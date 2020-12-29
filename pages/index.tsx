@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import { FC } from 'react';
+import { PageHeader } from 'antd';
 
 const Home: FC = () => {
   return (
@@ -10,9 +11,7 @@ const Home: FC = () => {
       </Head>
 
       <main>
-        <h1 className="title">
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+        <PageHeader onBack={() => null} title="Welcome to Next.js!" />
 
         <p className="description">
           Get started by editing <code>pages/index.js</code>
