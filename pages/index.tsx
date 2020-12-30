@@ -11,7 +11,11 @@ const Home: FC = () => {
       </Head>
 
       <main>
-        <PageHeader onBack={() => null} title="Welcome to Next.js!" />
+        <PageHeader
+          className="border border-gray-300"
+          onBack={() => null}
+          title="Welcome to Next.js!"
+        />
 
         <p className="description">
           Get started by editing <code>pages/index.js</code>
