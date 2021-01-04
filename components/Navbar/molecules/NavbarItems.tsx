@@ -35,8 +35,22 @@ const items = [
   },
 ];
 
+const TOGGLE_SUB_ITEMS_AFTER = 150;
+
 const NavbarItems: FC = () => {
   const [showMenuFor, setShowMenuFor] = useState<string | null>(null);
+
+  const toggleSubItemsVisibility = (text: string) => {
+    setTimeout(() => {
+      setShowMenuFor(showMenuFor === text ? null : text);
+    }, TOGGLE_SUB_ITEMS_AFTER);
+  };
+
+  const hideSubItems = () => {
+    setTimeout(() => {
+      setShowMenuFor(null);
+    }, TOGGLE_SUB_ITEMS_AFTER);
+  };
 
   return (
     <nav className="hidden md:flex space-x-10">
@@ -45,7 +59,8 @@ const NavbarItems: FC = () => {
           <button
             type="button"
             className="text-gray-700 inline-flex items-center text-base font-semibold hover:text-blue-400 focus:outline-none focus:ring-0"
-            onClick={() => setShowMenuFor(text)}
+            onClick={() => toggleSubItemsVisibility(text)}
+            onBlur={hideSubItems}
           >
             <span>{text}</span>
             {showMenuFor === text ? (
