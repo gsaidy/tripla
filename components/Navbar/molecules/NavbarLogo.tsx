@@ -6,7 +6,7 @@ const NavbarLogo: FC = () => (
     <Link href="/">
       <a>
         <span className="sr-only">Tripla</span>
-        <img className="h-10 w-auto sm:h-12" src="/logo.png" alt="logo" />
+        <img className="h-12 w-auto sm:h-14" src="/logo.png" alt="logo" />
       </a>
     </Link>
   </div>
