@@ -4,17 +4,17 @@ import { CaretUpFilled, CaretDownFilled } from '@ant-design/icons';
 
 const items = [
   {
-    text: 'Itineraries',
+    text: 'Trips',
     subItems: [
       {
-        href: '/itineraries/create',
-        text: 'Create Itinerary',
+        href: '/trips/create',
+        text: 'Create Trip',
         description: 'Create your trip itinerary.',
       },
       {
-        href: '/itineraries',
-        text: 'View Itineraries',
-        description: 'See a list of itineraries created by you or by other users.',
+        href: '/trips',
+        text: 'View Trips',
+        description: 'See a list of trips created by you or by other users.',
       },
     ],
   },
@@ -24,7 +24,7 @@ const items = [
       {
         href: '/templates/create',
         text: 'Create Template',
-        description: 'Create your itinerary template.',
+        description: 'Create your trip template.',
       },
       {
         href: '/templates',
@@ -70,7 +70,7 @@ const NavbarItems: FC = () => {
             )}
           </button>
           {showMenuFor === text && (
-            <div className="absolute z-10 -ml-4 mt-3 transform px-2 w-screen max-w-md sm:px-0 lg:ml-0 lg:left-1/2 lg:-translate-x-1/2">
+            <div className="absolute z-20 -ml-4 mt-3 transform px-2 w-screen max-w-md sm:px-0 lg:ml-0 lg:left-1/2 lg:-translate-x-1/2">
               <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
                 <div className="relative grid gap-6 bg-white px-5 py-6 sm:p-4">
                   {subItems.map(({ href, text, description }) => (
