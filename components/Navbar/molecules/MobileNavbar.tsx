@@ -6,8 +6,8 @@ import { Button } from 'antd';
 import NavbarLogo from './NavbarLogo';
 
 const items = [
-  { text: 'Create Itinerary', href: '/itineraries/create' },
-  { text: 'View Itineraries', href: '/itineraries' },
+  { text: 'Create Trip', href: '/trips/create' },
+  { text: 'View Trips', href: '/trips' },
   { text: 'Create Template', href: '/templates/create' },
   { text: 'View Templates', href: '/templates' },
 ];

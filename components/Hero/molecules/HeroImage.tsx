@@ -1,13 +1,36 @@
-import { FC } from 'react';
+import { FC, useState, useEffect } from 'react';
 
-const HeroImage: FC = () => (
-  <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-    <img
-      className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full"
-      src="https://cdn.pixabay.com/photo/2020/01/31/07/23/tokyo-4807294_1280.jpg"
-      alt=""
-    />
-  </div>
-);
+const images = ['havana', 'prague', 'rio', 'santorini', 'tokyo'];
+
+const HeroImage: FC = () => {
+  const [imageIndex, setImageIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      changeImageIndex();
+    }, 5000);
+    return function cleanup() {
+      clearInterval(interval);
+    };
+  });
+
+  const changeImageIndex = () => {
+    if (imageIndex === images.length - 1) {
+      setImageIndex(0);
+    } else {
+      setImageIndex(imageIndex + 1);
+    }
+  };
+
+  return (
+    <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
+      <img
+        className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full transition-opacity-0"
+        src={`${images[imageIndex]}.jpg`}
+        alt=""
+      />
+    </div>
+  );
+};
 
 export default HeroImage;

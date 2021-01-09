@@ -4,17 +4,17 @@ import { CaretUpFilled, CaretDownFilled } from '@ant-design/icons';
 
 const items = [
   {
-    text: 'Itineraries',
+    text: 'Trips',
     subItems: [
       {
-        href: '/itineraries/create',
-        text: 'Create Itinerary',
+        href: '/trips/create',
+        text: 'Create Trip',
         description: 'Create your trip itinerary.',
       },
       {
-        href: '/itineraries',
-        text: 'View Itineraries',
-        description: 'See a list of itineraries created by you or by other users.',
+        href: '/trips',
+        text: 'View Trips',
+        description: 'See a list of trips created by you or by other users.',
       },
     ],
   },
@@ -24,7 +24,7 @@ const items = [
       {
         href: '/templates/create',
         text: 'Create Template',
-        description: 'Create your itinerary template.',
+        description: 'Create your trip template.',
       },
       {
         href: '/templates',
