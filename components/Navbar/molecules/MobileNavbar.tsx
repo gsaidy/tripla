@@ -39,9 +39,11 @@ const MobileNavbar: FC<{ onClose: () => void }> = ({ onClose }) => (
         </div>
       </div>
       <div className="py-6 px-5 space-y-6">
-        <Button title="Sign In" type="primary" size="large" block>
-          Sign In
-        </Button>
+        <Link href="/signin">
+          <Button type="primary" size="large" block onClick={onClose}>
+            Sign In
+          </Button>
+        </Link>
       </div>
     </div>
   </div>
