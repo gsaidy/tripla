@@ -1,15 +1,18 @@
 import { FC } from 'react';
 import { useSession } from 'next-auth/client';
 
-const NavbarUserIcon: FC = () => {
+const NavbarProfileIcon: FC<{ onClick: () => void; onBlur: () => void }> = ({
+  onClick,
+  onBlur,
+}) => {
   const [session] = useSession();
   const image = session?.user?.image || '/profile.png';
 
   return (
-    <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
+    <button className="focus:outline-none" onClick={onClick} onBlur={onBlur}>
       <img className="h-10 w-10 rounded-full border-2" src={image} alt="user-icon" />
-    </div>
+    </button>
   );
 };
 
-export default NavbarUserIcon;
+export default NavbarProfileIcon;

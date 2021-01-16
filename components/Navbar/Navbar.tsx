@@ -7,7 +7,7 @@ import NavbarItems from './molecules/NavbarItems';
 import NavbarSignInButton from './molecules/NavbarSignInButton';
 import NavbarHamburgerButton from './molecules/NavbarHamburgerButton';
 import MobileNavbar from './molecules/MobileNavbar';
-import NavbarUserIcon from './molecules/NavbarUserIcon';
+import NavbarProfile from './molecules/NavbarProfile';
 
 const Navbar: FC = () => {
   const [showMobileNavbar, setShowMobileNavbar] = useState(false);
@@ -21,7 +21,7 @@ const Navbar: FC = () => {
         {/* Navbar items that show on medium and large screens */}
         <NavbarItems />
         {/* Sign in button or User icon that shows on medium and large screens */}
-        {session ? <NavbarUserIcon /> : <NavbarSignInButton />}
+        {session ? <NavbarProfile /> : <NavbarSignInButton />}
         {/* Hamburger button to open navbar on mobile screens */}
         <NavbarHamburgerButton onClick={() => setShowMobileNavbar(true)} />
       </NavbarContainer>
