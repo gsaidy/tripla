@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
-import Signin from '../components/Signin/Signin';
+import SignIn from '../components/SignIn/SignIn';
 
-const SigninPage: FC = () => <Signin />;
+const SignInPage: FC = () => <SignIn />;
 
-export default SigninPage;
+export default SignInPage;

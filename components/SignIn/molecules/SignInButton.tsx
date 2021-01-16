@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import { Provider } from '../enum/Provider';
 import { capitalize } from '../../../utils/capitalize';
 
-const SigninButton: FC<{ provider: Provider; icon: ReactNode }> = ({ provider, icon }) => {
+const SignInButton: FC<{ provider: Provider; icon: ReactNode }> = ({ provider, icon }) => {
   const { query } = useRouter();
   const callbackUrl = query?.callbackUrl || '/';
 
@@ -22,4 +22,4 @@ const SigninButton: FC<{ provider: Provider; icon: ReactNode }> = ({ provider, i
   );
 };
 
-export default SigninButton;
+export default SignInButton;

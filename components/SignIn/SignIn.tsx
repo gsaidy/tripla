@@ -1,31 +1,31 @@
 import { FC } from 'react';
 import { GoogleOutlined } from '@ant-design/icons';
 
-import SigninLogo from './molecules/SigninLogo';
-import SigninTitle from './molecules/SigninTitle';
-import SigninButton from './molecules/SigninButton';
+import SignInLogo from './molecules/SignInLogo';
+import SignInTitle from './molecules/SignInTitle';
+import SignInButton from './molecules/SignInButton';
 import { Provider } from './enum/Provider';
 
-const Signin: FC = () => (
+const SignIn: FC = () => (
   <div className="min-h-screen flex items-center justify-center -mt-16 md:-mt-13 lg:-mt-8 px-4 sm:px-6 lg:px-8">
     <div className="max-w-md w-full space-y-8">
       <div>
-        <SigninLogo />
-        <SigninTitle />
+        <SignInLogo />
+        <SignInTitle />
       </div>
       <div className="space-y-2 flex items-center flex-col">
-        <SigninButton
+        <SignInButton
           provider={Provider.Google}
           icon={<GoogleOutlined className="text-yellow-400" />}
         />
-        {/* <SigninButton
+        {/* <SignInButton
           provider={Provider.Facebook}
           icon={<FacebookOutlined className="text-blue-500" />}
         />
-        <SigninButton provider={Provider.Github} icon={<GithubOutlined />} /> */}
+        <SignInButton provider={Provider.Github} icon={<GithubOutlined />} /> */}
       </div>
     </div>
   </div>
 );
 
-export default Signin;
+export default SignIn;
