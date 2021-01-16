@@ -1,14 +1,12 @@
 import { FC } from 'react';
 import { Button } from 'antd';
-import Link from 'next/link';
+import { signIn } from 'next-auth/client';
 
 const NavbarSignInButton: FC = () => (
   <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
-    <Link href="/signin">
-      <Button type="primary" size="large" shape="round">
-        Sign In
-      </Button>
-    </Link>
+    <Button type="primary" size="large" shape="round" onClick={() => signIn()}>
+      Sign In
+    </Button>
   </div>
 );
 
