@@ -8,7 +8,7 @@ import { capitalize } from '../../../utils/capitalize';
 
 const SignInButton: FC<{ provider: Provider; icon: ReactNode }> = ({ provider, icon }) => {
   const { query } = useRouter();
-  const callbackUrl = query?.callbackUrl || '/';
+  const callbackUrl = (query?.callbackUrl || '/') as string;
 
   return (
     <Button
