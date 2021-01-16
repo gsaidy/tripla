@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { GoogleOutlined, FacebookOutlined, GithubOutlined } from '@ant-design/icons';
+import { GoogleOutlined } from '@ant-design/icons';
 
 import SigninLogo from './molecules/SigninLogo';
 import SigninTitle from './molecules/SigninTitle';
@@ -18,11 +18,11 @@ const Signin: FC = () => (
           provider={Provider.Google}
           icon={<GoogleOutlined className="text-yellow-400" />}
         />
-        <SigninButton
+        {/* <SigninButton
           provider={Provider.Facebook}
           icon={<FacebookOutlined className="text-blue-500" />}
         />
-        <SigninButton provider={Provider.Github} icon={<GithubOutlined />} />
+        <SigninButton provider={Provider.Github} icon={<GithubOutlined />} /> */}
       </div>
     </div>
   </div>

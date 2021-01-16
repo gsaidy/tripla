@@ -1,5 +1,5 @@
 export enum Provider {
-  Google = 'Google',
-  Facebook = 'Facebook',
-  Github = 'Github',
+  Google = 'google',
+  Facebook = 'facebook',
+  Github = 'github',
 }
