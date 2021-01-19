@@ -5,7 +5,7 @@ import { SmileOutlined } from '@ant-design/icons';
 
 const AlreadySignedIn: FC = () => (
   <Result
-    className="min-h-screen flex flex-col justify-center -mt-16"
+    className="min-h-tripla flex flex-col justify-center"
     icon={<SmileOutlined />}
     title="You are already signed in!"
     extra={

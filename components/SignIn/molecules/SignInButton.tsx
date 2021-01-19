@@ -12,7 +12,7 @@ const SignInButton: FC<{ provider: Provider; icon: ReactNode }> = ({ provider, i
 
   return (
     <Button
-      className="flex items-center justify-center w-80"
+      className="flex items-center justify-center w-64 sm:w-80"
       size="large"
       icon={icon}
       onClick={() => signIn(provider, { callbackUrl })}
