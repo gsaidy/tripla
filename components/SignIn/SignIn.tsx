@@ -7,8 +7,8 @@ import SignInButton from './molecules/SignInButton';
 import { Provider } from './enum/Provider';
 
 const SignIn: FC = () => (
-  <div className="min-h-screen flex items-center justify-center -mt-16 md:-mt-13 lg:-mt-8 px-4 sm:px-6 lg:px-8">
-    <div className="max-w-md w-full space-y-8">
+  <div className="min-h-tripla flex items-center justify-center px-4 sm:px-6 lg:px-8">
+    <div className="max-w-md w-full my-5 space-y-8">
       <div>
         <SignInLogo />
         <SignInTitle />

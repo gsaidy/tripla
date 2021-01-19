@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Result, Button } from 'antd';
 
 const NotFound: FC = () => (
-  <div className="min-h-screen flex flex-col justify-center">
+  <div className="min-h-tripla flex flex-col justify-center">
     <Result
       status="404"
       title="404"

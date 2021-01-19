@@ -2,6 +2,18 @@
 
 /* Write your own custom base styles here */
 
+/* for screen with a width below 640px, the navbar height is 74px and the footer height is 77px*/
+.min-h-tripla {
+  min-height: calc(100vh - 74px - 77px);
+}
+
+/* for screen with a width of 640px and above, the navbar height is 82px and the footer height is 60px*/
+@media (min-width: 640px) {
+  .min-h-tripla {
+    min-height: calc(100vh - 82px - 60px);
+  }
+}
+
 @tailwind components;
 
 /* Write your own custom component styles here */
