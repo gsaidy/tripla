@@ -1,5 +1,7 @@
 import { FC } from 'react';
 
-const CreateTemplate: FC = () => <h1>Create</h1>;
+import SignInBanner from '../SignIn/molecules/SignInBanner';
+
+const CreateTemplate: FC = () => <SignInBanner />;
 
 export default CreateTemplate;
