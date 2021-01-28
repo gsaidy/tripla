@@ -9,12 +9,8 @@ const FormSection: FC<{ title: string; children: ReactNode }> = ({ title, childr
         </div>
       </div>
       <div className="mt-5 md:mt-0 md:col-span-5">
-        <div className="shadow sm:rounded-md sm:overflow-hidden">
-          <div className="px-4 pt-5 bg-white space-y-6 sm:p-6 sm:pb-0">
-            <div className="grid grid-cols-4 gap-6">
-              <div className="col-span-4 sm:col-span-3 lg:col-span-2">{children}</div>
-            </div>
-          </div>
+        <div className="shadow bg-white sm:rounded-md sm:overflow-hidden">
+          <div className="px-4 pt-5 sm:p-6 sm:pb-0">{children}</div>
         </div>
       </div>
     </div>
