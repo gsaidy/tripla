@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { Form } from 'antd';
 
 import BasicInfo from '../molecules/BasicInfo';
+import AddSectionButton from '../molecules/AddSectionButton';
 
 const TemplateForm: FC = () => {
   const layout = {
@@ -11,6 +12,7 @@ const TemplateForm: FC = () => {
   return (
     <Form {...layout}>
       <BasicInfo />
+      <AddSectionButton />
     </Form>
   );
 };

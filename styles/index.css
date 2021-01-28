@@ -18,6 +18,12 @@
 
 /* Write your own custom component styles here */
 
+@media (max-width: 575px) {
+  .ant-form-item:not(:last-child) {
+    margin-bottom: 12px;
+  }
+}
+
 @tailwind utilities;
 
 /* Write your own custom utilities styles here */
