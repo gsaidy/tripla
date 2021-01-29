@@ -3,7 +3,7 @@ import { Checkbox, Form, Input, Select } from 'antd';
 const { Option } = Select;
 
 const SectionAttribute: FC = () => (
-  <div className="grid grid-cols-6 gap-x-6 border-b">
+  <div className="grid grid-cols-6 gap-x-6 border-b first:mt-0 xs:first:mt-2 my-4 xs:mt-6">
     <div className="col-span-6 sm:col-span-4 lg:col-span-3">
       <Form.Item
         label="Name"
