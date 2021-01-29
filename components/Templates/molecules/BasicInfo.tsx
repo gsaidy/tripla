@@ -9,6 +9,7 @@ const BasicInfo: FC = () => (
     <div className="grid grid-cols-4 gap-6">
       <div className="col-span-4 sm:col-span-3 lg:col-span-2">
         <Form.Item
+          className="mb-3 xs:mb-6"
           label="Name"
           name="templateName"
           rules={[{ required: true, message: 'Please input your template name.' }]}
