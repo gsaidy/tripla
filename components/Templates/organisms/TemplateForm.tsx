@@ -15,11 +15,19 @@ const TemplateForm: FC = () => {
     setSections([...sections, `Section ${sections.length + 1}`]);
   };
 
+  const removeSection = (sectionToRemove: string) => {
+    setSections(sections.filter((section) => section !== sectionToRemove));
+  };
+
   return (
     <Form {...layout}>
       <BasicInfo />
       {sections.map((section) => (
-        <TemplateSection key={section} title={section} />
+        <TemplateSection
+          key={section}
+          section={section}
+          removeSection={() => removeSection(section)}
+        />
       ))}
       <AddSectionButton addSection={addSection} />
     </Form>
