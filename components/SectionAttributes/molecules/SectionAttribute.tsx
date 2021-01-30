@@ -31,6 +31,7 @@ const SectionAttribute: FC<{ index: number; removeAttribute: () => void }> = ({
           label="Edit"
           name="editType"
           tooltip={{
+            placement: 'topLeft',
             title: 'Specify how this attribute will be displayed when creating or updating a trip',
             icon: <InfoCircleOutlined />,
           }}
@@ -51,6 +52,7 @@ const SectionAttribute: FC<{ index: number; removeAttribute: () => void }> = ({
           label="View"
           name="viewType"
           tooltip={{
+            placement: 'topLeft',
             title: 'Specify how this attribute will be displayed when viewing a trip',
             icon: <InfoCircleOutlined />,
           }}
