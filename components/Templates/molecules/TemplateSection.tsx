@@ -1,8 +1,8 @@
 import { FC } from 'react';
-import { Form, Input } from 'antd';
-import { MinusCircleOutlined } from '@ant-design/icons';
 
 import FormSection from '../atoms/FormSection';
+import TemplateHeader from '../atoms/TemplateHeader';
+import TemplateName from '../atoms/TemplateName';
 import SectionAttributes from '../../SectionAttributes/SectionAttributes';
 
 const TemplateSection: FC<{ index: number; removeSection: () => void }> = ({
@@ -10,23 +10,11 @@ const TemplateSection: FC<{ index: number; removeSection: () => void }> = ({
   removeSection,
 }) => (
   <FormSection
-    header={
-      <div className="flex items-center">
-        <h3>{`Section ${index + 1}`}</h3>
-        <MinusCircleOutlined className="ml-1 cursor-pointer text-red-500" onClick={removeSection} />
-      </div>
-    }
+    header={<TemplateHeader title={`Section ${index + 1}`} removeSection={removeSection} />}
   >
     <div className="pb-6">
       <div className="grid grid-cols-4 gap-6">
-        <div className="col-span-4 sm:col-span-3 lg:col-span-2">
-          <Form.Item
-            label="Name"
-            rules={[{ required: true, message: 'Please input your section name.' }]}
-          >
-            <Input />
-          </Form.Item>
-        </div>
+        <TemplateName />
       </div>
       <SectionAttributes />
     </div>
