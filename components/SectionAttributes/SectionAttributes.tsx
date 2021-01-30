@@ -13,6 +13,10 @@ const SectionAttributes: FC = () => {
     setAttributes([...attributes, `Attribute ${attributes.length + 1}`]);
   };
 
+  const removeAttribute = (attributeToRemove: string) => {
+    setAttributes(attributes.filter((attribute) => attribute !== attributeToRemove));
+  };
+
   return (
     <Collapse defaultActiveKey="1">
       <Panel
@@ -25,7 +29,11 @@ const SectionAttributes: FC = () => {
         }
       >
         {attributes.map((attribute) => (
-          <SectionAttribute key={attribute} />
+          <SectionAttribute
+            key={attribute}
+            attribute={attribute}
+            removeAttribute={() => removeAttribute(attribute)}
+          />
         ))}
         <AddAttributeButton addAttribute={addAttribute} />
       </Panel>

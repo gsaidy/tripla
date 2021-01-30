@@ -1,7 +1,7 @@
 import { FC, ReactNode } from 'react';
 
 const FormSection: FC<{ header: ReactNode; children: ReactNode }> = ({ header, children }) => (
-  <div className="max-w-7xl mx-auto pt-6 sm:px-6 lg:px-8">
+  <div className="max-w-7xl mx-auto pt-6 sm:px-4 lg:px-6">
     <div className="md:grid md:grid-cols-6">
       <div className="md:col-span-1">
         <div className="px-4 sm:px-0">

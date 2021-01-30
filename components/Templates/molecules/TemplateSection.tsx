@@ -11,10 +11,10 @@ const TemplateSection: FC<{ section: string; removeSection: (section: string) =>
 }) => (
   <FormSection
     header={
-      <span className="flex items-center">
+      <div className="flex items-center">
         <h3>{section}</h3>
-        <MinusCircleOutlined className="ml-2 cursor-pointer text-red-500" onClick={removeSection} />
-      </span>
+        <MinusCircleOutlined className="ml-1 cursor-pointer text-red-500" onClick={removeSection} />
+      </div>
     }
   >
     <div className="pb-6">
