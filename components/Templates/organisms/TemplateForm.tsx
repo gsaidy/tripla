@@ -7,7 +7,7 @@ import AddSectionButton from '../molecules/AddSectionButton';
 import { generateRandomString } from '../../../utils/string';
 
 const TemplateForm: FC = () => {
-  const [sections, setSections] = useState([]);
+  const [sections, setSections] = useState<string[]>([]);
   const layout = {
     labelCol: { span: 6 },
   };

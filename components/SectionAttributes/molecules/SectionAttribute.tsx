@@ -3,7 +3,7 @@ import { Checkbox, Form, Input, Select } from 'antd';
 const { Option } = Select;
 import { InfoCircleOutlined, MinusCircleOutlined } from '@ant-design/icons';
 
-const SectionAttribute: FC<{ index: number; removeAttribute: (attribute: string) => void }> = ({
+const SectionAttribute: FC<{ index: number; removeAttribute: () => void }> = ({
   index,
   removeAttribute,
 }) => (

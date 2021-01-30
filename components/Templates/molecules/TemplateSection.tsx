@@ -5,7 +5,7 @@ import { MinusCircleOutlined } from '@ant-design/icons';
 import FormSection from '../atoms/FormSection';
 import SectionAttributes from '../../SectionAttributes/SectionAttributes';
 
-const TemplateSection: FC<{ index: number; removeSection: (section: string) => void }> = ({
+const TemplateSection: FC<{ index: number; removeSection: () => void }> = ({
   index,
   removeSection,
 }) => (

@@ -8,7 +8,7 @@ import AddAttributeButton from './molecules/AddAttributeButton';
 import { generateRandomString } from '../../utils/string';
 
 const SectionAttributes: FC = () => {
-  const [attributes, setAttributes] = useState([]);
+  const [attributes, setAttributes] = useState<string[]>([]);
 
   const addAttribute = () => {
     setAttributes([...attributes, generateRandomString()]);
