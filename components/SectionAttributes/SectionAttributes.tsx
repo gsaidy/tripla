@@ -12,7 +12,7 @@ const SectionAttributes: FC = () => (
       key="1"
       header="Attributes"
       extra={
-        <Tooltip placement="topRight" title="A section must at least have one attribute">
+        <Tooltip placement="topRight" title="A section must have at least one attribute">
           <InfoCircleOutlined className="text-left" />
         </Tooltip>
       }
