@@ -20,6 +20,7 @@ const TemplateForm: FC = () => {
               <TemplateSection
                 key={field.key}
                 index={index}
+                name={field.name}
                 removeSection={() => remove(field.name)}
               />
             ))}

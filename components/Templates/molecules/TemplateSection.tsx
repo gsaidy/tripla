@@ -5,8 +5,9 @@ import TemplateHeader from '../atoms/TemplateHeader';
 import TemplateName from '../atoms/TemplateName';
 import SectionAttributes from '../../SectionAttributes/SectionAttributes';
 
-const TemplateSection: FC<{ index: number; removeSection: () => void }> = ({
+const TemplateSection: FC<{ index: number; name: number; removeSection: () => void }> = ({
   index,
+  name,
   removeSection,
 }) => (
   <FormSection
@@ -16,7 +17,7 @@ const TemplateSection: FC<{ index: number; removeSection: () => void }> = ({
       <div className="grid grid-cols-4 gap-6">
         <TemplateName />
       </div>
-      <SectionAttributes />
+      <SectionAttributes parentName={name} />
     </div>
   </FormSection>
 );

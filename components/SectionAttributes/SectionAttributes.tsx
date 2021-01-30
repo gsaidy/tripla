@@ -6,7 +6,7 @@ import { InfoCircleOutlined } from '@ant-design/icons';
 import SectionAttribute from './molecules/SectionAttribute';
 import AddAttributeButton from './molecules/AddAttributeButton';
 
-const SectionAttributes: FC = () => (
+const SectionAttributes: FC<{ parentName: number }> = ({ parentName }) => (
   <Collapse defaultActiveKey="1">
     <Panel
       key="1"
@@ -17,7 +17,7 @@ const SectionAttributes: FC = () => (
         </Tooltip>
       }
     >
-      <Form.List name="attributes">
+      <Form.List name={[parentName, 'attributes']}>
         {(fields, { add, remove }) => (
           <>
             {fields.map((field, index) => (
