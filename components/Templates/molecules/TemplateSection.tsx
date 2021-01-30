@@ -22,7 +22,6 @@ const TemplateSection: FC<{ index: number; removeSection: () => void }> = ({
         <div className="col-span-4 sm:col-span-3 lg:col-span-2">
           <Form.Item
             label="Name"
-            name="sectionName"
             rules={[{ required: true, message: 'Please input your section name.' }]}
           >
             <Input />

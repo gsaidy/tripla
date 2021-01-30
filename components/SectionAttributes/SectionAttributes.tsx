@@ -1,45 +1,38 @@
-import { FC, useState } from 'react';
-import { Collapse, Tooltip } from 'antd';
+import { FC } from 'react';
+import { Collapse, Form, Tooltip } from 'antd';
 const { Panel } = Collapse;
 import { InfoCircleOutlined } from '@ant-design/icons';
 
 import SectionAttribute from './molecules/SectionAttribute';
 import AddAttributeButton from './molecules/AddAttributeButton';
-import { generateRandomString } from '../../utils/string';
 
-const SectionAttributes: FC = () => {
-  const [attributes, setAttributes] = useState<string[]>([]);
-
-  const addAttribute = () => {
-    setAttributes([...attributes, generateRandomString()]);
-  };
-
-  const removeAttribute = (attributeToRemove: string) => {
-    setAttributes(attributes.filter((attribute) => attribute !== attributeToRemove));
-  };
-
-  return (
-    <Collapse defaultActiveKey="1">
-      <Panel
-        key="1"
-        header="Attributes"
-        extra={
-          <Tooltip placement="topRight" title="A section must at least have one attribute">
-            <InfoCircleOutlined className="text-left" />
-          </Tooltip>
-        }
-      >
-        {attributes.map((attributeId, index) => (
-          <SectionAttribute
-            key={attributeId}
-            index={index}
-            removeAttribute={() => removeAttribute(attributeId)}
-          />
-        ))}
-        <AddAttributeButton addAttribute={addAttribute} />
-      </Panel>
-    </Collapse>
-  );
-};
+const SectionAttributes: FC = () => (
+  <Collapse defaultActiveKey="1">
+    <Panel
+      key="1"
+      header="Attributes"
+      extra={
+        <Tooltip placement="topRight" title="A section must at least have one attribute">
+          <InfoCircleOutlined className="text-left" />
+        </Tooltip>
+      }
+    >
+      <Form.List name="attributes">
+        {(fields, { add, remove }) => (
+          <>
+            {fields.map((field, index) => (
+              <SectionAttribute
+                key={field.key}
+                index={index}
+                removeAttribute={() => remove(field.name)}
+              />
+            ))}
+            <AddAttributeButton addAttribute={add} />
+          </>
+        )}
+      </Form.List>
+    </Panel>
+  </Collapse>
+);
 
 export default SectionAttributes;
