@@ -3,13 +3,13 @@ import { Checkbox, Form, Input, Select } from 'antd';
 const { Option } = Select;
 import { InfoCircleOutlined, MinusCircleOutlined } from '@ant-design/icons';
 
-const SectionAttribute: FC<{ attribute: string; removeAttribute: (attribute: string) => void }> = ({
-  attribute,
+const SectionAttribute: FC<{ index: number; removeAttribute: (attribute: string) => void }> = ({
+  index,
   removeAttribute,
 }) => (
   <>
     <div className="flex items-center border-b pb-1">
-      <h3 className="font-bold text-gray-900">{attribute}</h3>
+      <h3 className="font-bold text-gray-900">{`Attribute ${index + 1}`}</h3>
       <MinusCircleOutlined className="ml-1 cursor-pointer text-red-500" onClick={removeAttribute} />
     </div>
     <div className="grid grid-cols-6 gap-x-2 mt-2 xs:mt-6 mb-1">

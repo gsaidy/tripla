@@ -5,14 +5,14 @@ import { MinusCircleOutlined } from '@ant-design/icons';
 import FormSection from '../atoms/FormSection';
 import SectionAttributes from '../../SectionAttributes/SectionAttributes';
 
-const TemplateSection: FC<{ section: string; removeSection: (section: string) => void }> = ({
-  section,
+const TemplateSection: FC<{ index: number; removeSection: (section: string) => void }> = ({
+  index,
   removeSection,
 }) => (
   <FormSection
     header={
       <div className="flex items-center">
-        <h3>{section}</h3>
+        <h3>{`Section ${index + 1}`}</h3>
         <MinusCircleOutlined className="ml-1 cursor-pointer text-red-500" onClick={removeSection} />
       </div>
     }

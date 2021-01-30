@@ -4,6 +4,7 @@ import { Form } from 'antd';
 import BasicInfo from '../molecules/BasicInfo';
 import TemplateSection from '../molecules/TemplateSection';
 import AddSectionButton from '../molecules/AddSectionButton';
+import { generateRandomString } from '../../../utils/string';
 
 const TemplateForm: FC = () => {
   const [sections, setSections] = useState([]);
@@ -12,7 +13,7 @@ const TemplateForm: FC = () => {
   };
 
   const addSection = () => {
-    setSections([...sections, `Section ${sections.length + 1}`]);
+    setSections([...sections, generateRandomString()]);
   };
 
   const removeSection = (sectionToRemove: string) => {
@@ -22,11 +23,11 @@ const TemplateForm: FC = () => {
   return (
     <Form {...layout}>
       <BasicInfo />
-      {sections.map((section) => (
+      {sections.map((sectionId, index) => (
         <TemplateSection
-          key={section}
-          section={section}
-          removeSection={() => removeSection(section)}
+          key={sectionId}
+          index={index}
+          removeSection={() => removeSection(sectionId)}
         />
       ))}
       <AddSectionButton addSection={addSection} />

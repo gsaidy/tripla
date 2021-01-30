@@ -5,12 +5,13 @@ import { InfoCircleOutlined } from '@ant-design/icons';
 
 import SectionAttribute from './molecules/SectionAttribute';
 import AddAttributeButton from './molecules/AddAttributeButton';
+import { generateRandomString } from '../../utils/string';
 
 const SectionAttributes: FC = () => {
   const [attributes, setAttributes] = useState([]);
 
   const addAttribute = () => {
-    setAttributes([...attributes, `Attribute ${attributes.length + 1}`]);
+    setAttributes([...attributes, generateRandomString()]);
   };
 
   const removeAttribute = (attributeToRemove: string) => {
@@ -28,11 +29,11 @@ const SectionAttributes: FC = () => {
           </Tooltip>
         }
       >
-        {attributes.map((attribute) => (
+        {attributes.map((attributeId, index) => (
           <SectionAttribute
-            key={attribute}
-            attribute={attribute}
-            removeAttribute={() => removeAttribute(attribute)}
+            key={attributeId}
+            index={index}
+            removeAttribute={() => removeAttribute(attributeId)}
           />
         ))}
         <AddAttributeButton addAttribute={addAttribute} />
