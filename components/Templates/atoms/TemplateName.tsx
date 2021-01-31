@@ -2,14 +2,14 @@ import { FC } from 'react';
 import { Form, Input } from 'antd';
 
 const TemplateName: FC = () => (
-  <div className="col-span-4 sm:col-span-3 lg:col-span-2">
-    <Form.Item
-      label="Name"
-      rules={[{ required: true, message: 'Please input your section name.' }]}
-    >
-      <Input />
-    </Form.Item>
-  </div>
+  <Form.Item
+    className="mb-3 xs:mb-6"
+    label="Name"
+    name="templateName"
+    rules={[{ required: true, message: 'Please input your template name.' }]}
+  >
+    <Input />
+  </Form.Item>
 );
 
 export default TemplateName;

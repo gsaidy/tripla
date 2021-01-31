@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { MinusCircleOutlined } from '@ant-design/icons';
 
-const TemplateHeader: FC<{ title: string; removeSection: () => void }> = ({
+const SectionHeader: FC<{ title: string; removeSection: () => void }> = ({
   title,
   removeSection,
 }) => (
@@ -11,4 +11,4 @@ const TemplateHeader: FC<{ title: string; removeSection: () => void }> = ({
   </div>
 );
 
-export default TemplateHeader;
+export default SectionHeader;
