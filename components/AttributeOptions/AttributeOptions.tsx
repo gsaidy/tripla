@@ -23,7 +23,7 @@ const AttributeOptions: FC<{ parentName: number }> = ({ parentName }) => (
                 removeOption={() => remove(field.name)}
               />
             ))}
-            <AddOptionButton addOption={add} />
+            <AddOptionButton addOption={() => add()} />
           </>
         )}
       </Form.List>

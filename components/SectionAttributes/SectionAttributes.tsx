@@ -24,7 +24,7 @@ const SectionAttributes: FC<{ parentName: number }> = ({ parentName }) => (
                 removeAttribute={() => remove(field.name)}
               />
             ))}
-            <AddAttributeButton addAttribute={add} />
+            <AddAttributeButton addAttribute={() => add()} />
           </>
         )}
       </Form.List>
