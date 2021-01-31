@@ -7,8 +7,9 @@ import AttributeEdit from '../atoms/AttributeEdit';
 import AttributeView from '../atoms/AttributeView';
 import AttributeOptions from '../../AttributeOptions/AttributeOptions';
 
-const SectionAttribute: FC<{ index: number; removeAttribute: () => void }> = ({
+const SectionAttribute: FC<{ index: number; name: number; removeAttribute: () => void }> = ({
   index,
+  name,
   removeAttribute,
 }) => {
   const [editValue, setEditValue] = useState('input');
@@ -23,7 +24,7 @@ const SectionAttribute: FC<{ index: number; removeAttribute: () => void }> = ({
         <AttributeEdit setValue={setEditValue} />
         <AttributeView setValue={setViewValue} />
       </div>
-      {(editValue === 'select' || viewValue === 'tag') && <AttributeOptions />}
+      {(editValue === 'select' || viewValue === 'tag') && <AttributeOptions parentName={name} />}
     </>
   );
 };
