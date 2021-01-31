@@ -1,20 +1,16 @@
 import { FC } from 'react';
-import { Collapse, Tooltip } from 'antd';
+import { Collapse } from 'antd';
 const { Panel } = Collapse;
-import { InfoCircleOutlined } from '@ant-design/icons';
 
+import EntityInfoTooltip from '../utilities/EntityInfoTooltip';
 import AttributeOption from './molecules/AttributeOption';
 
 const AttributeOptions: FC = () => (
-  <Collapse className="mb-7" defaultActiveKey="1">
+  <Collapse className="mb-7 sm:mb-6" defaultActiveKey="1">
     <Panel
       key="1"
       header="Options"
-      extra={
-        <Tooltip placement="topRight" title="An Select/Tag attribute must have at least one option">
-          <InfoCircleOutlined className="text-left" />
-        </Tooltip>
-      }
+      extra={<EntityInfoTooltip title="A Select/Tag attribute must have at least one option" />}
     >
       <AttributeOption />
     </Panel>
