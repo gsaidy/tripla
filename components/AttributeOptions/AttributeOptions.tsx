@@ -3,8 +3,10 @@ import { Collapse, Tooltip } from 'antd';
 const { Panel } = Collapse;
 import { InfoCircleOutlined } from '@ant-design/icons';
 
+import AttributeOption from './molecules/AttributeOption';
+
 const AttributeOptions: FC = () => (
-  <Collapse className="mb-6" defaultActiveKey="1">
+  <Collapse className="mb-7" defaultActiveKey="1">
     <Panel
       key="1"
       header="Options"
@@ -13,7 +15,9 @@ const AttributeOptions: FC = () => (
           <InfoCircleOutlined className="text-left" />
         </Tooltip>
       }
-    />
+    >
+      <AttributeOption />
+    </Panel>
   </Collapse>
 );
 
