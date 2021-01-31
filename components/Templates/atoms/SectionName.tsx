@@ -1,14 +1,10 @@
 import { FC } from 'react';
-import { Form, Input } from 'antd';
+
+import NameInput from '../../utilities/NameInput';
 
 const SectionName: FC = () => (
   <div className="col-span-4 sm:col-span-3 lg:col-span-2">
-    <Form.Item
-      label="Name"
-      rules={[{ required: true, message: 'Please input your section name.' }]}
-    >
-      <Input />
-    </Form.Item>
+    <NameInput entity="section" />
   </div>
 );
 
