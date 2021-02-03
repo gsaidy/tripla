@@ -1,5 +1,6 @@
 import { FC, useState } from 'react';
 import { useSession } from 'next-auth/client';
+import { Spin } from 'antd';
 
 import NavbarContainer from './molecules/NavbarContainer';
 import NavbarLogo from './molecules/NavbarLogo';
@@ -11,7 +12,7 @@ import NavbarProfile from './molecules/NavbarProfile';
 
 const Navbar: FC = () => {
   const [showMobileNavbar, setShowMobileNavbar] = useState(false);
-  const [session] = useSession();
+  const [session, loading] = useSession();
 
   return (
     <>
@@ -21,7 +22,7 @@ const Navbar: FC = () => {
         {/* Navbar items that show on medium and large screens */}
         <NavbarItems />
         {/* Sign in button or User icon that shows on medium and large screens */}
-        {session ? <NavbarProfile /> : <NavbarSignInButton />}
+        {loading ? <Spin /> : session ? <NavbarProfile /> : <NavbarSignInButton />}
         {/* Hamburger button to open navbar on mobile screens */}
         <NavbarHamburgerButton onClick={() => setShowMobileNavbar(true)} />
       </NavbarContainer>

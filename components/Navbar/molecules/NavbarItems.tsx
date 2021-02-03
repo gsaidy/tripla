@@ -57,7 +57,6 @@ const NavbarItems: FC = () => {
       {items.map(({ text, subItems }) => (
         <div key={text} className="relative">
           <button
-            type="button"
             className="text-gray-700 inline-flex items-center text-base font-semibold hover:text-blue-400 focus:outline-none focus:ring-0"
             onClick={() => toggleSubItemsVisibility(text)}
             onBlur={hideSubItems}
