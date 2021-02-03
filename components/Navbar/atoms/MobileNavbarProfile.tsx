@@ -18,6 +18,7 @@ const MobileNavbarProfile: FC = () => {
       </div>
       <div className="mt-3 px-2 space-y-1">
         <Button
+          className="rounded"
           type="primary"
           size="large"
           block

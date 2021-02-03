@@ -8,7 +8,7 @@ const items = [
   { text: 'View Templates', href: '/templates' },
 ];
 
-const MobileNavbarItems: FC<{ onClose: () => void }> = ({ onClose }) => (
+const MobileNavbarItems: FC<{ closeNavbar: () => void }> = ({ closeNavbar }) => (
   <div className="mt-6">
     <nav className="grid gap-y-8">
       {items.map(({ text, href }) => (
@@ -17,8 +17,8 @@ const MobileNavbarItems: FC<{ onClose: () => void }> = ({ onClose }) => (
             className="-m-3 p-3 flex items-center rounded-md hover:bg-gray-50"
             role="button"
             tabIndex={-1}
-            onClick={onClose}
-            onKeyDown={onClose}
+            onClick={closeNavbar}
+            onKeyDown={closeNavbar}
           >
             <span className="ml-3 text-base font-medium text-gray-900">{text}</span>
           </a>

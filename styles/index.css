@@ -18,6 +18,10 @@
 
 /* Write your own custom component styles here */
 
+.ant-input, .ant-select-selector {
+  border-radius: .25rem !important;
+}
+
 @tailwind utilities;
 
 /* Write your own custom utilities styles here */
