@@ -6,7 +6,10 @@ import EntityInfoTooltip from '../utilities/EntityInfoTooltip';
 import AttributeOption from './molecules/AttributeOption';
 import AddOptionButton from './molecules/AddOptionButton';
 
-const AttributeOptions: FC<{ parentName: number }> = ({ parentName }) => (
+const AttributeOptions: FC<{ parentName: number; showTagColor: boolean }> = ({
+  parentName,
+  showTagColor,
+}) => (
   <Collapse className="mb-7 sm:mb-6" defaultActiveKey="1">
     <Panel
       key="1"
@@ -20,6 +23,7 @@ const AttributeOptions: FC<{ parentName: number }> = ({ parentName }) => (
               <AttributeOption
                 key={field.key}
                 index={index}
+                showTagColor={showTagColor}
                 removeOption={() => remove(field.name)}
               />
             ))}

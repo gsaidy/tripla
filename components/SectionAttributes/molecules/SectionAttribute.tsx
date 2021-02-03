@@ -24,7 +24,9 @@ const SectionAttribute: FC<{ index: number; name: number; removeAttribute: () =>
         <AttributeEdit setValue={setEditValue} />
         <AttributeView setValue={setViewValue} />
       </div>
-      {(editValue === 'select' || viewValue === 'tag') && <AttributeOptions parentName={name} />}
+      {(editValue === 'select' || viewValue === 'tag') && (
+        <AttributeOptions parentName={name} showTagColor={viewValue === 'tag'} />
+      )}
     </>
   );
 };
