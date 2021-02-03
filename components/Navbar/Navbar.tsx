@@ -27,7 +27,7 @@ const Navbar: FC = () => {
         <NavbarHamburgerButton onClick={() => setShowMobileNavbar(true)} />
       </NavbarContainer>
       {/* Navbar items that show on mobile screens */}
-      {showMobileNavbar && <MobileNavbar onClose={() => setShowMobileNavbar(false)} />}
+      {showMobileNavbar && <MobileNavbar closeNavbar={() => setShowMobileNavbar(false)} />}
     </>
   );
 };
