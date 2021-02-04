@@ -10,7 +10,19 @@ const AttributeEdit: FC<{ setValue: (value: string) => void }> = ({ setValue }) 
       label="Edit"
       tooltip={{
         placement: 'topLeft',
-        title: 'Specify how this attribute will be displayed when creating or updating a trip',
+        title: (
+          <span>
+            Specify how{' '}
+            <a
+              className="italic underline text-blue-400 hover:text-blue-500"
+              href="/types-overview#edit"
+              target="_blank"
+            >
+              the attribute will be displayed
+            </a>{' '}
+            when creating or updating a trip
+          </span>
+        ),
         icon: <InfoCircleOutlined />,
       }}
     >
