@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Card, DatePicker, Divider, Form, Input, Select, TimePicker } from 'antd';
+import { Card, DatePicker, Divider, Form, Input, Select, Tag, TimePicker } from 'antd';
 const { Option } = Select;
 const { RangePicker: DateRangePicker } = DatePicker;
 const { RangePicker: TimeRangePicker } = TimePicker;
@@ -42,6 +42,18 @@ const TypesOverview: FC = () => (
             <TextArea />
           </Form.Item>
         </Form>
+      </Card>
+      <Card className="text-center mt-6" type="inner" title="View Types">
+        <div className="mt-1 -mb-2">
+          <label htmlFor="label">Label: Label</label>
+        </div>
+        <Divider />
+        <div className="mt-3 mb-1 space-x-2">
+          <label htmlFor="tag">Tag:</label>
+          <Tag color="#34D399">High</Tag>
+          <Tag color="#FCD34D">Medium</Tag>
+          <Tag color="#EF4444">Low</Tag>
+        </div>
       </Card>
     </div>
   </div>
