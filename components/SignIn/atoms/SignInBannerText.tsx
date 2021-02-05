@@ -5,15 +5,9 @@ const SignInBannerText: FC = () => (
   <p className="ml-3 font-medium text-white">
     <span>
       <span className="italic">Recommended: </span>
-      <a
-        className="underline hover:text-blue-800"
-        role="button"
-        tabIndex={-1}
-        onClick={() => signIn()}
-        onKeyDown={() => signIn()}
-      >
+      <button className="underline hover:text-blue-800 focus:outline-none" onClick={() => signIn()}>
         Sign in
-      </a>{' '}
+      </button>{' '}
       so you could edit your template later if needed.
     </span>
   </p>
