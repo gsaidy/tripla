@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import NameInput from '../../utilities/NameInput';
+import NameInput from '../../Utilities/NameInput';
 
 const SectionName: FC = () => (
   <div className="col-span-4 sm:col-span-3 lg:col-span-2">

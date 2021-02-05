@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import EntityHeader from '../../utilities/EntityHeader';
+import EntityHeader from '../../Utilities/EntityHeader';
 
 const AttributeHeader: FC<{ title: string; removeAttribute: () => void }> = ({
   title,

@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import EntityHeader from '../../utilities/EntityHeader';
+import EntityHeader from '../../Utilities/EntityHeader';
 
 const SectionHeader: FC<{ title: string; removeSection: () => void }> = ({
   title,

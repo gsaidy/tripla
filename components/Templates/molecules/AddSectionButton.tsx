@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import AddEntityButton from '../../utilities/AddEntityButton';
+import AddEntityButton from '../../Utilities/AddEntityButton';
 
 const AddSectionButton: FC<{ addSection: () => void }> = ({ addSection }) => (
   <div className="max-w-7xl mx-auto py-4 sm:px-4 lg:px-6">
