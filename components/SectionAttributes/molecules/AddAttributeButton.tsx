@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import AddEntityButton from '../../utilities/AddEntityButton';
+import AddEntityButton from '../../Utilities/AddEntityButton';
 
 const AddAttributeButton: FC<{ addAttribute: () => void }> = ({ addAttribute }) => (
   <AddEntityButton entity="Attribute" add={addAttribute} />

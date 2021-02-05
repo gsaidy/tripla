@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Collapse, Form } from 'antd';
 const { Panel } = Collapse;
 
-import EntityInfoTooltip from '../utilities/EntityInfoTooltip';
+import EntityInfoTooltip from '../Utilities/EntityInfoTooltip';
 import AttributeOption from './molecules/AttributeOption';
 import AddOptionButton from './molecules/AddOptionButton';
 
