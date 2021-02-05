@@ -3,7 +3,7 @@ import { FC } from 'react';
 import NameInput from '../../Utilities/NameInput';
 
 const SectionName: FC = () => (
-  <div className="col-span-4 sm:col-span-3 lg:col-span-2">
+  <div className="col-span-6 sm:col-span-4 lg:col-span-3">
     <NameInput entity="section" />
   </div>
 );
