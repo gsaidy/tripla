@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import { useSession } from 'next-auth/client';
 import Head from 'next/head';
-import { Spin } from 'antd';
 
-import SignIn from '../components/SignIn/SignIn';
+import SignInSpinner from '../components/SignIn/SignInSpinner';
 import AlreadySignedIn from '../components/SignIn/AlreadySignedIn';
+import SignIn from '../components/SignIn/SignIn';
 
 const SignInPage: FC = () => {
   const [session, loading] = useSession();
@@ -14,7 +14,7 @@ const SignInPage: FC = () => {
       <Head>
         <title>Sign in to manage your trips - Tripla</title>
       </Head>
-      {loading ? <Spin /> : session ? <AlreadySignedIn /> : <SignIn />}
+      {loading ? <SignInSpinner /> : session ? <AlreadySignedIn /> : <SignIn />}
     </>
   );
 };

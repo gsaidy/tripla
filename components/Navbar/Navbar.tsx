@@ -1,6 +1,5 @@
 import { FC, useState } from 'react';
 import { useSession } from 'next-auth/client';
-import { Spin } from 'antd';
 
 import NavbarContainer from './molecules/NavbarContainer';
 import NavbarLogo from './molecules/NavbarLogo';
@@ -9,6 +8,7 @@ import NavbarSignInButton from './molecules/NavbarSignInButton';
 import NavbarHamburgerButton from './molecules/NavbarHamburgerButton';
 import MobileNavbar from './molecules/MobileNavbar';
 import NavbarProfile from './molecules/NavbarProfile';
+import NavbarSpinner from './molecules/NavbarSpinner';
 
 const Navbar: FC = () => {
   const [showMobileNavbar, setShowMobileNavbar] = useState(false);
@@ -21,8 +21,12 @@ const Navbar: FC = () => {
         <NavbarLogo />
         {/* Navbar items that show on medium and large screens */}
         <NavbarItems />
-        {/* Sign in button or User icon that shows on medium and large screens */}
-        {loading ? <Spin /> : session ? <NavbarProfile /> : <NavbarSignInButton />}
+        {/*
+          Spinner if user state is being fetched,
+          User Profile if the user is signed in,
+          Sign in button if the user is not signed in.
+        */}
+        {loading ? <NavbarSpinner /> : session ? <NavbarProfile /> : <NavbarSignInButton />}
         {/* Hamburger button to open navbar on mobile screens */}
         <NavbarHamburgerButton onClick={() => setShowMobileNavbar(true)} />
       </NavbarContainer>
