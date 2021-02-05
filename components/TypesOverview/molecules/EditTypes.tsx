@@ -10,7 +10,7 @@ import TimeRangePickerType from '../atoms/TimeRangePickerType';
 import TextAreaType from '../atoms/TextAreaType';
 
 const EditTypes: FC = () => (
-  <Card className="text-center" type="inner" title="Edit Types">
+  <Card id="edit" className="text-center" type="inner" title="Edit Types">
     <Form labelCol={{ span: 6 }}>
       <InputType />
       <Divider />
