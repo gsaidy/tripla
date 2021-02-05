@@ -1,29 +1,35 @@
 import { FC } from 'react';
 import Link from 'next/link';
+import { Collapse } from 'antd';
+const { Panel } = Collapse;
 
-const items = [
-  { text: 'Create Trip', href: '/trips/create' },
-  { text: 'View Trips', href: '/trips' },
-  { text: 'Create Template', href: '/templates/create' },
-  { text: 'View Templates', href: '/templates' },
-];
+import navbarItems from '../utils/navbarItems';
 
 const MobileNavbarItems: FC<{ closeNavbar: () => void }> = ({ closeNavbar }) => (
-  <div className="mt-6">
-    <nav className="grid gap-y-8">
-      {items.map(({ text, href }) => (
-        <Link key={text} href={href}>
-          <a
-            className="-m-3 p-3 flex items-center rounded-md hover:bg-gray-50"
-            role="button"
-            tabIndex={-1}
-            onClick={closeNavbar}
-            onKeyDown={closeNavbar}
+  <div className="mt-6 -mb-3">
+    <nav>
+      <Collapse ghost>
+        {navbarItems.map(({ text, subItems }) => (
+          <Panel
+            key={text}
+            header={<div className="text-xl font-semibold text-gray-900">{text}</div>}
+            showArrow={false}
           >
-            <span className="ml-3 text-base font-medium text-gray-900">{text}</span>
-          </a>
-        </Link>
-      ))}
+            <div className="space-y-5 -mt-1">
+              {subItems.map(({ href, text }) => (
+                <Link key={text} href={href}>
+                  <button
+                    className="block ml-3 text-lg font-medium text-gray-700 focus:outline-none"
+                    onClick={closeNavbar}
+                  >
+                    {text}
+                  </button>
+                </Link>
+              ))}
+            </div>
+          </Panel>
+        ))}
+      </Collapse>
     </nav>
   </div>
 );

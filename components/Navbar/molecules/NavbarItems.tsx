@@ -2,38 +2,7 @@ import { FC, useState } from 'react';
 import Link from 'next/link';
 import { CaretUpFilled, CaretDownFilled } from '@ant-design/icons';
 
-const items = [
-  {
-    text: 'Trips',
-    subItems: [
-      {
-        href: '/trips/create',
-        text: 'Create Trip',
-        description: 'Create your trip itinerary.',
-      },
-      {
-        href: '/trips',
-        text: 'View Trips',
-        description: 'See a list of trips created by you or by other users.',
-      },
-    ],
-  },
-  {
-    text: 'Templates',
-    subItems: [
-      {
-        href: '/templates/create',
-        text: 'Create Template',
-        description: 'Create your trip template.',
-      },
-      {
-        href: '/templates',
-        text: 'View Templates',
-        description: 'See a list of templates created by you or by other users.',
-      },
-    ],
-  },
-];
+import navbarItems from '../utils/navbarItems';
 
 const TOGGLE_SUB_ITEMS_AFTER = 150;
 
@@ -54,7 +23,7 @@ const NavbarItems: FC = () => {
 
   return (
     <nav className="hidden md:flex space-x-10">
-      {items.map(({ text, subItems }) => (
+      {navbarItems.map(({ text, subItems }) => (
         <div key={text} className="relative">
           <button
             className="text-gray-700 inline-flex items-center text-base font-semibold hover:text-blue-400 focus:outline-none focus:ring-0"
