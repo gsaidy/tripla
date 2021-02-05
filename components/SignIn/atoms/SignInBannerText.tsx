@@ -6,7 +6,7 @@ const SignInBannerText: FC = () => (
     <span>
       <span className="italic">Recommended: </span>
       <a
-        className="underline underline-offset-1 hover:text-blue-800"
+        className="underline hover:text-blue-800"
         role="button"
         tabIndex={-1}
         onClick={() => signIn()}

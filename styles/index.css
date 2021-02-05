@@ -18,8 +18,12 @@
 
 /* Write your own custom component styles here */
 
-.ant-input, .ant-select-selector {
+.ant-input, .ant-select-selector, .ant-picker {
   border-radius: .25rem !important;
+}
+
+.ant-picker {
+  width: 100%;
 }
 
 @tailwind utilities;

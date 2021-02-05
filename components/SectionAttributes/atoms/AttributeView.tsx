@@ -9,7 +9,19 @@ const AttributeView: FC<{ setValue: (value: string) => void }> = ({ setValue }) 
       label="View"
       tooltip={{
         placement: 'topLeft',
-        title: 'Specify how this attribute will be displayed when viewing a trip',
+        title: (
+          <span>
+            Specify how{' '}
+            <a
+              className="italic underline text-blue-400 hover:text-blue-500"
+              href="/types-overview#view"
+              target="_blank"
+            >
+              the attribute will be displayed
+            </a>{' '}
+            when viewing a trip
+          </span>
+        ),
         icon: <InfoCircleOutlined />,
       }}
     >
