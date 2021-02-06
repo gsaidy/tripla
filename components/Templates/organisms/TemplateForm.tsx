@@ -25,7 +25,7 @@ const TemplateForm: FC = () => {
                 removeSection={() => remove(field.name)}
               />
             ))}
-            <AddSectionButton addSection={() => add()} />
+            <AddSectionButton addSection={() => add({ sectionOrder: fields.length + 1 })} />
           </>
         )}
       </Form.List>
