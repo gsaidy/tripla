@@ -5,14 +5,19 @@ import BasicInfo from '../molecules/BasicInfo';
 import TemplateSection from '../molecules/TemplateSection';
 import AddSectionButton from '../molecules/AddSectionButton';
 import CreateTemplateButton from '../molecules/CreateTemplateButton';
+import Template from '../interfaces/Template';
 
 const TemplateForm: FC = () => {
   const layout = {
     labelCol: { span: 6 },
   };
 
+  const onFinish = (values: Template) => {
+    console.log(values);
+  };
+
   return (
-    <Form {...layout}>
+    <Form {...layout} onFinish={onFinish}>
       <BasicInfo />
       <Form.List name="templateSections">
         {(fields, { add, remove }) => (

@@ -1,7 +1,7 @@
 import EditType from '../../SectionAttributes/enums/EditType';
 import ViewType from '../../SectionAttributes/enums/ViewType';
 
-export interface Template {
+interface Template {
   templateName: string;
   templateDescription?: string;
   templateSections?: Section[];
@@ -25,3 +25,5 @@ interface Option {
   optionName: string;
   optionTagColor?: string;
 }
+
+export default Template;
