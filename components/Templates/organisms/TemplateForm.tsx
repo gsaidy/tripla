@@ -4,6 +4,7 @@ import { Form } from 'antd';
 import BasicInfo from '../molecules/BasicInfo';
 import TemplateSection from '../molecules/TemplateSection';
 import AddSectionButton from '../molecules/AddSectionButton';
+import CreateTemplateButton from '../molecules/CreateTemplateButton';
 
 const TemplateForm: FC = () => {
   const layout = {
@@ -28,6 +29,7 @@ const TemplateForm: FC = () => {
           </>
         )}
       </Form.List>
+      <CreateTemplateButton />
     </Form>
   );
 };
