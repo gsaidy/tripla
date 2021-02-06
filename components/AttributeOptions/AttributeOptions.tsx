@@ -28,7 +28,7 @@ const AttributeOptions: FC<{ parentName: number; showTagColor: boolean }> = ({
                 removeOption={() => remove(field.name)}
               />
             ))}
-            <AddOptionButton addOption={() => add()} />
+            <AddOptionButton addOption={() => add({ optionTagColor: '#34D399' })} />
           </>
         )}
       </Form.List>

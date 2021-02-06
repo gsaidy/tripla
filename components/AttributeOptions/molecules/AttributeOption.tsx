@@ -14,7 +14,7 @@ const AttributeOption: FC<{
     <OptionHeader title={`Option ${index + 1}`} removeOption={removeOption} />
     <div className="grid grid-cols-6 gap-x-2 mt-2 xs:mt-6 mb-1">
       <OptionName parentName={name} />
-      {showTagColor && <OptionTagColor />}
+      {showTagColor && <OptionTagColor parentName={name} />}
     </div>
   </>
 );

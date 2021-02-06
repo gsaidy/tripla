@@ -17,19 +17,29 @@ const presetColors = [
   '#111827',
 ];
 
-const ColorPicker: FC<{ label: string }> = ({ label }) => {
+const ColorPicker: FC<{ label: string; name: string | (string | number)[] }> = ({
+  label,
+  name,
+}) => {
   const [color, setColor] = useState('#34D399');
 
   return (
     <Form.Item label={label}>
       <Popover
         content={
-          <SketchPicker
-            color={color}
-            disableAlpha={true}
-            presetColors={presetColors}
-            onChange={({ hex }) => setColor(hex)}
-          />
+          <Form.Item
+            className="-mx-4 -mb-3 -mt-2.5"
+            name={name}
+            valuePropName="color"
+            normalize={({ hex }) => hex}
+          >
+            <SketchPicker
+              color={color}
+              disableAlpha={true}
+              presetColors={presetColors}
+              onChange={({ hex }) => setColor(hex)}
+            />
+          </Form.Item>
         }
         trigger="click"
         placement="bottomLeft"
