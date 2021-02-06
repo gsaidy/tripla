@@ -13,7 +13,7 @@ const SectionAttributes: FC<{ parentName: number }> = ({ parentName }) => (
       header="Attributes"
       extra={<EntityInfoTooltip title="A section must have at least one attribute" />}
     >
-      <Form.List name={[parentName, 'attributes']}>
+      <Form.List name={[parentName, 'sectionAttributes']}>
         {(fields, { add, remove }) => (
           <>
             {fields.map((field, index) => (

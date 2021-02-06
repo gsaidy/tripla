@@ -17,7 +17,7 @@ const AttributeOptions: FC<{ parentName: number; showTagColor: boolean }> = ({
       header="Options"
       extra={<EntityInfoTooltip title="A Select/Tag attribute must have at least one option" />}
     >
-      <Form.List name={[parentName, 'options']}>
+      <Form.List name={[parentName, 'attributeOptions']}>
         {(fields, { add, remove }) => (
           <>
             {fields.map((field, index) => (

@@ -14,7 +14,7 @@ const TemplateForm: FC = () => {
   return (
     <Form {...layout}>
       <BasicInfo />
-      <Form.List name="sections">
+      <Form.List name="templateSections">
         {(fields, { add, remove }) => (
           <>
             {fields.map((field, index) => (

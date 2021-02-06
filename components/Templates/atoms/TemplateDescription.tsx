@@ -6,7 +6,7 @@ const TemplateName: FC = () => (
   <Form.Item
     className="-mt-3 xs:mt-0"
     label="Description"
-    name="description"
+    name="templateDescription"
     rules={[{ max: 250, message: 'Template description can not exceed 250 characters.' }]}
   >
     <TextArea rows={3} />
