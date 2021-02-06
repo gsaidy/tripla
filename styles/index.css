@@ -26,6 +26,10 @@
   width: 100%;
 }
 
+.ant-form-item-explain {
+  margin-bottom: 1rem;
+}
+
 @tailwind utilities;
 
 /* Write your own custom utilities styles here */

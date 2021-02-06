@@ -23,6 +23,7 @@ const AttributeOptions: FC<{ parentName: number; showTagColor: boolean }> = ({
               <AttributeOption
                 key={field.key}
                 index={index}
+                name={field.name}
                 showTagColor={showTagColor}
                 removeOption={() => remove(field.name)}
               />
