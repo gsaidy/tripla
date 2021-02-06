@@ -2,19 +2,21 @@ import { FC, useState } from 'react';
 import { Form, Popover } from 'antd';
 import { SketchPicker } from 'react-color';
 
+import colors from '../../utils/colors';
+
 const presetColors = [
-  '#34D399',
-  '#3B82F6',
-  '#EF4444',
-  '#FCD34D',
-  '#A78BFA',
-  '#6B7280',
-  '#F59E0B',
-  '#4F46E5',
-  '#065F46',
-  '#EC4899',
-  '#93C5FD',
-  '#111827',
+  colors.GREEN,
+  colors.BLUE,
+  colors.RED,
+  colors.YELLOW,
+  colors.PURPLE,
+  colors.GRAY,
+  colors.ORANGE,
+  colors.INDIGO,
+  colors.DARK_GREEN,
+  colors.PINK,
+  colors.LIGHT_BLUE,
+  colors.BLACK,
 ];
 
 const ColorPicker: FC<{ label: string; name: string | (string | number)[] }> = ({

@@ -5,6 +5,7 @@ const { Panel } = Collapse;
 import EntityInfoTooltip from '../Utilities/EntityInfoTooltip';
 import AttributeOption from './molecules/AttributeOption';
 import AddOptionButton from './molecules/AddOptionButton';
+import colors from '../../utils/colors';
 
 const AttributeOptions: FC<{ parentName: number; showTagColor: boolean }> = ({
   parentName,
@@ -28,7 +29,7 @@ const AttributeOptions: FC<{ parentName: number; showTagColor: boolean }> = ({
                 removeOption={() => remove(field.name)}
               />
             ))}
-            <AddOptionButton addOption={() => add({ optionTagColor: '#34D399' })} />
+            <AddOptionButton addOption={() => add({ optionTagColor: colors.GREEN })} />
           </>
         )}
       </Form.List>
