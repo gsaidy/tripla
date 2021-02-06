@@ -16,7 +16,7 @@ const TemplateSection: FC<{ index: number; name: number; removeSection: () => vo
   >
     <div className="pb-6">
       <div className="grid grid-cols-6 gap-6">
-        <SectionName />
+        <SectionName parentName={name} />
         <SectionOrder key={index + 1} defaultValue={index + 1} />
       </div>
       <SectionAttributes parentName={name} />
