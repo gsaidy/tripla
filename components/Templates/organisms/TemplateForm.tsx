@@ -4,16 +4,22 @@ import { Form } from 'antd';
 import BasicInfo from '../molecules/BasicInfo';
 import TemplateSection from '../molecules/TemplateSection';
 import AddSectionButton from '../molecules/AddSectionButton';
+import CreateTemplateButton from '../molecules/CreateTemplateButton';
+import Template from '../interfaces/Template';
 
 const TemplateForm: FC = () => {
   const layout = {
     labelCol: { span: 6 },
   };
 
+  const onFinish = (values: Template) => {
+    console.log(values);
+  };
+
   return (
-    <Form {...layout}>
+    <Form {...layout} onFinish={onFinish}>
       <BasicInfo />
-      <Form.List name="sections">
+      <Form.List name="templateSections">
         {(fields, { add, remove }) => (
           <>
             {fields.map((field, index) => (
@@ -24,10 +30,11 @@ const TemplateForm: FC = () => {
                 removeSection={() => remove(field.name)}
               />
             ))}
-            <AddSectionButton addSection={() => add()} />
+            <AddSectionButton addSection={() => add({ sectionOrder: fields.length + 1 })} />
           </>
         )}
       </Form.List>
+      <CreateTemplateButton />
     </Form>
   );
 };

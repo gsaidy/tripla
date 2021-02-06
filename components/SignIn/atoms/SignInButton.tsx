@@ -3,7 +3,7 @@ import { Button } from 'antd';
 import { signIn } from 'next-auth/client';
 import { useRouter } from 'next/router';
 
-import { Provider } from '../enums/Provider';
+import Provider from '../enums/Provider';
 import { capitalize } from '../../../utils/string';
 
 const SignInButton: FC<{ provider: Provider; icon: ReactNode }> = ({ provider, icon }) => {

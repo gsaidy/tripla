@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { GoogleOutlined, FacebookOutlined, GithubOutlined } from '@ant-design/icons';
 
 import SignInButton from '../atoms/SignInButton';
-import { Provider } from '../enums/Provider';
+import Provider from '../enums/Provider';
 
 const SignInButtons: FC = () => (
   <div className="space-y-2 flex items-center flex-col">

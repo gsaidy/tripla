@@ -5,6 +5,7 @@ const { Panel } = Collapse;
 import EntityInfoTooltip from '../Utilities/EntityInfoTooltip';
 import AttributeOption from './molecules/AttributeOption';
 import AddOptionButton from './molecules/AddOptionButton';
+import colors from '../../utils/colors';
 
 const AttributeOptions: FC<{ parentName: number; showTagColor: boolean }> = ({
   parentName,
@@ -16,7 +17,7 @@ const AttributeOptions: FC<{ parentName: number; showTagColor: boolean }> = ({
       header="Options"
       extra={<EntityInfoTooltip title="A Select/Tag attribute must have at least one option" />}
     >
-      <Form.List name={[parentName, 'options']}>
+      <Form.List name={[parentName, 'attributeOptions']}>
         {(fields, { add, remove }) => (
           <>
             {fields.map((field, index) => (
@@ -28,7 +29,7 @@ const AttributeOptions: FC<{ parentName: number; showTagColor: boolean }> = ({
                 removeOption={() => remove(field.name)}
               />
             ))}
-            <AddOptionButton addOption={() => add()} />
+            <AddOptionButton addOption={() => add({ optionTagColor: colors.GREEN })} />
           </>
         )}
       </Form.List>

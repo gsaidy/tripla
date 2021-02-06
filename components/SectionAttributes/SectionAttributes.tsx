@@ -5,6 +5,8 @@ const { Panel } = Collapse;
 import EntityInfoTooltip from '../Utilities/EntityInfoTooltip';
 import SectionAttribute from './molecules/SectionAttribute';
 import AddAttributeButton from './molecules/AddAttributeButton';
+import EditType from './enums/EditType';
+import ViewType from './enums/ViewType';
 
 const SectionAttributes: FC<{ parentName: number }> = ({ parentName }) => (
   <Collapse defaultActiveKey="1">
@@ -13,7 +15,7 @@ const SectionAttributes: FC<{ parentName: number }> = ({ parentName }) => (
       header="Attributes"
       extra={<EntityInfoTooltip title="A section must have at least one attribute" />}
     >
-      <Form.List name={[parentName, 'attributes']}>
+      <Form.List name={[parentName, 'sectionAttributes']}>
         {(fields, { add, remove }) => (
           <>
             {fields.map((field, index) => (
@@ -24,7 +26,11 @@ const SectionAttributes: FC<{ parentName: number }> = ({ parentName }) => (
                 removeAttribute={() => remove(field.name)}
               />
             ))}
-            <AddAttributeButton addAttribute={() => add()} />
+            <AddAttributeButton
+              addAttribute={() =>
+                add({ attributeEdit: EditType.Input, attributeView: ViewType.Label })
+              }
+            />
           </>
         )}
       </Form.List>
