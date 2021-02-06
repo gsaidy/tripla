@@ -3,11 +3,15 @@ import { Form, Select } from 'antd';
 const { Option } = Select;
 import { InfoCircleOutlined } from '@ant-design/icons';
 
-const AttributeEdit: FC<{ setValue: (value: string) => void }> = ({ setValue }) => (
+const AttributeEdit: FC<{ parentName: number; setValue: (value: string) => void }> = ({
+  parentName,
+  setValue,
+}) => (
   <div className="col-span-6 sm:col-span-4 lg:col-span-3">
     <Form.Item
       className="mb-3 xs:mb-6"
       label="Edit"
+      name={[parentName, 'attributeEdit']}
       tooltip={{
         placement: 'topLeft',
         title: (
@@ -26,7 +30,7 @@ const AttributeEdit: FC<{ setValue: (value: string) => void }> = ({ setValue }) 
         icon: <InfoCircleOutlined />,
       }}
     >
-      <Select showSearch defaultValue="input" onChange={setValue}>
+      <Select showSearch onChange={setValue}>
         <Option value="input">Input</Option>
         <Option value="select">Select</Option>
         <Option value="datePicker">Date Picker</Option>
