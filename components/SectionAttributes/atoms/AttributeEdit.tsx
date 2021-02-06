@@ -3,6 +3,8 @@ import { Form, Select } from 'antd';
 const { Option } = Select;
 import { InfoCircleOutlined } from '@ant-design/icons';
 
+import EditType from '../enums/EditType';
+
 const AttributeEdit: FC<{ parentName: number; setValue: (value: string) => void }> = ({
   parentName,
   setValue,
@@ -31,13 +33,13 @@ const AttributeEdit: FC<{ parentName: number; setValue: (value: string) => void 
       }}
     >
       <Select showSearch onChange={setValue}>
-        <Option value="input">Input</Option>
-        <Option value="select">Select</Option>
-        <Option value="datePicker">Date Picker</Option>
-        <Option value="dateRangePicker">Date Range Picker</Option>
-        <Option value="timePicker">Time Picker</Option>
-        <Option value="timeRangePicker">Time Range Picker</Option>
-        <Option value="textArea">Text Area</Option>
+        <Option value={EditType.Input}>Input</Option>
+        <Option value={EditType.Select}>Select</Option>
+        <Option value={EditType.DatePicker}>Date Picker</Option>
+        <Option value={EditType.DateRangePicker}>Date Range Picker</Option>
+        <Option value={EditType.TimePicker}>Time Picker</Option>
+        <Option value={EditType.TimeRangePicker}>Time Range Picker</Option>
+        <Option value={EditType.TextArea}>Text Area</Option>
       </Select>
     </Form.Item>
   </div>

@@ -5,6 +5,8 @@ const { Panel } = Collapse;
 import EntityInfoTooltip from '../Utilities/EntityInfoTooltip';
 import SectionAttribute from './molecules/SectionAttribute';
 import AddAttributeButton from './molecules/AddAttributeButton';
+import EditType from './enums/EditType';
+import ViewType from './enums/ViewType';
 
 const SectionAttributes: FC<{ parentName: number }> = ({ parentName }) => (
   <Collapse defaultActiveKey="1">
@@ -25,7 +27,9 @@ const SectionAttributes: FC<{ parentName: number }> = ({ parentName }) => (
               />
             ))}
             <AddAttributeButton
-              addAttribute={() => add({ attributeEdit: 'input', attributeView: 'label' })}
+              addAttribute={() =>
+                add({ attributeEdit: EditType.Input, attributeView: ViewType.Label })
+              }
             />
           </>
         )}

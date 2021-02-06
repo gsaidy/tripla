@@ -1,3 +1,6 @@
+import EditType from '../../SectionAttributes/enums/EditType';
+import ViewType from '../../SectionAttributes/enums/ViewType';
+
 export interface Template {
   templateName: string;
   templateDescription?: string;
@@ -13,8 +16,8 @@ interface Section {
 interface Attribute {
   attributeName: string;
   attributeRequired?: boolean;
-  attributeEdit: string;
-  attributeView: string;
+  attributeEdit: EditType;
+  attributeView: ViewType;
   attributeOptions?: Option[];
 }
 

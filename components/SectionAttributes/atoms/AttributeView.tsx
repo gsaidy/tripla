@@ -3,6 +3,8 @@ import { Form, Select } from 'antd';
 const { Option } = Select;
 import { InfoCircleOutlined } from '@ant-design/icons';
 
+import ViewType from '../enums/ViewType';
+
 const AttributeView: FC<{ parentName: number; setValue: (value: string) => void }> = ({
   parentName,
   setValue,
@@ -30,8 +32,8 @@ const AttributeView: FC<{ parentName: number; setValue: (value: string) => void 
       }}
     >
       <Select showSearch onChange={setValue}>
-        <Option value="label">Label</Option>
-        <Option value="tag">Tag</Option>
+        <Option value={ViewType.Label}>Label</Option>
+        <Option value={ViewType.Tag}>Tag</Option>
       </Select>
     </Form.Item>
   </div>
