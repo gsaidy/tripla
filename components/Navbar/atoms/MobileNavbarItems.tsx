@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Collapse } from 'antd';
 const { Panel } = Collapse;
 
-import navbarItems from '../utils/navbarItems';
+import navbarItems from '../../../constants/navbarItems';
 
 const MobileNavbarItems: FC<{ closeNavbar: () => void }> = ({ closeNavbar }) => (
   <div className="mt-6 -mb-3">
