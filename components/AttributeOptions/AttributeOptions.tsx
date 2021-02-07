@@ -5,7 +5,7 @@ const { Panel } = Collapse;
 import EntityInfoTooltip from '../Utilities/EntityInfoTooltip';
 import AttributeOption from './molecules/AttributeOption';
 import AddOptionButton from './molecules/AddOptionButton';
-import colors from '../../utils/colors';
+import colors from '../../constants/colors';
 
 const AttributeOptions: FC<{ parentName: number; showTagColor: boolean }> = ({
   parentName,

@@ -3,7 +3,7 @@ import { Form, Select } from 'antd';
 const { Option } = Select;
 import { InfoCircleOutlined } from '@ant-design/icons';
 
-import EditType from '../enums/EditType';
+import EditType from '../../../enums/EditType';
 
 const AttributeEdit: FC<{ parentName: number; setValue: (value: string) => void }> = ({
   parentName,

@@ -5,7 +5,7 @@ import BasicInfo from '../molecules/BasicInfo';
 import TemplateSection from '../molecules/TemplateSection';
 import AddSectionButton from '../molecules/AddSectionButton';
 import CreateTemplateButton from '../molecules/CreateTemplateButton';
-import Template from '../interfaces/Template';
+import Template from '../../../interfaces/Template';
 
 const TemplateForm: FC = () => {
   const layout = {
