@@ -3,7 +3,7 @@ import { Form, Select } from 'antd';
 const { Option } = Select;
 import { InfoCircleOutlined } from '@ant-design/icons';
 
-import ViewType from '../enums/ViewType';
+import ViewType from '../../../enums/ViewType';
 
 const AttributeView: FC<{ parentName: number; setValue: (value: string) => void }> = ({
   parentName,
