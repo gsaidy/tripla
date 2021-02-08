@@ -1,6 +1,6 @@
 import { FC, useState, useEffect } from 'react';
 
-const images = ['havana', 'prague', 'rio', 'santorini', 'tokyo'];
+const images = ['havana', 'prague', 'rio', 'santorini', 'tokyo', 'bled', 'cappadocia'];
 
 const HeroImage: FC = () => {
   const [imageIndex, setImageIndex] = useState(0);
