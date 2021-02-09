@@ -2,7 +2,7 @@ import { FC, useState } from 'react';
 import Link from 'next/link';
 import { CaretUpFilled, CaretDownFilled } from '@ant-design/icons';
 
-import navbarItems from '../../../constants/navbarItems';
+import navbarItems from 'constants/navbarItems';
 
 const TOGGLE_SUB_ITEMS_AFTER = 150;
 

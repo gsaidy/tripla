@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import Head from 'next/head';
 
-import Hero from '../components/Hero/Hero';
-import Features from '../components/Features/Features';
+import Hero from 'components/Hero/Hero';
+import Features from 'components/Features/Features';
 
 const Home: FC = () => (
   <>

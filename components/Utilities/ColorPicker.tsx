@@ -2,7 +2,7 @@ import { FC, useState } from 'react';
 import { Form, Popover } from 'antd';
 import { SketchPicker } from 'react-color';
 
-import colors from '../../constants/colors';
+import colors from 'constants/colors';
 
 const presetColors = [
   colors.GREEN,
