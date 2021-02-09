@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import Head from 'next/head';
 
-import CreateTemplate from '../../components/Templates/CreateTemplate';
+import CreateTemplate from 'components/Templates/CreateTemplate';
 
 const CreateTemplatePage: FC = () => (
   <>

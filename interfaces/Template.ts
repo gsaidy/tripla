@@ -1,5 +1,5 @@
-import EditType from '../enums/EditType';
-import ViewType from '../enums/ViewType';
+import EditType from 'enums/EditType';
+import ViewType from 'enums/ViewType';
 
 interface Template {
   templateName: string;
