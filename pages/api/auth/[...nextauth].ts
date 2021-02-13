@@ -2,7 +2,7 @@ import NextAuth from 'next-auth';
 import Providers from 'next-auth/providers';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import Session from 'interfaces/Session';
+import Session from 'interfaces/session';
 
 let accountId: number;
 
@@ -25,7 +25,7 @@ const options = {
     signIn: '/signin',
   },
   callbacks: {
-    async signIn(_: Session, { id }: { id: number }) {
+    async signIn(_: unknown, { id }: { id: number }) {
       accountId = id;
       return true;
     },
