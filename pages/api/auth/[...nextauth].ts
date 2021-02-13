@@ -2,6 +2,10 @@ import NextAuth from 'next-auth';
 import Providers from 'next-auth/providers';
 import { NextApiRequest, NextApiResponse } from 'next';
 
+import Session from 'interfaces/Session';
+
+let accountId: number;
+
 const options = {
   providers: [
     Providers.Google({
@@ -19,6 +23,15 @@ const options = {
   ],
   pages: {
     signIn: '/signin',
+  },
+  callbacks: {
+    async signIn(_: Session, { id }: { id: number }) {
+      accountId = id;
+      return true;
+    },
+    async session(session: Session) {
+      return { ...session, user: { id: accountId, ...session.user } };
+    },
   },
 };
 
