@@ -4,7 +4,7 @@ import NameInput from '../../Utilities/NameInput';
 
 const AttributeName: FC<{ parentName: number }> = ({ parentName }) => (
   <div className="col-span-6 sm:col-span-4 lg:col-span-3">
-    <NameInput name={[parentName, 'attributeName']} entity="attribute" />
+    <NameInput name={[parentName, 'name']} entity="attribute" />
   </div>
 );
 

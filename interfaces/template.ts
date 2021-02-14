@@ -2,28 +2,28 @@ import EditType from 'enums/editType';
 import ViewType from 'enums/viewType';
 
 interface Template {
-  templateName: string;
-  templateDescription?: string;
-  templateSections?: Section[];
+  name: string;
+  description?: string;
+  sections?: Section[];
 }
 
 interface Section {
-  sectionName: string;
-  sectionOrder?: number;
-  sectionAttributes?: Attribute[];
+  name: string;
+  order?: number;
+  attributes?: Attribute[];
 }
 
 interface Attribute {
-  attributeName: string;
-  attributeRequired?: boolean;
-  attributeEdit: EditType;
-  attributeView: ViewType;
-  attributeOptions?: Option[];
+  name: string;
+  required?: boolean;
+  edit: EditType;
+  view: ViewType;
+  options?: Option[];
 }
 
 interface Option {
-  optionName: string;
-  optionTagColor?: string;
+  name: string;
+  color?: string;
 }
 
 export default Template;

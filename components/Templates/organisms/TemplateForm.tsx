@@ -19,7 +19,7 @@ const TemplateForm: FC = () => {
   return (
     <Form {...layout} onFinish={onFinish}>
       <BasicInfo />
-      <Form.List name="templateSections">
+      <Form.List name="sections">
         {(fields, { add, remove }) => (
           <>
             {fields.map((field, index) => (
@@ -30,7 +30,7 @@ const TemplateForm: FC = () => {
                 removeSection={() => remove(field.name)}
               />
             ))}
-            <AddSectionButton addSection={() => add({ sectionOrder: fields.length + 1 })} />
+            <AddSectionButton addSection={() => add({ order: fields.length + 1 })} />
           </>
         )}
       </Form.List>

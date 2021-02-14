@@ -15,7 +15,7 @@ const SectionAttributes: FC<{ parentName: number }> = ({ parentName }) => (
       header="Attributes"
       extra={<EntityInfoTooltip title="A section must have at least one attribute" />}
     >
-      <Form.List name={[parentName, 'sectionAttributes']}>
+      <Form.List name={[parentName, 'attributes']}>
         {(fields, { add, remove }) => (
           <>
             {fields.map((field, index) => (
@@ -27,9 +27,7 @@ const SectionAttributes: FC<{ parentName: number }> = ({ parentName }) => (
               />
             ))}
             <AddAttributeButton
-              addAttribute={() =>
-                add({ attributeEdit: EditType.Input, attributeView: ViewType.Label })
-              }
+              addAttribute={() => add({ edit: EditType.Input, view: ViewType.Label })}
             />
           </>
         )}
