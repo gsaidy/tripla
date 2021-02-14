@@ -4,6 +4,7 @@ import { useMutation } from '@apollo/client';
 
 import SignInBanner from '../SignIn/molecules/SignInBanner';
 import TemplateForm from './organisms/TemplateForm';
+import CreateTemplateButton from './molecules/CreateTemplateButton';
 import Template from 'interfaces/template';
 import CREATE_TEMPLATE from 'gql/mutations/createTemplate';
 import { mapTemplate } from 'utils/mapper';
@@ -11,7 +12,7 @@ import User from 'interfaces/user';
 
 const CreateTemplate: FC = () => {
   const [session, loading] = useSession();
-  const [createTemplateMutation] = useMutation(CREATE_TEMPLATE);
+  const [createTemplateMutation, { loading: createLoading }] = useMutation(CREATE_TEMPLATE);
 
   const createTemplate = (template: Template) => {
     createTemplateMutation({
@@ -35,9 +36,13 @@ const CreateTemplate: FC = () => {
   };
 
   return (
-    <div className="min-h-tripla bg-gray-50">
+    <div
+      className={`min-h-tripla bg-gray-50 ${createLoading ? 'opacity-50 pointer-events-none' : ''}`}
+    >
       {!session && !loading && <SignInBanner />}
-      <TemplateForm onSubmit={createTemplate} />
+      <TemplateForm onSubmit={createTemplate}>
+        <CreateTemplateButton loading={createLoading} />
+      </TemplateForm>
     </div>
   );
 };

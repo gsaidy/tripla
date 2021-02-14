@@ -1,13 +1,15 @@
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 import { Form } from 'antd';
 
 import BasicInfo from '../molecules/BasicInfo';
 import TemplateSection from '../molecules/TemplateSection';
 import AddSectionButton from '../molecules/AddSectionButton';
-import CreateTemplateButton from '../molecules/CreateTemplateButton';
 import Template from 'interfaces/template';
 
-const TemplateForm: FC<{ onSubmit: (template: Template) => void }> = ({ onSubmit }) => {
+const TemplateForm: FC<{ onSubmit: (template: Template) => void; children: ReactNode }> = ({
+  onSubmit,
+  children,
+}) => {
   const layout = {
     labelCol: { span: 6 },
   };
@@ -34,7 +36,7 @@ const TemplateForm: FC<{ onSubmit: (template: Template) => void }> = ({ onSubmit
           </>
         )}
       </Form.List>
-      <CreateTemplateButton />
+      {children}
     </Form>
   );
 };
