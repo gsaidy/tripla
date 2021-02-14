@@ -7,13 +7,13 @@ import AddSectionButton from '../molecules/AddSectionButton';
 import CreateTemplateButton from '../molecules/CreateTemplateButton';
 import Template from 'interfaces/template';
 
-const TemplateForm: FC = () => {
+const TemplateForm: FC<{ onSubmit: (template: Template) => void }> = ({ onSubmit }) => {
   const layout = {
     labelCol: { span: 6 },
   };
 
   const onFinish = (values: Template) => {
-    console.log(values);
+    onSubmit(values);
   };
 
   return (
