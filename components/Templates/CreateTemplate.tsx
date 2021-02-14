@@ -7,6 +7,7 @@ import TemplateForm from './organisms/TemplateForm';
 import Template from 'interfaces/template';
 import CREATE_TEMPLATE from 'gql/mutations/createTemplate';
 import { mapTemplate } from 'utils/mapper';
+import User from 'interfaces/user';
 
 const CreateTemplate: FC = () => {
   const [session, loading] = useSession();
@@ -15,9 +16,22 @@ const CreateTemplate: FC = () => {
   const createTemplate = (template: Template) => {
     createTemplateMutation({
       variables: {
-        input: mapTemplate(template),
+        input: { ...mapTemplate(template), ...mapUser() },
       },
     });
+  };
+
+  const mapUser = () => {
+    if (session?.user) {
+      const user = session?.user as User;
+      return {
+        user: {
+          id: user.id,
+          name: user.name,
+        },
+      };
+    }
+    return;
   };
 
   return (
