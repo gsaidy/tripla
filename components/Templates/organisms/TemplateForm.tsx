@@ -1,21 +1,29 @@
-import { FC, ReactNode } from 'react';
+import { FC, ReactNode, useState } from 'react';
 import { Form } from 'antd';
 
 import BasicInfo from '../molecules/BasicInfo';
 import TemplateSection from '../molecules/TemplateSection';
 import AddSectionButton from '../molecules/AddSectionButton';
+import ErrorList from '../molecules/ErrorList';
 import Template from 'interfaces/template';
+import { validateAtLeastOneAttributeAndOption } from 'utils/validator';
 
 const TemplateForm: FC<{ onSubmit: (template: Template) => void; children: ReactNode }> = ({
   onSubmit,
   children,
 }) => {
+  const [errors, setErrors] = useState<string[]>([]);
+
   const layout = {
     labelCol: { span: 6 },
   };
 
-  const onFinish = (values: Template) => {
-    onSubmit(values);
+  const onFinish = async (template: Template) => {
+    const validationErrors = validateAtLeastOneAttributeAndOption(template);
+    setErrors(validateAtLeastOneAttributeAndOption(template));
+    if (validationErrors.length === 0) {
+      onSubmit(template);
+    }
   };
 
   return (
@@ -37,6 +45,7 @@ const TemplateForm: FC<{ onSubmit: (template: Template) => void; children: React
         )}
       </Form.List>
       {children}
+      {errors.length > 0 && <ErrorList errors={errors} onClose={() => setErrors([])} />}
     </Form>
   );
 };

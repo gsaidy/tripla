@@ -64,8 +64,6 @@ module.exports = {
 
         // Includes .prettierrc.js rules
         'prettier/prettier': ['error', {}, { usePrettierrc: true }],
-
-        '@typescript-eslint/explicit-module-boundary-types': 'off',
       },
     },
   ],

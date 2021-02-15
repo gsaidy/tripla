@@ -5,6 +5,7 @@ import Option from 'interfaces/option';
 import EditType from 'enums/editType';
 import ViewType from 'enums/viewType';
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const mapTemplate = ({ name, description, sections }: Template) => ({
   name,
   description,
