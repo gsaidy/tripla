@@ -12,7 +12,7 @@ const AttributeView: FC<{ parentName: number; setValue: (value: string) => void 
   <div className="col-span-6 sm:col-span-4 lg:col-span-3 lg:mr-5">
     <Form.Item
       label="View"
-      name={[parentName, 'attributeView']}
+      name={[parentName, 'view']}
       tooltip={{
         placement: 'topLeft',
         title: (

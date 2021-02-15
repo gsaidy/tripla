@@ -1,29 +1,9 @@
-import EditType from 'enums/editType';
-import ViewType from 'enums/viewType';
+import Section from './section';
 
 interface Template {
-  templateName: string;
-  templateDescription?: string;
-  templateSections?: Section[];
-}
-
-interface Section {
-  sectionName: string;
-  sectionOrder?: number;
-  sectionAttributes?: Attribute[];
-}
-
-interface Attribute {
-  attributeName: string;
-  attributeRequired?: boolean;
-  attributeEdit: EditType;
-  attributeView: ViewType;
-  attributeOptions?: Option[];
-}
-
-interface Option {
-  optionName: string;
-  optionTagColor?: string;
+  name: string;
+  description?: string;
+  sections?: Section[];
 }
 
 export default Template;

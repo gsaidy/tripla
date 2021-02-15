@@ -1,25 +1,27 @@
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 import { Form } from 'antd';
 
 import BasicInfo from '../molecules/BasicInfo';
 import TemplateSection from '../molecules/TemplateSection';
 import AddSectionButton from '../molecules/AddSectionButton';
-import CreateTemplateButton from '../molecules/CreateTemplateButton';
 import Template from 'interfaces/template';
 
-const TemplateForm: FC = () => {
+const TemplateForm: FC<{ onSubmit: (template: Template) => void; children: ReactNode }> = ({
+  onSubmit,
+  children,
+}) => {
   const layout = {
     labelCol: { span: 6 },
   };
 
   const onFinish = (values: Template) => {
-    console.log(values);
+    onSubmit(values);
   };
 
   return (
     <Form {...layout} onFinish={onFinish}>
       <BasicInfo />
-      <Form.List name="templateSections">
+      <Form.List name="sections">
         {(fields, { add, remove }) => (
           <>
             {fields.map((field, index) => (
@@ -30,11 +32,11 @@ const TemplateForm: FC = () => {
                 removeSection={() => remove(field.name)}
               />
             ))}
-            <AddSectionButton addSection={() => add({ sectionOrder: fields.length + 1 })} />
+            <AddSectionButton addSection={() => add({ order: fields.length + 1 })} />
           </>
         )}
       </Form.List>
-      <CreateTemplateButton />
+      {children}
     </Form>
   );
 };

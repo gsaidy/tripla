@@ -13,7 +13,7 @@ const AttributeEdit: FC<{ parentName: number; setValue: (value: string) => void 
     <Form.Item
       className="mb-3 xs:mb-6"
       label="Edit"
-      name={[parentName, 'attributeEdit']}
+      name={[parentName, 'edit']}
       tooltip={{
         placement: 'topLeft',
         title: (

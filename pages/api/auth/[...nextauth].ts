@@ -3,8 +3,7 @@ import Providers from 'next-auth/providers';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import Session from 'interfaces/session';
-
-let accountId: number;
+import User from 'interfaces/user';
 
 const options = {
   providers: [
@@ -25,12 +24,11 @@ const options = {
     signIn: '/signin',
   },
   callbacks: {
-    async signIn(_: unknown, { id }: { id: number }) {
-      accountId = id;
-      return true;
+    async jwt(token: unknown & { id?: number }, _: unknown, account: unknown & { id: number }) {
+      return { ...token, id: token.id || account.id };
     },
-    async session(session: Session) {
-      return { ...session, user: { id: accountId, ...session.user } };
+    async session(session: Session, user: User) {
+      return { ...session, user: { ...session.user, id: user.id } };
     },
   },
 };
