@@ -2,6 +2,7 @@ import { FC, useEffect } from 'react';
 import { useSession } from 'next-auth/client';
 import { useMutation } from '@apollo/client';
 import { message } from 'antd';
+import { useRouter } from 'next/router';
 
 import SignInBanner from '../SignIn/molecules/SignInBanner';
 import TemplateForm from './organisms/TemplateForm';
@@ -17,6 +18,7 @@ const CreateTemplate: FC = () => {
     createTemplateMutation,
     { loading: createLoading, error: createError, data: createData },
   ] = useMutation(CREATE_TEMPLATE);
+  const router = useRouter();
 
   useEffect(() => {
     if (createLoading) {
@@ -27,8 +29,12 @@ const CreateTemplate: FC = () => {
     } else if (createData) {
       message.destroy('loading');
       message.success({ content: 'Template successfully created.', key: 'success', duration: 3 });
+      const {
+        insert_templates_one: { id: createdTemplateId },
+      } = createData;
+      router.push(`/templates/${createdTemplateId}`);
     }
-  }, [createLoading, createError, createData]);
+  }, [createLoading, createError, createData, router]);
 
   const createTemplate = (template: Template) => {
     createTemplateMutation({
