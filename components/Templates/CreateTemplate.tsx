@@ -1,6 +1,7 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { useSession } from 'next-auth/client';
 import { useMutation } from '@apollo/client';
+import { message } from 'antd';
 
 import SignInBanner from '../SignIn/molecules/SignInBanner';
 import TemplateForm from './organisms/TemplateForm';
@@ -12,7 +13,22 @@ import User from 'interfaces/user';
 
 const CreateTemplate: FC = () => {
   const [session, loading] = useSession();
-  const [createTemplateMutation, { loading: createLoading }] = useMutation(CREATE_TEMPLATE);
+  const [
+    createTemplateMutation,
+    { loading: createLoading, error: createError, data: createData },
+  ] = useMutation(CREATE_TEMPLATE);
+
+  useEffect(() => {
+    if (createLoading) {
+      message.loading({ content: 'Saving template...', key: 'loading' });
+    } else if (createError) {
+      message.destroy('loading');
+      message.error({ content: 'An error occurred. Please try again.', key: 'error', duration: 3 });
+    } else if (createData) {
+      message.destroy('loading');
+      message.success({ content: 'Template successfully created.', key: 'success', duration: 3 });
+    }
+  }, [createLoading, createError, createData]);
 
   const createTemplate = (template: Template) => {
     createTemplateMutation({
