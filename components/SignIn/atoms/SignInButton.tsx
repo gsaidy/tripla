@@ -4,7 +4,7 @@ import { signIn } from 'next-auth/client';
 import { useRouter } from 'next/router';
 
 import Provider from 'enums/provider';
-import { capitalize } from 'utils/string';
+import { capitalize } from 'utils/helpers';
 
 const SignInButton: FC<{ provider: Provider; icon: ReactNode }> = ({ provider, icon }) => {
   const { query } = useRouter();

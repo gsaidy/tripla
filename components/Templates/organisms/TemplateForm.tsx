@@ -6,7 +6,7 @@ import TemplateSection from '../molecules/TemplateSection';
 import AddSectionButton from '../molecules/AddSectionButton';
 import ErrorList from '../molecules/ErrorList';
 import Template from 'interfaces/template';
-import { validateAtLeastOneAttributeAndOption } from 'utils/validator';
+import { validateAtLeastOneAttributeAndOption } from 'utils/validators';
 
 const TemplateForm: FC<{ onSubmit: (template: Template) => void; children: ReactNode }> = ({
   onSubmit,

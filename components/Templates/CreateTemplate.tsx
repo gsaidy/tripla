@@ -9,7 +9,7 @@ import TemplateForm from './organisms/TemplateForm';
 import CreateTemplateButton from './molecules/CreateTemplateButton';
 import Template from 'interfaces/template';
 import CREATE_TEMPLATE from 'gql/mutations/createTemplate';
-import { mapTemplate } from 'utils/mapper';
+import { mapTemplate } from 'utils/mappers';
 import User from 'interfaces/user';
 
 const CreateTemplate: FC = () => {
