@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Form, Input } from 'antd';
 
-import { capitalize } from 'utils/string';
+import { capitalize } from 'utils/helpers';
 
 const NameInput: FC<{ name: string | (string | number)[]; entity: string }> = ({
   name,
