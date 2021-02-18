@@ -1,13 +1,22 @@
 import { FC } from 'react';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 
-const TemplateViewPage: FC = () => (
-  <>
-    <Head>
-      <title>Template View - Tripla</title>
-    </Head>
-    <div>Under construction</div>
-  </>
-);
+import TemplateDetails from 'components/Templates/TemplateDetails';
 
-export default TemplateViewPage;
+const TemplateDetailsPage: FC = () => {
+  const {
+    query: { slug },
+  } = useRouter();
+
+  return (
+    <>
+      <Head>
+        <title>Template Details - Tripla</title>
+      </Head>
+      {slug && <TemplateDetails id={slug} />}
+    </>
+  );
+};
+
+export default TemplateDetailsPage;
