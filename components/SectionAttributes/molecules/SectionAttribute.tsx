@@ -6,6 +6,8 @@ import AttributeRequired from '../atoms/AttributeRequired';
 import AttributeEdit from '../atoms/AttributeEdit';
 import AttributeView from '../atoms/AttributeView';
 import AttributeOptions from '../../AttributeOptions/AttributeOptions';
+import EditType from 'enums/editType';
+import ViewType from 'enums/viewType';
 
 const SectionAttribute: FC<{ index: number; name: number; removeAttribute: () => void }> = ({
   index,
@@ -24,8 +26,8 @@ const SectionAttribute: FC<{ index: number; name: number; removeAttribute: () =>
         <AttributeEdit parentName={name} setValue={setEditValue} />
         <AttributeView parentName={name} setValue={setViewValue} />
       </div>
-      {(editValue === 'select' || viewValue === 'tag') && (
-        <AttributeOptions parentName={name} showTagColor={viewValue === 'tag'} />
+      {(editValue === EditType.Select || viewValue === ViewType.Tag) && (
+        <AttributeOptions parentName={name} showTagColor={viewValue === ViewType.Tag} />
       )}
     </>
   );
