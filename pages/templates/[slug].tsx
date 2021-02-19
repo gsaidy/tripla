@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 import TemplateDetails from 'components/Templates/TemplateDetails';
+import PageLoader from 'components/PageLoader/PageLoader';
 
 const TemplateDetailsPage: FC = () => {
   const {
@@ -14,7 +15,7 @@ const TemplateDetailsPage: FC = () => {
       <Head>
         <title>Template Details - Tripla</title>
       </Head>
-      {slug && <TemplateDetails id={slug} />}
+      {slug ? <TemplateDetails id={slug} /> : <PageLoader />}
     </>
   );
 };
