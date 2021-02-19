@@ -30,6 +30,11 @@
   margin-bottom: 1rem;
 }
 
+.ant-input-disabled {
+  color: #111827 !important;
+  cursor: auto !important;
+}
+
 @tailwind utilities;
 
 /* Write your own custom utilities styles here */

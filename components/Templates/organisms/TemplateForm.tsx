@@ -33,7 +33,12 @@ const TemplateForm: FC<{
 
   return (
     <TemplateFormContext.Provider value={formMode}>
-      <Form {...layout} initialValues={templateInitialData} onFinish={onFinish}>
+      <Form
+        {...layout}
+        initialValues={templateInitialData}
+        requiredMark={formMode !== FormMode.View}
+        onFinish={onFinish}
+      >
         <BasicInfo />
         <Form.List name="sections">
           {(fields, { add, remove }) => (
