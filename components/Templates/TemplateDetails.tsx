@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { useQuery } from '@apollo/client';
 
 import GET_TEMPLATE_DETAILS from 'gql/queries/getTemplateDetails';
@@ -7,8 +7,10 @@ import ErrorResult from '../ErrorResult/ErrorResult';
 import NotFound from '../NotFound/NotFound';
 import TemplateForm from './organisms/TemplateForm';
 import Template from 'interfaces/template';
+import FormMode from 'enums/formMode';
 
 const TemplateDetails: FC<{ id: string | string[] }> = ({ id }) => {
+  const [formMode] = useState(FormMode.View);
   const { loading, error, data } = useQuery(GET_TEMPLATE_DETAILS, { variables: { id } });
   if (loading) {
     return <PageLoader />;
@@ -34,7 +36,9 @@ const TemplateDetails: FC<{ id: string | string[] }> = ({ id }) => {
     console.log(template);
   };
 
-  return <TemplateForm templateInitialData={template} onSubmit={updateTemplate} />;
+  return (
+    <TemplateForm formMode={formMode} templateInitialData={template} onSubmit={updateTemplate} />
+  );
 };
 
 export default TemplateDetails;
