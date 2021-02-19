@@ -14,11 +14,13 @@ const TemplateName: FC = () => {
       label="Description"
       name="description"
       rules={[{ max: 250, message: 'Template description can not exceed 250 characters.' }]}
+      labelCol={{ span: formMode === FormMode.View ? 4 : 6 }}
     >
       <TextArea
         rows={3}
         bordered={formMode !== FormMode.View}
         disabled={formMode === FormMode.View}
+        autoSize={formMode === FormMode.View}
       />
     </Form.Item>
   );
