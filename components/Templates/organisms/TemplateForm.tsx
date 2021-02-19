@@ -8,10 +8,11 @@ import ErrorList from '../molecules/ErrorList';
 import Template from 'interfaces/template';
 import { validateAtLeastOneAttributeAndOption } from 'utils/validators';
 
-const TemplateForm: FC<{ onSubmit: (template: Template) => void; children: ReactNode }> = ({
-  onSubmit,
-  children,
-}) => {
+const TemplateForm: FC<{
+  templateInitialData?: Template;
+  children?: ReactNode;
+  onSubmit: (template: Template) => void;
+}> = ({ templateInitialData, children, onSubmit }) => {
   const [errors, setErrors] = useState<string[]>([]);
 
   const layout = {
@@ -27,7 +28,7 @@ const TemplateForm: FC<{ onSubmit: (template: Template) => void; children: React
   };
 
   return (
-    <Form {...layout} onFinish={onFinish}>
+    <Form {...layout} initialValues={templateInitialData} onFinish={onFinish}>
       <BasicInfo />
       <Form.List name="sections">
         {(fields, { add, remove }) => (

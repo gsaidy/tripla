@@ -5,6 +5,8 @@ import GET_TEMPLATE_DETAILS from 'gql/queries/getTemplateDetails';
 import PageLoader from '../PageLoader/PageLoader';
 import ErrorResult from '../ErrorResult/ErrorResult';
 import NotFound from '../NotFound/NotFound';
+import TemplateForm from './organisms/TemplateForm';
+import Template from 'interfaces/template';
 
 const TemplateDetails: FC<{ id: string | string[] }> = ({ id }) => {
   const { loading, error, data } = useQuery(GET_TEMPLATE_DETAILS, { variables: { id } });
@@ -27,7 +29,12 @@ const TemplateDetails: FC<{ id: string | string[] }> = ({ id }) => {
       />
     );
   }
-  return null;
+
+  const updateTemplate = (template: Template) => {
+    console.log(template);
+  };
+
+  return <TemplateForm templateInitialData={template} onSubmit={updateTemplate} />;
 };
 
 export default TemplateDetails;
