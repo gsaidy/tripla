@@ -37,7 +37,9 @@ const TemplateDetails: FC<{ id: string | string[] }> = ({ id }) => {
   };
 
   return (
-    <TemplateForm formMode={formMode} templateInitialData={template} onSubmit={updateTemplate} />
+    <div className="min-h-tripla bg-gray-50">
+      <TemplateForm formMode={formMode} templateInitialData={template} onSubmit={updateTemplate} />
+    </div>
   );
 };
 
