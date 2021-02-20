@@ -9,7 +9,9 @@ import Template from 'interfaces/template';
 import { validateAtLeastOneAttributeAndOption } from 'utils/validators';
 import FormMode from 'enums/formMode';
 
-export const TemplateFormContext = createContext(FormMode.Create);
+export const TemplateFormContext = createContext<{ formMode: FormMode }>({
+  formMode: FormMode.Create,
+});
 
 const TemplateForm: FC<{
   formMode: FormMode;
@@ -32,7 +34,7 @@ const TemplateForm: FC<{
   };
 
   return (
-    <TemplateFormContext.Provider value={formMode}>
+    <TemplateFormContext.Provider value={{ formMode }}>
       <Form
         {...layout}
         initialValues={templateInitialData}

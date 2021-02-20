@@ -10,7 +10,7 @@ const NameInput: FC<{
   labelCol?: { span: number };
   entity: string;
 }> = ({ name, labelCol, entity }) => {
-  const formMode = useContext(TemplateFormContext);
+  const { formMode } = useContext(TemplateFormContext);
 
   return (
     <Form.Item

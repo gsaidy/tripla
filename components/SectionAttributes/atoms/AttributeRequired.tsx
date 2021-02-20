@@ -5,7 +5,7 @@ import { TemplateFormContext } from '../../Templates/organisms/TemplateForm';
 import FormMode from 'enums/formMode';
 
 const AttributeRequired: FC<{ parentName: number }> = ({ parentName }) => {
-  const formMode = useContext(TemplateFormContext);
+  const { formMode } = useContext(TemplateFormContext);
 
   return (
     <div className="col-span-6 sm:col-span-4 lg:col-span-3 -mt-3 -mb-6 xs:my-0">

@@ -11,7 +11,7 @@ const AttributeView: FC<{ parentName: number; setValue: (value: string) => void 
   parentName,
   setValue,
 }) => {
-  const formMode = useContext(TemplateFormContext);
+  const { formMode } = useContext(TemplateFormContext);
 
   return (
     <div className="col-span-6 sm:col-span-4 lg:col-span-3 lg:mr-5">

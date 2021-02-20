@@ -6,7 +6,7 @@ import { TemplateFormContext } from '../organisms/TemplateForm';
 import FormMode from 'enums/formMode';
 
 const TemplateName: FC = () => {
-  const formMode = useContext(TemplateFormContext);
+  const { formMode } = useContext(TemplateFormContext);
 
   return (
     <Form.Item

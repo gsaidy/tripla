@@ -9,7 +9,7 @@ const EntityHeader: FC<{ className?: string; title: string; remove: () => void }
   title,
   remove,
 }) => {
-  const formMode = useContext(TemplateFormContext);
+  const { formMode } = useContext(TemplateFormContext);
 
   return (
     <div className={`flex items-center ${className}`}>

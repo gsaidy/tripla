@@ -11,7 +11,7 @@ import { TemplateFormContext } from '../Templates/organisms/TemplateForm';
 import FormMode from 'enums/formMode';
 
 const SectionAttributes: FC<{ parentName: number }> = ({ parentName }) => {
-  const formMode = useContext(TemplateFormContext);
+  const { formMode } = useContext(TemplateFormContext);
 
   return (
     <Collapse defaultActiveKey={formMode === FormMode.Create ? '1' : '0'}>

@@ -6,7 +6,7 @@ import FormMode from 'enums/formMode';
 import { TemplateFormContext } from '../Templates/organisms/TemplateForm';
 
 const AddEntityButton: FC<{ entity: string; add: () => void }> = ({ entity, add }) => {
-  const formMode = useContext(TemplateFormContext);
+  const { formMode } = useContext(TemplateFormContext);
 
   if (formMode === FormMode.View) {
     return null;

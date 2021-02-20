@@ -6,7 +6,7 @@ import { TemplateFormContext } from '../Templates/organisms/TemplateForm';
 import FormMode from 'enums/formMode';
 
 const EntityInfoTooltip: FC<{ title: string }> = ({ title }) => {
-  const formMode = useContext(TemplateFormContext);
+  const { formMode } = useContext(TemplateFormContext);
 
   if (formMode !== FormMode.View) {
     return (

@@ -9,7 +9,7 @@ import TemplateCreatedBy from '../atoms/TemplateCreatedBy';
 import User from 'interfaces/user';
 
 const BasicInfo: FC<{ user?: User }> = ({ user }) => {
-  const formMode = useContext(TemplateFormContext);
+  const { formMode } = useContext(TemplateFormContext);
 
   return (
     <FormSection header={<h3>Basic Info</h3>}>

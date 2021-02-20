@@ -13,7 +13,7 @@ const AttributeOptions: FC<{ parentName: number; showTagColor: boolean }> = ({
   parentName,
   showTagColor,
 }) => {
-  const formMode = useContext(TemplateFormContext);
+  const { formMode } = useContext(TemplateFormContext);
 
   return (
     <Collapse className="mb-7 sm:mb-6" defaultActiveKey={formMode === FormMode.Create ? '1' : '0'}>
