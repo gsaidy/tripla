@@ -8,9 +8,10 @@ import NotFound from '../NotFound/NotFound';
 import TemplateForm from './organisms/TemplateForm';
 import Template from 'interfaces/template';
 import FormMode from 'enums/formMode';
+import EditTemplateButton from './molecules/EditTemplateButton';
 
 const TemplateDetails: FC<{ id: string | string[] }> = ({ id }) => {
-  const [formMode] = useState(FormMode.View);
+  const [formMode, setFormMode] = useState(FormMode.View);
   const { loading, error, data } = useQuery(GET_TEMPLATE_DETAILS, { variables: { id } });
   if (loading) {
     return <PageLoader />;
@@ -38,7 +39,11 @@ const TemplateDetails: FC<{ id: string | string[] }> = ({ id }) => {
 
   return (
     <div className="min-h-tripla bg-gray-50">
-      <TemplateForm formMode={formMode} templateInitialData={template} onSubmit={updateTemplate} />
+      <TemplateForm formMode={formMode} templateInitialData={template} onSubmit={updateTemplate}>
+        {formMode === FormMode.View && (
+          <EditTemplateButton onClick={() => setFormMode(FormMode.Edit)} />
+        )}
+      </TemplateForm>
     </div>
   );
 };
