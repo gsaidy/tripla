@@ -9,14 +9,18 @@ import colors from 'constants/colors';
 import { TemplateFormContext } from '../Templates/organisms/TemplateForm';
 import FormMode from 'enums/formMode';
 
-const AttributeOptions: FC<{ parentName: number; showTagColor: boolean }> = ({
-  parentName,
-  showTagColor,
-}) => {
+const AttributeOptions: FC<{
+  parentName: number;
+  chainedName: (string | number)[];
+  showTagColor: boolean;
+}> = ({ parentName, chainedName, showTagColor }) => {
   const { formMode } = useContext(TemplateFormContext);
 
   return (
-    <Collapse className="mb-7 sm:mb-6" defaultActiveKey={formMode === FormMode.Create ? '1' : '0'}>
+    <Collapse
+      className={formMode === FormMode.View ? 'mb-2' : 'mb-7 sm:mb-6'}
+      defaultActiveKey={formMode === FormMode.Create ? '1' : '0'}
+    >
       <Panel
         key="1"
         header="Options"
@@ -30,6 +34,7 @@ const AttributeOptions: FC<{ parentName: number; showTagColor: boolean }> = ({
                   key={field.key}
                   index={index}
                   name={field.name}
+                  chainedName={chainedName}
                   showTagColor={showTagColor}
                   removeOption={() => remove(field.name)}
                 />

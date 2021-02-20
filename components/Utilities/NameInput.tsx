@@ -1,12 +1,13 @@
 import { FC, useContext } from 'react';
 import { Form, Input } from 'antd';
+import { NamePath } from 'antd/lib/form/interface';
 
 import { capitalize } from 'utils/helpers';
 import { TemplateFormContext } from '../Templates/organisms/TemplateForm';
 import FormMode from 'enums/formMode';
 
 const NameInput: FC<{
-  name: string | (string | number)[];
+  name: NamePath;
   labelCol?: { span: number };
   entity: string;
 }> = ({ name, labelCol, entity }) => {

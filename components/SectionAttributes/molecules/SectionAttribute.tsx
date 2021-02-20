@@ -31,7 +31,11 @@ const SectionAttribute: FC<{
         <AttributeView parentName={name} setValue={setViewValue} />
       </div>
       {(editValue === EditType.Select || viewValue === ViewType.Tag) && (
-        <AttributeOptions parentName={name} showTagColor={viewValue === ViewType.Tag} />
+        <AttributeOptions
+          parentName={name}
+          chainedName={chainedName}
+          showTagColor={viewValue === ViewType.Tag}
+        />
       )}
     </>
   );

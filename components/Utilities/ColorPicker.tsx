@@ -1,8 +1,11 @@
-import { FC, useState } from 'react';
+import { FC, useState, useContext } from 'react';
 import { Form, Popover } from 'antd';
 import { SketchPicker } from 'react-color';
+import { NamePath } from 'antd/lib/form/interface';
 
 import colors from 'constants/colors';
+import { TemplateFormContext } from '../Templates/organisms/TemplateForm';
+import FormMode from 'enums/formMode';
 
 const presetColors = [
   colors.GREEN,
@@ -19,21 +22,24 @@ const presetColors = [
   colors.BLACK,
 ];
 
-const ColorPicker: FC<{ label: string; name: string | (string | number)[] }> = ({
+const ColorPicker: FC<{ label: string; name: NamePath; defaultValue: string }> = ({
   label,
   name,
+  defaultValue,
 }) => {
-  const [color, setColor] = useState('#34D399');
+  const { formMode } = useContext(TemplateFormContext);
+  const [color, setColor] = useState(defaultValue);
 
   return (
     <Form.Item label={label}>
       <Popover
+        className={formMode === FormMode.View ? 'pointer-events-none' : ''}
         content={
           <Form.Item
             className="-mx-4 -mb-3 -mt-2.5"
             name={name}
             valuePropName="color"
-            normalize={({ hex }) => hex}
+            normalize={({ hex }: { hex: string }) => hex}
           >
             <SketchPicker
               color={color}
