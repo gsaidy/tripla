@@ -28,6 +28,7 @@ const SectionAttributes: FC<{ parentName: number }> = ({ parentName }) => {
                   key={field.key}
                   index={index}
                   name={field.name}
+                  parentName={parentName}
                   removeAttribute={() => remove(field.name)}
                 />
               ))}

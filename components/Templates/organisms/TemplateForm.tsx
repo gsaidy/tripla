@@ -1,5 +1,6 @@
 import { FC, ReactNode, createContext, useState } from 'react';
 import { Form } from 'antd';
+import { NamePath } from 'antd/lib/form/interface';
 
 import BasicInfo from '../molecules/BasicInfo';
 import TemplateSection from '../molecules/TemplateSection';
@@ -9,9 +10,10 @@ import Template from 'interfaces/template';
 import { validateAtLeastOneAttributeAndOption } from 'utils/validators';
 import FormMode from 'enums/formMode';
 
-export const TemplateFormContext = createContext<{ formMode: FormMode }>({
-  formMode: FormMode.Create,
-});
+export const TemplateFormContext = createContext<{
+  formMode: FormMode;
+  getFieldValue: (name: NamePath) => unknown;
+}>({ formMode: FormMode.Create, getFieldValue: (name: NamePath) => name });
 
 const TemplateForm: FC<{
   formMode: FormMode;
@@ -19,6 +21,7 @@ const TemplateForm: FC<{
   children?: ReactNode;
   onSubmit: (template: Template) => void;
 }> = ({ formMode, templateInitialData, children, onSubmit }) => {
+  const [form] = Form.useForm();
   const [errors, setErrors] = useState<string[]>([]);
 
   const layout = {
@@ -34,9 +37,10 @@ const TemplateForm: FC<{
   };
 
   return (
-    <TemplateFormContext.Provider value={{ formMode }}>
+    <TemplateFormContext.Provider value={{ formMode, getFieldValue: form.getFieldValue }}>
       <Form
         {...layout}
+        form={form}
         initialValues={templateInitialData}
         requiredMark={formMode !== FormMode.View}
         onFinish={onFinish}
