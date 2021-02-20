@@ -39,7 +39,7 @@ const TemplateForm: FC<{
         requiredMark={formMode !== FormMode.View}
         onFinish={onFinish}
       >
-        <BasicInfo />
+        <BasicInfo user={templateInitialData ? templateInitialData.user : undefined} />
         <Form.List name="sections">
           {(fields, { add, remove }) => (
             <>
