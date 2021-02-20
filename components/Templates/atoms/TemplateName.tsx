@@ -1,7 +1,19 @@
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 
 import NameInput from '../../Utilities/NameInput';
+import { TemplateFormContext } from '../organisms/TemplateForm';
+import FormMode from 'enums/formMode';
 
-const TemplateName: FC = () => <NameInput name="name" entity="template" />;
+const TemplateName: FC = () => {
+  const { formMode } = useContext(TemplateFormContext);
+
+  return (
+    <NameInput
+      name="name"
+      entity="template"
+      labelCol={{ span: formMode === FormMode.View ? 4 : 6 }}
+    />
+  );
+};
 
 export default TemplateName;

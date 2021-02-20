@@ -15,6 +15,11 @@ const createApolloClient = () => {
   });
 };
 
-const useApollo = (): ApolloClient<NormalizedCacheObject> => apolloClient ?? createApolloClient();
+const initializeApollo = () => {
+  apolloClient = apolloClient ?? createApolloClient();
+  return apolloClient;
+};
+
+const useApollo = (): ApolloClient<NormalizedCacheObject> => initializeApollo();
 
 export default useApollo;

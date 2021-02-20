@@ -11,6 +11,7 @@ import Template from 'interfaces/template';
 import CREATE_TEMPLATE from 'gql/mutations/createTemplate';
 import { mapTemplate } from 'utils/mappers';
 import User from 'interfaces/user';
+import FormMode from 'enums/formMode';
 
 const CreateTemplate: FC = () => {
   const [session, loading] = useSession();
@@ -62,7 +63,7 @@ const CreateTemplate: FC = () => {
       className={`min-h-tripla bg-gray-50 ${createLoading ? 'opacity-50 pointer-events-none' : ''}`}
     >
       {!session && !loading && <SignInBanner />}
-      <TemplateForm onSubmit={createTemplate}>
+      <TemplateForm formMode={FormMode.Create} onSubmit={createTemplate}>
         <CreateTemplateButton loading={createLoading} />
       </TemplateForm>
     </div>
