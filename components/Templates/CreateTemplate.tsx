@@ -1,17 +1,18 @@
 import { FC, useEffect } from 'react';
 import { useSession } from 'next-auth/client';
 import { useMutation } from '@apollo/client';
-import { message } from 'antd';
+import { Button } from 'antd';
 import { useRouter } from 'next/router';
 
 import SignInBanner from '../SignIn/molecules/SignInBanner';
 import TemplateForm from './organisms/TemplateForm';
-import CreateTemplateButton from './molecules/CreateTemplateButton';
+import TemplateActions from './molecules/TemplateActions';
 import Template from 'interfaces/template';
 import CREATE_TEMPLATE from 'gql/mutations/createTemplate';
 import { mapTemplate } from 'utils/mappers';
 import User from 'interfaces/user';
 import FormMode from 'enums/formMode';
+import { showLoadingMessage, showErrorMessage, showSuccessMessage } from 'utils/mutationFeedback';
 
 const CreateTemplate: FC = () => {
   const [session, loading] = useSession();
@@ -23,13 +24,11 @@ const CreateTemplate: FC = () => {
 
   useEffect(() => {
     if (createLoading) {
-      message.loading({ content: 'Saving template...', key: 'loading' });
+      showLoadingMessage('Saving template...');
     } else if (createError) {
-      message.destroy('loading');
-      message.error({ content: 'An error occurred. Please try again.', key: 'error', duration: 3 });
+      showErrorMessage('An error occurred. Please try again.');
     } else if (createData) {
-      message.destroy('loading');
-      message.success({ content: 'Template successfully created.', key: 'success', duration: 3 });
+      showSuccessMessage('Template successfully created.');
       const {
         insert_templates_one: { id: createdTemplateId },
       } = createData;
@@ -64,7 +63,17 @@ const CreateTemplate: FC = () => {
     >
       {!session && !loading && <SignInBanner />}
       <TemplateForm formMode={FormMode.Create} onSubmit={createTemplate}>
-        <CreateTemplateButton loading={createLoading} />
+        <TemplateActions>
+          <Button
+            className="rounded"
+            type="primary"
+            htmlType="submit"
+            size="large"
+            loading={createLoading}
+          >
+            Create Template
+          </Button>
+        </TemplateActions>
       </TemplateForm>
     </div>
   );
