@@ -1,12 +1,12 @@
 import { FC, useEffect } from 'react';
 import { useSession } from 'next-auth/client';
 import { useMutation } from '@apollo/client';
-import { message } from 'antd';
+import { message, Button } from 'antd';
 import { useRouter } from 'next/router';
 
 import SignInBanner from '../SignIn/molecules/SignInBanner';
 import TemplateForm from './organisms/TemplateForm';
-import CreateTemplateButton from './molecules/CreateTemplateButton';
+import TemplateActions from './molecules/TemplateActions';
 import Template from 'interfaces/template';
 import CREATE_TEMPLATE from 'gql/mutations/createTemplate';
 import { mapTemplate } from 'utils/mappers';
@@ -64,7 +64,17 @@ const CreateTemplate: FC = () => {
     >
       {!session && !loading && <SignInBanner />}
       <TemplateForm formMode={FormMode.Create} onSubmit={createTemplate}>
-        <CreateTemplateButton loading={createLoading} />
+        <TemplateActions>
+          <Button
+            className="rounded"
+            type="primary"
+            htmlType="submit"
+            size="large"
+            loading={createLoading}
+          >
+            Create Template
+          </Button>
+        </TemplateActions>
       </TemplateForm>
     </div>
   );

@@ -1,5 +1,6 @@
 import { FC, useState } from 'react';
 import { useQuery } from '@apollo/client';
+import { Button } from 'antd';
 
 import GET_TEMPLATE_DETAILS from 'gql/queries/getTemplateDetails';
 import PageLoader from '../PageLoader/PageLoader';
@@ -8,7 +9,7 @@ import NotFound from '../NotFound/NotFound';
 import TemplateForm from './organisms/TemplateForm';
 import Template from 'interfaces/template';
 import FormMode from 'enums/formMode';
-import EditTemplateButton from './molecules/EditTemplateButton';
+import TemplateActions from './molecules/TemplateActions';
 
 const TemplateDetails: FC<{ id: string | string[] }> = ({ id }) => {
   const [formMode, setFormMode] = useState(FormMode.View);
@@ -41,7 +42,24 @@ const TemplateDetails: FC<{ id: string | string[] }> = ({ id }) => {
     <div className="min-h-tripla bg-gray-50">
       <TemplateForm formMode={formMode} templateInitialData={template} onSubmit={updateTemplate}>
         {formMode === FormMode.View && (
-          <EditTemplateButton onClick={() => setFormMode(FormMode.Edit)} />
+          <TemplateActions className="-mt-3">
+            <Button
+              className="rounded"
+              type="primary"
+              size="large"
+              onClick={() => setFormMode(FormMode.Edit)}
+            >
+              Edit Template
+            </Button>
+            <Button
+              className="rounded"
+              size="large"
+              danger
+              onClick={() => setFormMode(FormMode.Edit)}
+            >
+              Delete Template
+            </Button>
+          </TemplateActions>
         )}
       </TemplateForm>
     </div>
