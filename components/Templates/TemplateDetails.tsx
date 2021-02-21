@@ -1,6 +1,5 @@
 import { FC, useState, useEffect } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
-import { Button, Popconfirm } from 'antd';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/client';
 
@@ -15,6 +14,8 @@ import TemplateActions from './molecules/TemplateActions';
 import DELETE_TEMPLATE from 'gql/mutations/deleteTemplate';
 import { showLoadingMessage, showErrorMessage, showSuccessMessage } from 'utils/mutationFeedback';
 import User from 'interfaces/user';
+import EditTemplateButton from './atoms/EditTemplateButton';
+import DeleteTemplateButton from './atoms/DeleteTemplateButton';
 
 const TemplateDetails: FC<{ id: string | string[] }> = ({ id }) => {
   const [session] = useSession();
@@ -82,24 +83,8 @@ const TemplateDetails: FC<{ id: string | string[] }> = ({ id }) => {
           <TemplateActions className="-mt-3">
             {formMode === FormMode.View && (
               <>
-                <Button
-                  className="rounded"
-                  type="primary"
-                  size="large"
-                  onClick={() => setFormMode(FormMode.Edit)}
-                >
-                  Edit Template
-                </Button>
-                <Popconfirm
-                  title="Are you sure you want to delete this template?"
-                  okText="Yes"
-                  cancelText="No"
-                  onConfirm={deleteTemplate}
-                >
-                  <Button className="rounded" size="large" danger>
-                    Delete Template
-                  </Button>
-                </Popconfirm>
+                <EditTemplateButton onClick={() => setFormMode(FormMode.Edit)} />
+                <DeleteTemplateButton onConfirm={deleteTemplate} />
               </>
             )}
           </TemplateActions>

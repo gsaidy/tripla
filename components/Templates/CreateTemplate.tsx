@@ -1,7 +1,6 @@
 import { FC, useEffect } from 'react';
 import { useSession } from 'next-auth/client';
 import { useMutation } from '@apollo/client';
-import { Button } from 'antd';
 import { useRouter } from 'next/router';
 
 import SignInBanner from '../SignIn/molecules/SignInBanner';
@@ -13,6 +12,7 @@ import { mapTemplate } from 'utils/mappers';
 import User from 'interfaces/user';
 import FormMode from 'enums/formMode';
 import { showLoadingMessage, showErrorMessage, showSuccessMessage } from 'utils/mutationFeedback';
+import CreateTemplateButton from './atoms/CreateTemplateButton';
 
 const CreateTemplate: FC = () => {
   const [session, loading] = useSession();
@@ -64,15 +64,7 @@ const CreateTemplate: FC = () => {
       {!session && !loading && <SignInBanner />}
       <TemplateForm formMode={FormMode.Create} onSubmit={createTemplate}>
         <TemplateActions>
-          <Button
-            className="rounded"
-            type="primary"
-            htmlType="submit"
-            size="large"
-            loading={createLoading}
-          >
-            Create Template
-          </Button>
+          <CreateTemplateButton loading={createLoading} />
         </TemplateActions>
       </TemplateForm>
     </div>
