@@ -18,7 +18,7 @@ const AttributeOptions: FC<{
 
   return (
     <Collapse
-      className={formMode === FormMode.View ? 'mb-2' : 'mb-7 sm:mb-6'}
+      className={formMode === FormMode.View ? 'mb-2' : 'mb-5 sm:mb-4'}
       defaultActiveKey={formMode === FormMode.Create ? '1' : '0'}
     >
       <Panel

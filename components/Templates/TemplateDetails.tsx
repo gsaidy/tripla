@@ -91,7 +91,7 @@ const TemplateDetails: FC<{ id: string | string[] }> = ({ id }) => {
             ) : (
               <>
                 <SaveChangesButton />
-                <CancelChangesButton />
+                <CancelChangesButton onClick={() => setFormMode(FormMode.View)} />
               </>
             )}
           </TemplateActions>
