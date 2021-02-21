@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 import { useQuery } from '@apollo/client';
-import { Button } from 'antd';
+import { Button, Popconfirm } from 'antd';
 
 import GET_TEMPLATE_DETAILS from 'gql/queries/getTemplateDetails';
 import PageLoader from '../PageLoader/PageLoader';
@@ -51,14 +51,15 @@ const TemplateDetails: FC<{ id: string | string[] }> = ({ id }) => {
             >
               Edit Template
             </Button>
-            <Button
-              className="rounded"
-              size="large"
-              danger
-              onClick={() => setFormMode(FormMode.Edit)}
+            <Popconfirm
+              title="Are you sure you want to delete this template?"
+              okText="Yes"
+              cancelText="No"
             >
-              Delete Template
-            </Button>
+              <Button className="rounded" size="large" danger>
+                Delete Template
+              </Button>
+            </Popconfirm>
           </TemplateActions>
         )}
       </TemplateForm>
