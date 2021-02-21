@@ -16,6 +16,8 @@ import { showLoadingMessage, showErrorMessage, showSuccessMessage } from 'utils/
 import User from 'interfaces/user';
 import EditTemplateButton from './atoms/EditTemplateButton';
 import DeleteTemplateButton from './atoms/DeleteTemplateButton';
+import SaveChangesButton from './atoms/SaveChangesButton';
+import CancelChangesButton from './atoms/CancelChangesButton';
 
 const TemplateDetails: FC<{ id: string | string[] }> = ({ id }) => {
   const [session] = useSession();
@@ -80,11 +82,16 @@ const TemplateDetails: FC<{ id: string | string[] }> = ({ id }) => {
     <div className="min-h-tripla bg-gray-50">
       <TemplateForm formMode={formMode} templateInitialData={template} onSubmit={updateTemplate}>
         {userHasPermissionToEditOrDelete() && (
-          <TemplateActions className="-mt-3">
-            {formMode === FormMode.View && (
+          <TemplateActions className={formMode === FormMode.View ? '-mt-3' : ''}>
+            {formMode === FormMode.View ? (
               <>
                 <EditTemplateButton onClick={() => setFormMode(FormMode.Edit)} />
                 <DeleteTemplateButton onConfirm={deleteTemplate} />
+              </>
+            ) : (
+              <>
+                <SaveChangesButton />
+                <CancelChangesButton />
               </>
             )}
           </TemplateActions>
