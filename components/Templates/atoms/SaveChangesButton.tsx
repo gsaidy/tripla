@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import { Button } from 'antd';
 
-const SaveChangesButton: FC = () => (
-  <Button className="rounded" type="primary" htmlType="submit" size="large">
-    Save
+const SaveChangesButton: FC<{ loading: boolean; label: string }> = ({ loading = false, label }) => (
+  <Button className="rounded" type="primary" htmlType="submit" size="large" loading={loading}>
+    {label}
   </Button>
 );
 

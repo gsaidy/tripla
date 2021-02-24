@@ -18,6 +18,8 @@ import EditTemplateButton from './atoms/EditTemplateButton';
 import DeleteTemplateButton from './atoms/DeleteTemplateButton';
 import SaveChangesButton from './atoms/SaveChangesButton';
 import CancelChangesButton from './atoms/CancelChangesButton';
+import UPDATE_TEMPLATE from 'gql/mutations/updateTemplate';
+import { mapTemplate } from 'utils/mappers';
 
 const TemplateDetails: FC<{ id: string | string[] }> = ({ id }) => {
   const [session] = useSession();
@@ -27,6 +29,10 @@ const TemplateDetails: FC<{ id: string | string[] }> = ({ id }) => {
     deleteTemplateMutation,
     { loading: deleteLoading, error: deleteError, data: deleteData },
   ] = useMutation(DELETE_TEMPLATE);
+  const [
+    updateTemplateMutation,
+    { loading: updateLoading, error: updateError, data: updateData },
+  ] = useMutation(UPDATE_TEMPLATE);
   const router = useRouter();
 
   useEffect(() => {
@@ -39,6 +45,17 @@ const TemplateDetails: FC<{ id: string | string[] }> = ({ id }) => {
       router.push('/templates');
     }
   }, [deleteLoading, deleteError, deleteData, router]);
+
+  useEffect(() => {
+    if (updateLoading) {
+      showLoadingMessage('Updating template...');
+    } else if (updateError) {
+      showErrorMessage('An error occurred. Please try again.');
+    } else if (updateData) {
+      showSuccessMessage('Template successfully updated.');
+      setFormMode(FormMode.View);
+    }
+  }, [updateLoading, updateError, updateData]);
 
   if (loading) {
     return <PageLoader />;
@@ -72,12 +89,21 @@ const TemplateDetails: FC<{ id: string | string[] }> = ({ id }) => {
     });
   };
 
-  const updateTemplate = (template: Template) => {
-    console.log(template);
+  const updateTemplate = (updatedTemplate: Template) => {
+    updateTemplateMutation({
+      variables: {
+        id,
+        input: { id, user: template.user, ...mapTemplate({ ...template, ...updatedTemplate }) },
+      },
+    });
   };
 
   return (
-    <div className="min-h-tripla bg-gray-50">
+    <div
+      className={`min-h-tripla bg-gray-50 ${
+        deleteLoading || updateLoading ? 'opacity-50 pointer-events-none' : ''
+      }`}
+    >
       <TemplateForm formMode={formMode} templateInitialData={template} onSubmit={updateTemplate}>
         {userHasPermissionToEditOrDelete() && (
           <TemplateActions className={formMode === FormMode.View ? '-mt-3' : ''}>
@@ -88,7 +114,10 @@ const TemplateDetails: FC<{ id: string | string[] }> = ({ id }) => {
               </>
             ) : (
               <>
-                <SaveChangesButton />
+                <SaveChangesButton
+                  label={updateLoading ? 'Saving' : 'Save'}
+                  loading={updateLoading}
+                />
                 <CancelChangesButton onClick={() => setFormMode(FormMode.View)} />
               </>
             )}
