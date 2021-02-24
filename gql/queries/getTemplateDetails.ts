@@ -1,28 +1,14 @@
 import { gql } from '@apollo/client';
 
+import TEMPLATE_DETAILS from '../fragments/templateDetails';
+
 const GET_TEMPLATE_DETAILS = gql`
   query GetTemplateDetails($id: Int!) {
-    templates(where: { id: { _eq: $id } }) {
-      id
-      name
-      description
-      sections(order_by: { order: asc }) {
-        name
-        order
-        attributes {
-          name
-          required
-          edit
-          view
-          options {
-            name
-            color
-          }
-        }
-      }
-      user
+    templates_by_pk(id: $id) {
+      ...TemplateDetails
     }
   }
+  ${TEMPLATE_DETAILS}
 `;
 
 export default GET_TEMPLATE_DETAILS;

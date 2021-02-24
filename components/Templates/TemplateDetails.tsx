@@ -46,9 +46,7 @@ const TemplateDetails: FC<{ id: string | string[] }> = ({ id }) => {
   if (error) {
     return <ErrorResult />;
   }
-  const {
-    templates: [template],
-  } = data;
+  const { templates_by_pk: template } = data;
   if (!template) {
     return (
       <NotFound
