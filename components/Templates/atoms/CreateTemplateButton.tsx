@@ -1,9 +1,12 @@
 import { FC } from 'react';
 import { Button } from 'antd';
 
-const CreateTemplateButton: FC<{ loading: boolean }> = ({ loading = false }) => (
+const CreateTemplateButton: FC<{ loading: boolean; label: string }> = ({
+  loading = false,
+  label,
+}) => (
   <Button className="rounded" type="primary" htmlType="submit" size="large" loading={loading}>
-    Create Template
+    {label}
   </Button>
 );
 

@@ -24,7 +24,7 @@ const CreateTemplate: FC = () => {
 
   useEffect(() => {
     if (createLoading) {
-      showLoadingMessage('Saving template...');
+      showLoadingMessage('Creating template...');
     } else if (createError) {
       showErrorMessage('An error occurred. Please try again.');
     } else if (createData) {
@@ -64,7 +64,10 @@ const CreateTemplate: FC = () => {
       {!session && !loading && <SignInBanner />}
       <TemplateForm formMode={FormMode.Create} onSubmit={createTemplate}>
         <TemplateActions>
-          <CreateTemplateButton loading={createLoading} />
+          <CreateTemplateButton
+            label={createLoading ? 'Creating Template' : 'Create Template'}
+            loading={createLoading}
+          />
         </TemplateActions>
       </TemplateForm>
     </div>
