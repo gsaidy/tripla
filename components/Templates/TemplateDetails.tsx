@@ -1,6 +1,5 @@
 import { FC, useState, useEffect } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
-import { Button, Popconfirm } from 'antd';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/client';
 
@@ -15,6 +14,12 @@ import TemplateActions from './molecules/TemplateActions';
 import DELETE_TEMPLATE from 'gql/mutations/deleteTemplate';
 import { showLoadingMessage, showErrorMessage, showSuccessMessage } from 'utils/mutationFeedback';
 import User from 'interfaces/user';
+import EditTemplateButton from './atoms/EditTemplateButton';
+import DeleteTemplateButton from './atoms/DeleteTemplateButton';
+import SaveChangesButton from './atoms/SaveChangesButton';
+import CancelChangesButton from './atoms/CancelChangesButton';
+import UPDATE_TEMPLATE from 'gql/mutations/updateTemplate';
+import { mapTemplate } from 'utils/mappers';
 
 const TemplateDetails: FC<{ id: string | string[] }> = ({ id }) => {
   const [session] = useSession();
@@ -24,6 +29,10 @@ const TemplateDetails: FC<{ id: string | string[] }> = ({ id }) => {
     deleteTemplateMutation,
     { loading: deleteLoading, error: deleteError, data: deleteData },
   ] = useMutation(DELETE_TEMPLATE);
+  const [
+    updateTemplateMutation,
+    { loading: updateLoading, error: updateError, data: updateData },
+  ] = useMutation(UPDATE_TEMPLATE);
   const router = useRouter();
 
   useEffect(() => {
@@ -37,15 +46,24 @@ const TemplateDetails: FC<{ id: string | string[] }> = ({ id }) => {
     }
   }, [deleteLoading, deleteError, deleteData, router]);
 
+  useEffect(() => {
+    if (updateLoading) {
+      showLoadingMessage('Updating template...');
+    } else if (updateError) {
+      showErrorMessage('An error occurred. Please try again.');
+    } else if (updateData) {
+      showSuccessMessage('Template successfully updated.');
+      setFormMode(FormMode.View);
+    }
+  }, [updateLoading, updateError, updateData]);
+
   if (loading) {
     return <PageLoader />;
   }
   if (error) {
     return <ErrorResult />;
   }
-  const {
-    templates: [template],
-  } = data;
+  const { templates_by_pk: template } = data;
   if (!template) {
     return (
       <NotFound
@@ -71,35 +89,36 @@ const TemplateDetails: FC<{ id: string | string[] }> = ({ id }) => {
     });
   };
 
-  const updateTemplate = (template: Template) => {
-    console.log(template);
+  const updateTemplate = (updatedTemplate: Template) => {
+    updateTemplateMutation({
+      variables: {
+        id,
+        input: { id, user: template.user, ...mapTemplate({ ...template, ...updatedTemplate }) },
+      },
+    });
   };
 
   return (
-    <div className="min-h-tripla bg-gray-50">
+    <div
+      className={`min-h-tripla bg-gray-50 ${
+        deleteLoading || updateLoading ? 'opacity-50 pointer-events-none' : ''
+      }`}
+    >
       <TemplateForm formMode={formMode} templateInitialData={template} onSubmit={updateTemplate}>
         {userHasPermissionToEditOrDelete() && (
-          <TemplateActions className="-mt-3">
-            {formMode === FormMode.View && (
+          <TemplateActions className={formMode === FormMode.View ? '-mt-3' : ''}>
+            {formMode === FormMode.View ? (
               <>
-                <Button
-                  className="rounded"
-                  type="primary"
-                  size="large"
-                  onClick={() => setFormMode(FormMode.Edit)}
-                >
-                  Edit Template
-                </Button>
-                <Popconfirm
-                  title="Are you sure you want to delete this template?"
-                  okText="Yes"
-                  cancelText="No"
-                  onConfirm={deleteTemplate}
-                >
-                  <Button className="rounded" size="large" danger>
-                    Delete Template
-                  </Button>
-                </Popconfirm>
+                <EditTemplateButton onClick={() => setFormMode(FormMode.Edit)} />
+                <DeleteTemplateButton onConfirm={deleteTemplate} />
+              </>
+            ) : (
+              <>
+                <SaveChangesButton
+                  label={updateLoading ? 'Saving' : 'Save'}
+                  loading={updateLoading}
+                />
+                <CancelChangesButton onClick={() => setFormMode(FormMode.View)} />
               </>
             )}
           </TemplateActions>

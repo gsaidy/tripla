@@ -14,7 +14,12 @@ import BackToTemplateList from '../molecules/BackToTemplateList';
 export const TemplateFormContext = createContext<{
   formMode: FormMode;
   getFieldValue: (name: NamePath) => unknown;
-}>({ formMode: FormMode.Create, getFieldValue: (name: NamePath) => name });
+  resetFields: (fields?: NamePath[]) => void;
+}>({
+  formMode: FormMode.Create,
+  getFieldValue: (name: NamePath) => name,
+  resetFields: (fields?: NamePath[]) => fields,
+});
 
 const TemplateForm: FC<{
   formMode: FormMode;
@@ -38,7 +43,9 @@ const TemplateForm: FC<{
   };
 
   return (
-    <TemplateFormContext.Provider value={{ formMode, getFieldValue: form.getFieldValue }}>
+    <TemplateFormContext.Provider
+      value={{ formMode, getFieldValue: form.getFieldValue, resetFields: form.resetFields }}
+    >
       <Form
         {...layout}
         form={form}
