@@ -1,5 +1,7 @@
 import { gql } from '@apollo/client';
 
+import TEMPLATE_DETAILS from '../fragments/templateDetails';
+
 /*
   As of 24/02/2021, Hasura does not support updating relationships.
   A RFC for it already exists though https://github.com/hasura/graphql-engine/pull/3852
@@ -11,26 +13,10 @@ const UPDATE_TEMPLATE = gql`
       id
     }
     insert_templates_one(object: $input) {
-      id
-      name
-      description
-      sections(order_by: { order: asc }) {
-        name
-        order
-        attributes {
-          name
-          required
-          edit
-          view
-          options {
-            name
-            color
-          }
-        }
-      }
-      user
+      ...TemplateDetails
     }
   }
+  ${TEMPLATE_DETAILS}
 `;
 
 export default UPDATE_TEMPLATE;
