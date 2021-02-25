@@ -19,7 +19,10 @@ const TEMPLATE_DETAILS = gql`
         }
       }
     }
-    user
+    user {
+      id
+      name
+    }
   }
 `;
 
