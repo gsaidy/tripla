@@ -19,7 +19,7 @@ import DeleteTemplateButton from './atoms/DeleteTemplateButton';
 import SaveChangesButton from './atoms/SaveChangesButton';
 import CancelChangesButton from './atoms/CancelChangesButton';
 import UPDATE_TEMPLATE from 'gql/mutations/updateTemplate';
-import { mapTemplate } from 'utils/mappers';
+import { mapTemplate, mapUser } from 'utils/mappers';
 
 const TemplateDetails: FC<{ id: string | string[] }> = ({ id }) => {
   const [session] = useSession();
@@ -93,7 +93,11 @@ const TemplateDetails: FC<{ id: string | string[] }> = ({ id }) => {
     updateTemplateMutation({
       variables: {
         id,
-        input: { id, user: template.user, ...mapTemplate({ ...template, ...updatedTemplate }) },
+        input: {
+          id,
+          ...mapTemplate({ ...template, ...updatedTemplate }),
+          ...mapUser(template.user),
+        },
       },
     });
   };

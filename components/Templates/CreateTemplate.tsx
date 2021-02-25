@@ -8,11 +8,11 @@ import TemplateForm from './organisms/TemplateForm';
 import TemplateActions from './molecules/TemplateActions';
 import Template from 'interfaces/template';
 import CREATE_TEMPLATE from 'gql/mutations/createTemplate';
-import { mapTemplate } from 'utils/mappers';
-import User from 'interfaces/user';
+import { mapTemplate, mapUser } from 'utils/mappers';
 import FormMode from 'enums/formMode';
 import { showLoadingMessage, showErrorMessage, showSuccessMessage } from 'utils/mutationFeedback';
 import CreateTemplateButton from './atoms/CreateTemplateButton';
+import User from 'interfaces/user';
 
 const CreateTemplate: FC = () => {
   const [session, loading] = useSession();
@@ -39,22 +39,9 @@ const CreateTemplate: FC = () => {
   const createTemplate = (template: Template) => {
     createTemplateMutation({
       variables: {
-        input: { ...mapTemplate(template), ...mapUser() },
+        input: { ...mapTemplate(template), ...mapUser(session?.user as User | undefined) },
       },
     });
-  };
-
-  const mapUser = () => {
-    if (session?.user) {
-      const user = session?.user as User;
-      return {
-        user: {
-          id: user.id,
-          name: user.name,
-        },
-      };
-    }
-    return;
   };
 
   return (
