@@ -1,4 +1,5 @@
 import { ColumnsType } from 'antd/lib/table';
+import moment from 'moment';
 
 import TemplateOverview from 'interfaces/templateOverview';
 
@@ -25,11 +26,13 @@ const templateTableColumns: ColumnsType<TemplateOverview> = [
     title: 'Created',
     dataIndex: 'createdAt',
     align: 'center',
+    render: (createdAt) => moment(createdAt).fromNow(),
   },
   {
-    title: 'Updated',
+    title: 'Last Updated',
     dataIndex: 'updatedAt',
     align: 'center',
+    render: (updatedAt) => moment(updatedAt).fromNow(),
   },
 ];
 

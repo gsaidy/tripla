@@ -95,6 +95,7 @@ const TemplateDetails: FC<{ id: string | string[] }> = ({ id }) => {
         id,
         input: {
           id,
+          createdAt: template.createdAt,
           ...mapTemplate({ ...template, ...updatedTemplate }),
           ...mapUser(template.user),
         },
