@@ -1,8 +1,8 @@
 import { ColumnsType } from 'antd/lib/table';
 
-import TemplateTableColumns from 'interfaces/templateTableColumns';
+import TemplateOverview from 'interfaces/templateOverview';
 
-const templateTableColumns: ColumnsType<TemplateTableColumns> = [
+const templateTableColumns: ColumnsType<TemplateOverview> = [
   {
     title: 'Name',
     dataIndex: 'name',
@@ -17,17 +17,18 @@ const templateTableColumns: ColumnsType<TemplateTableColumns> = [
   },
   {
     title: 'Created By',
-    dataIndex: 'createdBy',
+    dataIndex: 'user',
     align: 'center',
+    render: (user) => user?.name ?? 'Anonymous',
   },
   {
     title: 'Created',
-    dataIndex: 'created',
+    dataIndex: 'createdAt',
     align: 'center',
   },
   {
     title: 'Updated',
-    dataIndex: 'updated',
+    dataIndex: 'updatedAt',
     align: 'center',
   },
 ];

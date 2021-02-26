@@ -14,8 +14,8 @@ const GET_TEMPLATES = gql`
       user {
         name
       }
-      created_at
-      updated_at
+      createdAt
+      updatedAt
     }
   }
 `;

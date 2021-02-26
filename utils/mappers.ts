@@ -54,6 +54,7 @@ const mapOptions = (options?: Option[]) => {
   return;
 };
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const mapUser = (user?: User) => {
   if (user) {
     return {
