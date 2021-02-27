@@ -23,6 +23,7 @@ const TEMPLATE_DETAILS = gql`
       id
       name
     }
+    createdAt
   }
 `;
 

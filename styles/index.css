@@ -35,6 +35,10 @@
   cursor: auto !important;
 }
 
+.ant-divider {
+  margin: 0 !important;
+}
+
 @tailwind utilities;
 
 /* Write your own custom utilities styles here */
