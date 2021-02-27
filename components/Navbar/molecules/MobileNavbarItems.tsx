@@ -1,11 +1,11 @@
 import { FC } from 'react';
-import Link from 'next/link';
 import { Collapse } from 'antd';
 const { Panel } = Collapse;
 
 import navbarItems from 'constants/navbarItems';
+import MobileNavbarSubItem from '../atoms/MobileNavbarSubItem';
 
-const MobileNavbarItems: FC<{ closeNavbar: () => void }> = ({ closeNavbar }) => (
+const MobileNavbarItems: FC = () => (
   <div className="mt-6 -mb-3">
     <nav>
       <Collapse ghost>
@@ -17,14 +17,7 @@ const MobileNavbarItems: FC<{ closeNavbar: () => void }> = ({ closeNavbar }) => 
           >
             <div className="space-y-5 -mt-1">
               {subItems.map(({ href, text }) => (
-                <Link key={text} href={href}>
-                  <button
-                    className="block ml-3 text-lg font-medium text-gray-700 focus:outline-none"
-                    onClick={closeNavbar}
-                  >
-                    {text}
-                  </button>
-                </Link>
+                <MobileNavbarSubItem key={text} text={text} href={href} />
               ))}
             </div>
           </Panel>

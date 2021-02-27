@@ -1,7 +1,7 @@
 import { FC, useState } from 'react';
 
-import NavbarProfileIcon from '../atoms/NavbarProfileIcon';
-import NavbarProfileDropdown from '../atoms/NavbarProfileDropdown';
+import NavbarProfileIcon from '../molecules/NavbarProfileIcon';
+import NavbarProfileDropdown from '../molecules/NavbarProfileDropdown';
 
 const TOGGLE_DROPDOWN_AFTER = 150;
 
