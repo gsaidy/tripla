@@ -16,7 +16,11 @@ const MobileNavbar: FC<{ closeNavbar: () => void }> = ({ closeNavbar }) => {
         <MobileNavbarHeader closeNavbar={closeNavbar} />
         <MobileNavbarItems closeNavbar={closeNavbar} />
       </div>
-      {session ? <MobileNavbarProfile /> : <MobileNavbarSignInButton closeNavbar={closeNavbar} />}
+      {session ? (
+        <MobileNavbarProfile closeNavbar={closeNavbar} />
+      ) : (
+        <MobileNavbarSignInButton closeNavbar={closeNavbar} />
+      )}
     </MobileNavbarContainer>
   );
 };
