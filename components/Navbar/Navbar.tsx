@@ -1,14 +1,14 @@
 import { FC, useState } from 'react';
 import { useSession } from 'next-auth/client';
 
-import NavbarContainer from './molecules/NavbarContainer';
-import NavbarLogo from './molecules/NavbarLogo';
-import NavbarItems from './molecules/NavbarItems';
-import NavbarSignInButton from './molecules/NavbarSignInButton';
-import NavbarHamburgerButton from './molecules/NavbarHamburgerButton';
-import MobileNavbar from './molecules/MobileNavbar';
-import NavbarProfile from './molecules/NavbarProfile';
-import NavbarSpinner from './molecules/NavbarSpinner';
+import NavbarContainer from './organisms/NavbarContainer';
+import NavbarLogo from './organisms/NavbarLogo';
+import NavbarItems from './organisms/NavbarItems';
+import NavbarSignInButton from './organisms/NavbarSignInButton';
+import NavbarHamburgerButton from './organisms/NavbarHamburgerButton';
+import MobileNavbar from './organisms/MobileNavbar';
+import NavbarProfile from './organisms/NavbarProfile';
+import NavbarSpinner from './organisms/NavbarSpinner';
 
 const Navbar: FC = () => {
   const [showMobileNavbar, setShowMobileNavbar] = useState(false);

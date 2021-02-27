@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { CloseOutlined } from '@ant-design/icons';
 
-import NavbarLogo from '../molecules/NavbarLogo';
+import NavbarLogo from '../organisms/NavbarLogo';
 
 const MobileNavbarHeader: FC<{ closeNavbar: () => void }> = ({ closeNavbar }) => (
   <div className="flex items-center justify-between">

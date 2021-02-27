@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import { useSession } from 'next-auth/client';
 
-import MobileNavbarHeader from '../atoms/MobileNavbarHeader';
-import MobileNavbarItems from '../atoms/MobileNavbarItems';
-import MobileNavbarSignInButton from '../atoms/MobileNavbarSignInButton';
-import MobileNavbarProfile from '../atoms/MobileNavbarProfile';
+import MobileNavbarHeader from '../molecules/MobileNavbarHeader';
+import MobileNavbarItems from '../molecules/MobileNavbarItems';
+import MobileNavbarSignInButton from '../molecules/MobileNavbarSignInButton';
+import MobileNavbarProfile from '../molecules/MobileNavbarProfile';
 
 const MobileNavbar: FC<{ closeNavbar: () => void }> = ({ closeNavbar }) => {
   const [session] = useSession();

@@ -13,7 +13,14 @@ const NavbarProfileDropdown: FC = () => (
       role="menuitem"
       onClick={() => signOut({ callbackUrl: window.location.pathname })}
     >
-      Sign out
+      My Templates
+    </button>
+    <button
+      className="w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none"
+      role="menuitem"
+      onClick={() => signOut({ callbackUrl: window.location.pathname })}
+    >
+      Sign Out
     </button>
   </div>
 );
