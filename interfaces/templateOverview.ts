@@ -1,4 +1,5 @@
 import User from './user';
+import { ReactNode } from 'react';
 
 interface TemplateOverview {
   id: number;
@@ -7,6 +8,7 @@ interface TemplateOverview {
   user?: User;
   createdAt: string;
   updatedAt: string;
+  action: ReactNode;
 }
 
 export default TemplateOverview;

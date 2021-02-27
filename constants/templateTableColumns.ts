@@ -1,9 +1,8 @@
-import { ColumnsType } from 'antd/lib/table';
 import moment from 'moment';
 
-import TemplateOverview from 'interfaces/templateOverview';
+import User from 'interfaces/user';
 
-const templateTableColumns: ColumnsType<TemplateOverview> = [
+const templateTableColumns = [
   {
     title: 'Name',
     dataIndex: 'name',
@@ -20,19 +19,19 @@ const templateTableColumns: ColumnsType<TemplateOverview> = [
     title: 'Created By',
     dataIndex: 'user',
     align: 'center',
-    render: (user) => user?.name ?? 'Anonymous',
+    render: (user: User): string => user?.name ?? 'Anonymous',
   },
   {
     title: 'Created',
     dataIndex: 'createdAt',
     align: 'center',
-    render: (createdAt) => moment(createdAt).fromNow(),
+    render: (createdAt: string): string => moment(createdAt).fromNow(),
   },
   {
     title: 'Last Updated',
     dataIndex: 'updatedAt',
     align: 'center',
-    render: (updatedAt) => moment(updatedAt).fromNow(),
+    render: (updatedAt: string): string => moment(updatedAt).fromNow(),
   },
 ];
 

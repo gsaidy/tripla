@@ -11,11 +11,7 @@ const TemplateTableHeader: FC<{ title: string; showCreateButton: boolean }> = ({
   return (
     <div className="relative">
       {showCreateButton && (
-        <Button
-          type="primary"
-          className="float-right"
-          onClick={() => router.push('/templates/create')}
-        >
+        <Button className="float-right" onClick={() => router.push('/templates/create')}>
           Create
         </Button>
       )}
