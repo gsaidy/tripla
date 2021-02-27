@@ -22,7 +22,11 @@ const MyTemplateList: FC = () => {
     return <ErrorResult />;
   }
   const { templates } = data;
-  return <TemplateTable data={templates} />;
+  return (
+    <div className="pt-4">
+      <TemplateTable title="My Templates" data={templates} />
+    </div>
+  );
 };
 
 export default MyTemplateList;
