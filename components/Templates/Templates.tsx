@@ -21,7 +21,7 @@ const Templates: FC = () => {
           <OtherUsersTemplateList
             createdBy={CreatorFilter.Other}
             title="Other Users Templates"
-            className="-mt-6"
+            className="-mt-7"
           />
         </>
       ) : (

@@ -22,7 +22,7 @@ const TemplateList: FC<{ createdBy: CreatorFilter; title: string; className?: st
       return { userId: { _eq: user.id } };
     }
     if (createdBy === CreatorFilter.Other) {
-      return { userId: { _neq: user.id } };
+      return { _or: [{ userId: { _neq: user.id } }, { userId: { _is_null: true } }] };
     }
     return;
   };
