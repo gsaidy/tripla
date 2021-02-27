@@ -8,7 +8,13 @@ import TemplateTableHeader from '../atoms/TemplateTableHeader';
 const TemplateTable: FC<{ title: string; data: TemplateOverview[] }> = ({ title, data }) => (
   <div className="max-w-7xl mx-auto py-6 px-4 lg:px-6">
     <TemplateTableHeader title={title} />
-    <Table columns={templateTableColumns} dataSource={data} rowKey="id" scroll={{ x: 1000 }} />
+    <Table
+      columns={templateTableColumns}
+      dataSource={data}
+      rowKey="id"
+      locale={{ emptyText: 'No Templates' }}
+      scroll={{ x: 1000 }}
+    />
   </div>
 );
 
