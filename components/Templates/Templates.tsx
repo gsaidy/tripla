@@ -17,15 +17,15 @@ const Templates: FC = () => {
     <div className="min-h-tripla">
       {session ? (
         <>
-          <MyTemplateList createdBy={CreatorFilter.Me} title="My Templates" className="pt-6" />
+          <MyTemplateList createdBy={CreatorFilter.Me} title="My Templates" />
           <OtherUsersTemplateList
             createdBy={CreatorFilter.Other}
             title="Other Users Templates"
-            className="-mt-5"
+            className="-mt-6"
           />
         </>
       ) : (
-        <AllTemplateList createdBy={CreatorFilter.All} title="Templates" className="pt-6" />
+        <AllTemplateList createdBy={CreatorFilter.All} title="Templates" />
       )}
     </div>
   );

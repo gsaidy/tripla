@@ -9,7 +9,7 @@ import ErrorResult from '../../ErrorResult/ErrorResult';
 import CreatorFilter from 'enums/creatorFilter';
 import User from 'interfaces/user';
 
-const TemplateList: FC<{ createdBy: CreatorFilter; title: string; className: string }> = ({
+const TemplateList: FC<{ createdBy: CreatorFilter; title: string; className?: string }> = ({
   createdBy,
   title,
   className,
@@ -40,7 +40,7 @@ const TemplateList: FC<{ createdBy: CreatorFilter; title: string; className: str
   const { templates } = data;
   return (
     <div className={className}>
-      <TemplateTable title={title} data={templates} />
+      <TemplateTable createdBy={createdBy} title={title} data={templates} />
     </div>
   );
 };
