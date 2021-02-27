@@ -12,15 +12,18 @@ const Templates: FC = () => {
   if (loading) {
     return <PageLoader />;
   }
-  if (session) {
-    return (
-      <>
-        <MyTemplateList />
-        <OtherUsersTemplateList />
-      </>
-    );
-  }
-  return <TemplateList />;
+  return (
+    <div className="min-h-tripla">
+      {session ? (
+        <>
+          <MyTemplateList />
+          <OtherUsersTemplateList />
+        </>
+      ) : (
+        <TemplateList />
+      )}
+    </div>
+  );
 };
 
 export default Templates;
