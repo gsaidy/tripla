@@ -19,16 +19,17 @@ const TemplateList: FC<{ createdBy: CreatorFilter; title: string; className?: st
 
   const getUserFilter = () => {
     if (createdBy === CreatorFilter.Me) {
-      return { userId: { _eq: user.id } };
+      return { userId: { _eq: `${user.id}` } };
     }
     if (createdBy === CreatorFilter.Other) {
-      return { _or: [{ userId: { _neq: user.id } }, { userId: { _is_null: true } }] };
+      return { _or: [{ userId: { _neq: `${user.id}` } }, { userId: { _is_null: true } }] };
     }
     return;
   };
 
   const { loading, error, data } = useQuery(GET_TEMPLATES, {
     variables: { offset: 0, limit: 10, where: getUserFilter() },
+    fetchPolicy: 'cache-and-network',
   });
 
   if (loading) {
@@ -39,7 +40,7 @@ const TemplateList: FC<{ createdBy: CreatorFilter; title: string; className?: st
   }
   const { templates } = data;
   return (
-    <div className={className}>
+    <div className={`${className} ${templates.length === 0 ? 'pb-7' : ''}`}>
       <TemplateTable createdBy={createdBy} title={title} data={templates} />
     </div>
   );

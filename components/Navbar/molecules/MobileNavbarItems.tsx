@@ -5,7 +5,7 @@ const { Panel } = Collapse;
 import navbarItems from 'constants/navbarItems';
 import MobileNavbarSubItem from '../atoms/MobileNavbarSubItem';
 
-const MobileNavbarItems: FC<{ closeNavbar: () => void }> = ({ closeNavbar }) => (
+const MobileNavbarItems: FC = () => (
   <div className="mt-6 -mb-3">
     <nav>
       <Collapse ghost>
@@ -17,7 +17,7 @@ const MobileNavbarItems: FC<{ closeNavbar: () => void }> = ({ closeNavbar }) => 
           >
             <div className="space-y-5 -mt-1">
               {subItems.map(({ href, text }) => (
-                <MobileNavbarSubItem key={text} text={text} href={href} closeNavbar={closeNavbar} />
+                <MobileNavbarSubItem key={text} text={text} href={href} />
               ))}
             </div>
           </Panel>

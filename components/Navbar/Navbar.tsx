@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useState, createContext } from 'react';
 import { useSession } from 'next-auth/client';
 
 import NavbarContainer from './organisms/NavbarContainer';
@@ -9,6 +9,12 @@ import NavbarHamburgerButton from './organisms/NavbarHamburgerButton';
 import MobileNavbar from './organisms/MobileNavbar';
 import NavbarProfile from './organisms/NavbarProfile';
 import NavbarSpinner from './organisms/NavbarSpinner';
+
+export const NavbarContext = createContext<{
+  closeMobileNavbar: () => void;
+}>({
+  closeMobileNavbar: () => ({}),
+});
 
 const Navbar: FC = () => {
   const [showMobileNavbar, setShowMobileNavbar] = useState(false);
@@ -31,7 +37,9 @@ const Navbar: FC = () => {
         <NavbarHamburgerButton onClick={() => setShowMobileNavbar(true)} />
       </NavbarContainer>
       {/* Navbar items that show on mobile screens */}
-      {showMobileNavbar && <MobileNavbar closeNavbar={() => setShowMobileNavbar(false)} />}
+      <NavbarContext.Provider value={{ closeMobileNavbar: () => setShowMobileNavbar(false) }}>
+        {showMobileNavbar && <MobileNavbar />}
+      </NavbarContext.Provider>
     </>
   );
 };

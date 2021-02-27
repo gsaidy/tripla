@@ -7,20 +7,16 @@ import MobileNavbarSignInButton from '../molecules/MobileNavbarSignInButton';
 import MobileNavbarProfile from '../molecules/MobileNavbarProfile';
 import MobileNavbarContainer from '../molecules/MobileNavbarContainer';
 
-const MobileNavbar: FC<{ closeNavbar: () => void }> = ({ closeNavbar }) => {
+const MobileNavbar: FC = () => {
   const [session] = useSession();
 
   return (
     <MobileNavbarContainer>
       <div className="pt-5 pb-6 px-5">
-        <MobileNavbarHeader closeNavbar={closeNavbar} />
-        <MobileNavbarItems closeNavbar={closeNavbar} />
+        <MobileNavbarHeader />
+        <MobileNavbarItems />
       </div>
-      {session ? (
-        <MobileNavbarProfile closeNavbar={closeNavbar} />
-      ) : (
-        <MobileNavbarSignInButton closeNavbar={closeNavbar} />
-      )}
+      {session ? <MobileNavbarProfile /> : <MobileNavbarSignInButton />}
     </MobileNavbarContainer>
   );
 };
