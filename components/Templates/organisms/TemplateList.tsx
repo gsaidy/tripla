@@ -9,6 +9,8 @@ import ErrorResult from '../../ErrorResult/ErrorResult';
 import CreatorFilter from 'enums/creatorFilter';
 import User from 'interfaces/user';
 
+const PAGE_SIZE = 5;
+
 const TemplateList: FC<{ createdBy: CreatorFilter; title: string; className?: string }> = ({
   createdBy,
   title,
@@ -28,7 +30,7 @@ const TemplateList: FC<{ createdBy: CreatorFilter; title: string; className?: st
   };
 
   const { loading, error, data } = useQuery(GET_TEMPLATES, {
-    variables: { offset: 0, limit: 10, where: getUserFilter() },
+    variables: { offset: 0, limit: PAGE_SIZE, where: getUserFilter() },
     fetchPolicy: 'cache-and-network',
   });
 
@@ -39,9 +41,19 @@ const TemplateList: FC<{ createdBy: CreatorFilter; title: string; className?: st
     return <ErrorResult />;
   }
   const { templates } = data;
+  const {
+    templates_aggregate: {
+      aggregate: { count: total },
+    },
+  } = data;
+  const pagination = {
+    current: 1,
+    pageSize: PAGE_SIZE,
+    total,
+  };
   return (
     <div className={`${className} ${templates.length === 0 ? 'pb-7' : ''}`}>
-      <TemplateTable createdBy={createdBy} title={title} data={templates} />
+      <TemplateTable createdBy={createdBy} title={title} data={templates} pagination={pagination} />
     </div>
   );
 };
