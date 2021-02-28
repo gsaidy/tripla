@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import { useSession } from 'next-auth/client';
 
@@ -19,6 +19,9 @@ const TemplateList: FC<{ createdBy: CreatorFilter; title: string; className?: st
   const [session] = useSession();
   const user = session?.user as User;
 
+  const [templates, setTemplates] = useState([]);
+  const [pagination, setPagination] = useState({});
+
   const getUserFilter = () => {
     if (createdBy === CreatorFilter.Me) {
       return { userId: { _eq: `${user.id}` } };
@@ -30,28 +33,39 @@ const TemplateList: FC<{ createdBy: CreatorFilter; title: string; className?: st
   };
 
   const { loading, error, data } = useQuery(GET_TEMPLATES, {
-    variables: { offset: 0, limit: PAGE_SIZE, where: getUserFilter() },
+    variables: {
+      offset: 0,
+      limit: PAGE_SIZE,
+      order_by: { updatedAt: 'desc' },
+      where: getUserFilter(),
+    },
     fetchPolicy: 'cache-and-network',
   });
 
-  if (loading) {
+  useEffect(() => {
+    if (data) {
+      const { templates } = data;
+      setTemplates(templates);
+      const {
+        templates_aggregate: {
+          aggregate: { count: total },
+        },
+      } = data;
+      setPagination({
+        current: 1,
+        pageSize: PAGE_SIZE,
+        total,
+      });
+    }
+  }, [data]);
+
+  if (loading && !data) {
     return <PageLoader />;
   }
   if (error) {
     return <ErrorResult />;
   }
-  const { templates } = data;
-  const {
-    templates_aggregate: {
-      aggregate: { count: total },
-    },
-  } = data;
-  const pagination = {
-    current: 1,
-    pageSize: PAGE_SIZE,
-    total,
-    showTotal: (total: number, range: number[]) => `${range[0]}-${range[1]} of ${total} templates`,
-  };
+
   return (
     <div className={`${className} ${templates.length === 0 ? 'pb-7' : ''}`}>
       <TemplateTable createdBy={createdBy} title={title} data={templates} pagination={pagination} />

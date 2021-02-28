@@ -13,7 +13,7 @@ const TemplateTable: FC<{
   createdBy: CreatorFilter;
   title: string;
   data: TemplateOverview[];
-  pagination: Pagination;
+  pagination: Pagination | Record<string, never>;
 }> = ({ createdBy, title, data, pagination }) => {
   const action = {
     title: 'Action',
@@ -32,7 +32,11 @@ const TemplateTable: FC<{
         rowKey="id"
         columns={[...templateTableColumns, action] as ColumnsType<TemplateOverview>}
         dataSource={data}
-        pagination={pagination}
+        pagination={{
+          ...pagination,
+          showTotal: (total: number, range: number[]) =>
+            `${range[0]}-${range[1]} of ${total} templates`,
+        }}
         locale={{ emptyText: 'No Templates' }}
         scroll={{ x: 1000 }}
       />
