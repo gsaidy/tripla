@@ -12,7 +12,7 @@ import Template from 'interfaces/template';
 import FormMode from 'enums/formMode';
 import TemplateActions from './molecules/TemplateActions';
 import DELETE_TEMPLATE from 'gql/mutations/deleteTemplate';
-import { showLoadingMessage, showErrorMessage, showSuccessMessage } from 'utils/mutationFeedback';
+import { showLoadingMessage, showErrorMessage, showSuccessMessage } from 'utils/feedback';
 import User from 'interfaces/user';
 import EditTemplateButton from './atoms/EditTemplateButton';
 import DeleteTemplateButton from './atoms/DeleteTemplateButton';

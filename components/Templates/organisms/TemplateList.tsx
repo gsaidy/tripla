@@ -1,6 +1,7 @@
 import { FC, useState, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import { useSession } from 'next-auth/client';
+import { TablePaginationConfig } from 'antd/lib/table';
 
 import TemplateTable from '../molecules/TemplateTable';
 import GET_TEMPLATES from 'gql/queries/getTemplates';
@@ -8,6 +9,7 @@ import PageLoader from '../../PageLoader/PageLoader';
 import ErrorResult from '../../ErrorResult/ErrorResult';
 import CreatorFilter from 'enums/creatorFilter';
 import User from 'interfaces/user';
+import { showErrorMessage } from 'utils/feedback';
 
 const PAGE_SIZE = 5;
 
@@ -21,6 +23,7 @@ const TemplateList: FC<{ createdBy: CreatorFilter; title: string; className?: st
 
   const [templates, setTemplates] = useState([]);
   const [pagination, setPagination] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const getUserFilter = () => {
     if (createdBy === CreatorFilter.Me) {
@@ -32,7 +35,7 @@ const TemplateList: FC<{ createdBy: CreatorFilter; title: string; className?: st
     return;
   };
 
-  const { loading, error, data } = useQuery(GET_TEMPLATES, {
+  const { loading: getTemplatesLoading, error, data, fetchMore } = useQuery(GET_TEMPLATES, {
     variables: {
       offset: 0,
       limit: PAGE_SIZE,
@@ -40,6 +43,7 @@ const TemplateList: FC<{ createdBy: CreatorFilter; title: string; className?: st
       where: getUserFilter(),
     },
     fetchPolicy: 'cache-and-network',
+    nextFetchPolicy: 'cache-first',
   });
 
   useEffect(() => {
@@ -59,16 +63,42 @@ const TemplateList: FC<{ createdBy: CreatorFilter; title: string; className?: st
     }
   }, [data]);
 
-  if (loading && !data) {
+  if (getTemplatesLoading && !data) {
     return <PageLoader />;
   }
   if (error) {
     return <ErrorResult />;
   }
 
+  const onChange = async (pagination: TablePaginationConfig) => {
+    setLoading(true);
+    const currentPage = pagination?.current || 1;
+    const offset = (currentPage - 1) * PAGE_SIZE;
+    const { data, error } = await fetchMore({
+      variables: {
+        offset,
+        limit: PAGE_SIZE,
+      },
+    });
+    setLoading(false);
+    if (data) {
+      setTemplates(data.templates);
+      setPagination(pagination);
+    } else if (error) {
+      showErrorMessage('An error occurred. Please try again.');
+    }
+  };
+
   return (
     <div className={`${className} ${templates.length === 0 ? 'pb-7' : ''}`}>
-      <TemplateTable createdBy={createdBy} title={title} data={templates} pagination={pagination} />
+      <TemplateTable
+        createdBy={createdBy}
+        title={title}
+        data={templates}
+        pagination={pagination}
+        loading={loading}
+        onChange={onChange}
+      />
     </div>
   );
 };

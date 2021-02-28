@@ -1,20 +1,21 @@
 import { FC } from 'react';
 import { Table } from 'antd';
-import { ColumnsType } from 'antd/lib/table';
+import { ColumnsType, TablePaginationConfig } from 'antd/lib/table';
 
 import templateTableColumns from 'constants/templateTableColumns';
 import TemplateOverview from 'interfaces/templateOverview';
 import TemplateTableHeader from '../atoms/TemplateTableHeader';
 import CreatorFilter from 'enums/creatorFilter';
 import TemplateTableViewButton from '../atoms/TemplateTableViewButton';
-import Pagination from 'interfaces/pagination';
 
 const TemplateTable: FC<{
   createdBy: CreatorFilter;
   title: string;
   data: TemplateOverview[];
-  pagination: Pagination | Record<string, never>;
-}> = ({ createdBy, title, data, pagination }) => {
+  pagination: TablePaginationConfig | Record<string, never>;
+  loading: boolean;
+  onChange: (pagination: TablePaginationConfig) => void;
+}> = ({ createdBy, title, data, pagination, loading, onChange }) => {
   const action = {
     title: 'Action',
     key: 'action',
@@ -39,6 +40,8 @@ const TemplateTable: FC<{
         }}
         locale={{ emptyText: 'No Templates' }}
         scroll={{ x: 1000 }}
+        loading={loading}
+        onChange={onChange}
       />
     </div>
   );
