@@ -39,6 +39,12 @@
   margin: 0 !important;
 }
 
+.ant-pagination-item-link {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
 @tailwind utilities;
 
 /* Write your own custom utilities styles here */

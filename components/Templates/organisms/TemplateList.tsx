@@ -50,6 +50,7 @@ const TemplateList: FC<{ createdBy: CreatorFilter; title: string; className?: st
     current: 1,
     pageSize: PAGE_SIZE,
     total,
+    showTotal: (total: number, range: number[]) => `${range[0]}-${range[1]} of ${total} templates`,
   };
   return (
     <div className={`${className} ${templates.length === 0 ? 'pb-7' : ''}`}>
