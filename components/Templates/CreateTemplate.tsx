@@ -10,7 +10,7 @@ import Template from 'interfaces/template';
 import CREATE_TEMPLATE from 'gql/mutations/createTemplate';
 import { mapTemplate, mapUser } from 'utils/mappers';
 import FormMode from 'enums/formMode';
-import { showLoadingMessage, showErrorMessage, showSuccessMessage } from 'utils/mutationFeedback';
+import { showLoadingMessage, showErrorMessage, showSuccessMessage } from 'utils/feedback';
 import CreateTemplateButton from './atoms/CreateTemplateButton';
 import User from 'interfaces/user';
 
