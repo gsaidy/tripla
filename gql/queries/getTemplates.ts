@@ -17,6 +17,11 @@ const GET_TEMPLATES = gql`
       createdAt
       updatedAt
     }
+    templates_aggregate(where: $where) {
+      aggregate {
+        count
+      }
+    }
   }
 `;
 
