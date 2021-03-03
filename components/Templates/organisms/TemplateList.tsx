@@ -39,8 +39,8 @@ const TemplateList: FC<{ createdBy: CreatorFilter; title: string; className?: st
     variables: {
       offset: 0,
       limit: PAGE_SIZE,
-      order_by: { updatedAt: 'desc' },
       where: getUserFilter(),
+      orderBy: { updatedAt: 'desc' },
     },
     fetchPolicy: 'cache-and-network',
     nextFetchPolicy: 'cache-first',
@@ -70,7 +70,7 @@ const TemplateList: FC<{ createdBy: CreatorFilter; title: string; className?: st
     return <ErrorResult />;
   }
 
-  const onChange = async (pagination: TablePaginationConfig) => {
+  const onPaginationChange = async (pagination: TablePaginationConfig) => {
     setLoading(true);
     const currentPage = pagination?.current || 1;
     const offset = (currentPage - 1) * PAGE_SIZE;
@@ -97,7 +97,7 @@ const TemplateList: FC<{ createdBy: CreatorFilter; title: string; className?: st
         data={templates}
         pagination={pagination}
         loading={loading}
-        onChange={onChange}
+        onPaginationChange={onPaginationChange}
       />
     </div>
   );
