@@ -12,6 +12,7 @@ const templateTableColumns: ColumnsType<TemplateOverview> = [
     dataIndex: 'name',
     ellipsis: true,
     align: 'center',
+    sorter: true,
   },
   {
     title: 'Description',
@@ -29,12 +30,14 @@ const templateTableColumns: ColumnsType<TemplateOverview> = [
     title: 'Created',
     dataIndex: 'createdAt',
     align: 'center',
+    sorter: true,
     render: (createdAt: string) => moment(createdAt).fromNow(),
   },
   {
     title: 'Last Updated',
     dataIndex: 'updatedAt',
     align: 'center',
+    sorter: true,
     render: (updatedAt: string) => moment(updatedAt).fromNow(),
   },
   {

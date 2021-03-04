@@ -10,8 +10,10 @@ import ErrorResult from '../../ErrorResult/ErrorResult';
 import CreatorFilter from 'enums/creatorFilter';
 import User from 'interfaces/user';
 import { showErrorMessage } from 'utils/feedback';
+import SortOrder from 'enums/sortOrder';
 
 const PAGE_SIZE = 5;
+const DEFAULT_SORT = { updatedAt: SortOrder.DESC };
 
 const TemplateList: FC<{ createdBy: CreatorFilter; title: string; className?: string }> = ({
   createdBy,
@@ -35,16 +37,20 @@ const TemplateList: FC<{ createdBy: CreatorFilter; title: string; className?: st
     return;
   };
 
-  const { loading: getTemplatesLoading, error, data, fetchMore } = useQuery(GET_TEMPLATES, {
-    variables: {
-      offset: 0,
-      limit: PAGE_SIZE,
-      where: getUserFilter(),
-      orderBy: { updatedAt: 'desc' },
-    },
-    fetchPolicy: 'cache-and-network',
-    nextFetchPolicy: 'cache-first',
-  });
+  const orderBy: { [field: string]: SortOrder } = DEFAULT_SORT;
+  const { loading: getTemplatesLoading, error, data, fetchMore, refetch } = useQuery(
+    GET_TEMPLATES,
+    {
+      variables: {
+        offset: 0,
+        limit: PAGE_SIZE,
+        where: getUserFilter(),
+        orderBy,
+      },
+      fetchPolicy: 'cache-and-network',
+      nextFetchPolicy: 'cache-first',
+    }
+  );
 
   useEffect(() => {
     if (data) {
@@ -89,6 +95,22 @@ const TemplateList: FC<{ createdBy: CreatorFilter; title: string; className?: st
     }
   };
 
+  const onSortChange = async (field: string, order?: SortOrder) => {
+    setLoading(true);
+    const orderBy = order ? { [field]: order } : DEFAULT_SORT;
+    const { data, error } = await refetch({
+      offset: 0,
+      limit: PAGE_SIZE,
+      orderBy,
+    });
+    setLoading(false);
+    if (data) {
+      setTemplates(data.templates);
+    } else if (error) {
+      showErrorMessage('An error occurred. Please try again.');
+    }
+  };
+
   return (
     <div className={`${className} ${templates.length === 0 ? 'pb-7' : ''}`}>
       <TemplateTable
@@ -98,6 +120,7 @@ const TemplateList: FC<{ createdBy: CreatorFilter; title: string; className?: st
         pagination={pagination}
         loading={loading}
         onPaginationChange={onPaginationChange}
+        onSortChange={onSortChange}
       />
     </div>
   );
