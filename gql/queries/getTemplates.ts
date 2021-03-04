@@ -5,9 +5,9 @@ const GET_TEMPLATES = gql`
     $offset: Int!
     $limit: Int!
     $where: templates_bool_exp
-    $order_by: [templates_order_by!]
+    $orderBy: [templates_order_by!]
   ) {
-    templates(offset: $offset, limit: $limit, where: $where, order_by: $order_by) {
+    templates(offset: $offset, limit: $limit, where: $where, order_by: $orderBy) {
       id
       name
       description

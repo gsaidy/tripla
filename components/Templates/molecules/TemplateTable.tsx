@@ -1,12 +1,13 @@
 import { FC } from 'react';
 import { Table } from 'antd';
-import { ColumnsType, TablePaginationConfig } from 'antd/lib/table';
+import { TablePaginationConfig } from 'antd/lib/table';
+import { TableCurrentDataSource } from 'antd/lib/table/interface';
 
 import templateTableColumns from 'constants/templateTableColumns';
 import TemplateOverview from 'interfaces/templateOverview';
 import TemplateTableHeader from '../atoms/TemplateTableHeader';
 import CreatorFilter from 'enums/creatorFilter';
-import TemplateTableViewButton from '../atoms/TemplateTableViewButton';
+import TableAction from 'enums/tableAction';
 
 const TemplateTable: FC<{
   createdBy: CreatorFilter;
@@ -14,16 +15,17 @@ const TemplateTable: FC<{
   data: TemplateOverview[];
   pagination: TablePaginationConfig | Record<string, never>;
   loading: boolean;
-  onChange: (pagination: TablePaginationConfig) => void;
-}> = ({ createdBy, title, data, pagination, loading, onChange }) => {
-  const action = {
-    title: 'Action',
-    key: 'action',
-    width: '9%',
-    fixed: 'right',
-    render(_: unknown, { id }: TemplateOverview) {
-      return <TemplateTableViewButton id={id} />;
-    },
+  onPaginationChange: (pagination: TablePaginationConfig) => void;
+}> = ({ createdBy, title, data, pagination, loading, onPaginationChange }) => {
+  const onChange = (
+    pagination: TablePaginationConfig,
+    filters: unknown,
+    sorter: unknown,
+    { action }: TableCurrentDataSource<TemplateOverview>
+  ) => {
+    if (action === TableAction.Paginate) {
+      onPaginationChange(pagination);
+    }
   };
 
   return (
@@ -31,7 +33,7 @@ const TemplateTable: FC<{
       <TemplateTableHeader title={title} showCreateButton={createdBy !== CreatorFilter.Other} />
       <Table
         rowKey="id"
-        columns={[...templateTableColumns, action] as ColumnsType<TemplateOverview>}
+        columns={templateTableColumns}
         dataSource={data}
         pagination={{
           ...pagination,
