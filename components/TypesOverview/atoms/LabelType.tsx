@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 const LabelType: FC = () => (
-  <div className="mt-1 -mb-2">
+  <div className="-mb-3">
     <label htmlFor="label">Label: Label</label>
   </div>
 );

@@ -17,10 +17,7 @@ const AttributeOptions: FC<{
   const { formMode } = useContext(TemplateFormContext);
 
   return (
-    <Collapse
-      className={formMode === FormMode.View ? 'mb-2' : 'mb-5 sm:mb-4'}
-      defaultActiveKey={formMode === FormMode.Create ? '1' : '0'}
-    >
+    <Collapse className="mb-5" defaultActiveKey={formMode === FormMode.Create ? '1' : '0'}>
       <Panel
         key="1"
         header="Options"

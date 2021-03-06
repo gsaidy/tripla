@@ -11,7 +11,7 @@ import TextAreaType from '../atoms/TextAreaType';
 
 const EditTypes: FC = () => (
   <Card id="edit" className="text-center" type="inner" title="Edit Types">
-    <Form labelCol={{ span: 6 }}>
+    <Form className="space-y-5" labelCol={{ span: 6 }}>
       <InputType />
       <Divider />
       <SelectType />

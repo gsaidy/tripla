@@ -35,10 +35,6 @@
   cursor: auto !important;
 }
 
-.ant-divider {
-  margin: 0 !important;
-}
-
 .ant-pagination-item-link {
   display: flex !important;
   justify-content: center !important;

@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { DatePicker, Form } from 'antd';
 
 const DatePickerType: FC = () => (
-  <Form.Item className="mt-3" label="Date Picker">
+  <Form.Item label="Date Picker">
     <DatePicker />
   </Form.Item>
 );

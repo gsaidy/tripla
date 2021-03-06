@@ -60,7 +60,7 @@ export const mapUser = (user?: User) => {
     return {
       user: {
         data: {
-          id: user.id,
+          id: `${user.id}`,
           name: user.name,
         },
         on_conflict: {

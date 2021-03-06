@@ -45,6 +45,7 @@ const AttributeView: FC<{ parentName: number; setValue: (value: string) => void 
         >
           <Option value={ViewType.Label}>Label</Option>
           <Option value={ViewType.Tag}>Tag</Option>
+          <Option value={ViewType.Link}>Link</Option>
         </Select>
       </Form.Item>
     </div>

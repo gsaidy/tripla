@@ -3,7 +3,7 @@ import { Form, Select } from 'antd';
 const { Option } = Select;
 
 const SelectType: FC = () => (
-  <Form.Item className="mt-3" label="Select">
+  <Form.Item label="Select">
     <Select showSearch>
       <Option value="option1">Option 1</Option>
       <Option value="option2">Option 2</Option>

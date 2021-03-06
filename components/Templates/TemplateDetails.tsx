@@ -78,7 +78,9 @@ const TemplateDetails: FC<{ id: string | string[] }> = ({ id }) => {
   const userHasPermissionToEditOrDelete = () => {
     const loggedInUser = session?.user as User;
     const { user: templateCreatedByUser } = template;
-    return loggedInUser && templateCreatedByUser && loggedInUser.id === templateCreatedByUser.id;
+    return (
+      loggedInUser && templateCreatedByUser && `${loggedInUser.id}` === templateCreatedByUser.id
+    );
   };
 
   const deleteTemplate = () => {

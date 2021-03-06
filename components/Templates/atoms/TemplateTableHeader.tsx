@@ -15,9 +15,7 @@ const TemplateTableHeader: FC<{ title: string; showCreateButton: boolean }> = ({
           Create
         </Button>
       )}
-      <Divider className="pb-3" orientation="left">
-        {title}
-      </Divider>
+      <Divider orientation="left">{title}</Divider>
     </div>
   );
 };
