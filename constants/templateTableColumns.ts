@@ -1,10 +1,13 @@
 import React, { ReactNode } from 'react';
 import moment from 'moment';
 import { ColumnsType } from 'antd/lib/table';
+import { FilterDropdownProps } from 'antd/lib/table/interface';
 
 import User from 'interfaces/user';
 import TemplateOverview from 'interfaces/templateOverview';
 import TemplateTableViewButton from 'components/Templates/atoms/TemplateTableViewButton';
+import TemplateTableFilter from 'components/Templates/atoms/TemplateTableFilter';
+import TemplateTableFilterIcon from 'components/Templates/atoms/TemplateTableFilterIcon';
 
 const templateTableColumns: ColumnsType<TemplateOverview> = [
   {
@@ -13,6 +16,21 @@ const templateTableColumns: ColumnsType<TemplateOverview> = [
     ellipsis: true,
     align: 'center',
     sorter: true,
+    filterDropdown({
+      selectedKeys,
+      setSelectedKeys,
+      confirm,
+      clearFilters,
+    }: FilterDropdownProps): ReactNode {
+      return React.createElement(
+        TemplateTableFilter,
+        { selectedKeys, setSelectedKeys, confirm, clearFilters },
+        null
+      );
+    },
+    filterIcon(filtered: boolean): ReactNode {
+      return React.createElement(TemplateTableFilterIcon, { filtered }, null);
+    },
   },
   {
     title: 'Description',

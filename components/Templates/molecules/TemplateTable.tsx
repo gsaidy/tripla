@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Table } from 'antd';
 import { TablePaginationConfig } from 'antd/lib/table';
-import { TableCurrentDataSource, SorterResult } from 'antd/lib/table/interface';
+import { TableCurrentDataSource, SorterResult, FilterValue } from 'antd/lib/table/interface';
 
 import templateTableColumns from 'constants/templateTableColumns';
 import TemplateOverview from 'interfaces/templateOverview';
@@ -17,16 +17,28 @@ const TemplateTable: FC<{
   pagination: TablePaginationConfig | Record<string, never>;
   loading: boolean;
   onPaginationChange: (pagination: TablePaginationConfig) => void;
+  onFiltersChange: (filters: Record<string, FilterValue | null>) => void;
   onSortChange: (field: string, order?: SortOrder) => void;
-}> = ({ createdBy, title, data, pagination, loading, onPaginationChange, onSortChange }) => {
+}> = ({
+  createdBy,
+  title,
+  data,
+  pagination,
+  loading,
+  onPaginationChange,
+  onFiltersChange,
+  onSortChange,
+}) => {
   const onChange = (
     pagination: TablePaginationConfig,
-    filters: unknown,
+    filters: Record<string, FilterValue | null>,
     sorter: SorterResult<TemplateOverview> | SorterResult<TemplateOverview>[],
     { action }: TableCurrentDataSource<TemplateOverview>
   ) => {
     if (action === TableAction.Paginate) {
       onPaginationChange(pagination);
+    } else if (action === TableAction.Filter) {
+      onFiltersChange(filters);
     } else if (action === TableAction.Sort) {
       const { field, order } = sorter as { field: string; order?: 'ascend' | 'descend' };
       onSortChange(field, order ? (order.slice(0, -3) as SortOrder) : order);

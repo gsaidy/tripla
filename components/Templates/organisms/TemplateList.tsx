@@ -1,7 +1,8 @@
-import { FC, useState, useEffect } from 'react';
+import { FC, useState, useEffect, createContext } from 'react';
 import { useQuery } from '@apollo/client';
 import { useSession } from 'next-auth/client';
 import { TablePaginationConfig } from 'antd/lib/table';
+import { FilterValue } from 'antd/lib/table/interface';
 
 import TemplateTable from '../molecules/TemplateTable';
 import GET_TEMPLATES from 'gql/queries/getTemplates';
@@ -11,9 +12,16 @@ import CreatorFilter from 'enums/creatorFilter';
 import User from 'interfaces/user';
 import { showErrorMessage } from 'utils/feedback';
 import SortOrder from 'enums/sortOrder';
+import { getTemplateFilters } from 'utils/filters';
 
 const PAGE_SIZE = 5;
 const DEFAULT_SORT = { updatedAt: SortOrder.DESC };
+
+export const TemplateListContext = createContext<{
+  createdBy: CreatorFilter;
+}>({
+  createdBy: CreatorFilter.All,
+});
 
 const TemplateList: FC<{ createdBy: CreatorFilter; title: string; className?: string }> = ({
   createdBy,
@@ -27,16 +35,6 @@ const TemplateList: FC<{ createdBy: CreatorFilter; title: string; className?: st
   const [pagination, setPagination] = useState({});
   const [loading, setLoading] = useState(false);
 
-  const getUserFilter = () => {
-    if (createdBy === CreatorFilter.Me) {
-      return { userId: { _eq: `${user.id}` } };
-    }
-    if (createdBy === CreatorFilter.Other) {
-      return { _or: [{ userId: { _neq: `${user.id}` } }, { userId: { _is_null: true } }] };
-    }
-    return;
-  };
-
   const orderBy: { [field: string]: SortOrder } = DEFAULT_SORT;
   const { loading: getTemplatesLoading, error, data, fetchMore, refetch } = useQuery(
     GET_TEMPLATES,
@@ -44,7 +42,7 @@ const TemplateList: FC<{ createdBy: CreatorFilter; title: string; className?: st
       variables: {
         offset: 0,
         limit: PAGE_SIZE,
-        where: getUserFilter(),
+        where: getTemplateFilters(createdBy, user),
         orderBy,
       },
       fetchPolicy: 'cache-and-network',
@@ -95,6 +93,22 @@ const TemplateList: FC<{ createdBy: CreatorFilter; title: string; className?: st
     }
   };
 
+  const onFiltersChange = async (filters: Record<string, FilterValue | null>) => {
+    setLoading(true);
+    const where = getTemplateFilters(createdBy, user, filters.name?.[0] as string | undefined);
+    const { data, error } = await refetch({
+      offset: 0,
+      limit: PAGE_SIZE,
+      where,
+    });
+    setLoading(false);
+    if (data) {
+      setTemplates(data.templates);
+    } else if (error) {
+      showErrorMessage('An error occurred. Please try again.');
+    }
+  };
+
   const onSortChange = async (field: string, order?: SortOrder) => {
     setLoading(true);
     const orderBy = order ? { [field]: order } : DEFAULT_SORT;
@@ -112,17 +126,20 @@ const TemplateList: FC<{ createdBy: CreatorFilter; title: string; className?: st
   };
 
   return (
-    <div className={`${className} ${templates.length === 0 ? 'pb-7' : ''}`}>
-      <TemplateTable
-        createdBy={createdBy}
-        title={title}
-        data={templates}
-        pagination={pagination}
-        loading={loading}
-        onPaginationChange={onPaginationChange}
-        onSortChange={onSortChange}
-      />
-    </div>
+    <TemplateListContext.Provider value={{ createdBy }}>
+      <div className={`${className} ${templates.length === 0 ? 'pb-7' : ''}`}>
+        <TemplateTable
+          createdBy={createdBy}
+          title={title}
+          data={templates}
+          pagination={pagination}
+          loading={loading}
+          onPaginationChange={onPaginationChange}
+          onFiltersChange={onFiltersChange}
+          onSortChange={onSortChange}
+        />
+      </div>
+    </TemplateListContext.Provider>
   );
 };
 
