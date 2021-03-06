@@ -13,6 +13,7 @@ import FormMode from 'enums/formMode';
 import { showLoadingMessage, showErrorMessage, showSuccessMessage } from 'utils/feedback';
 import CreateTemplateButton from './atoms/CreateTemplateButton';
 import User from 'interfaces/user';
+import EntityType from 'enums/entityType';
 
 const CreateTemplate: FC = () => {
   const [session, loading] = useSession();
@@ -48,7 +49,7 @@ const CreateTemplate: FC = () => {
     <div
       className={`min-h-tripla bg-gray-50 ${createLoading ? 'opacity-50 pointer-events-none' : ''}`}
     >
-      {!session && !loading && <SignInBanner />}
+      {!session && !loading && <SignInBanner entity={EntityType.Template} />}
       <TemplateForm formMode={FormMode.Create} onSubmit={createTemplate}>
         <TemplateActions>
           <CreateTemplateButton
