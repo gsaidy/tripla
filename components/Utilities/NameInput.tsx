@@ -23,7 +23,7 @@ const NameInput: FC<{
       ]}
       labelCol={labelCol}
     >
-      <Input bordered={formMode !== FormMode.View} disabled={formMode === FormMode.View} />
+      <Input bordered={formMode !== FormMode.View} />
     </Form.Item>
   );
 };

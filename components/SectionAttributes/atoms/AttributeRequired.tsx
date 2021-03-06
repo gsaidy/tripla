@@ -15,7 +15,7 @@ const AttributeRequired: FC<{ parentName: number }> = ({ parentName }) => {
         valuePropName={formMode === FormMode.View ? 'value' : 'checked'}
       >
         {formMode === FormMode.View ? (
-          <Input className="capitalize mb-3 xs:mb-0" bordered={false} disabled={true} />
+          <Input className="capitalize mb-3 xs:mb-0" bordered={false} />
         ) : (
           <Switch className="-mt-5 xs:mt-0" />
         )}

@@ -41,7 +41,6 @@ const AttributeEdit: FC<{ parentName: number; setValue: (value: string) => void 
           showSearch
           bordered={formMode !== FormMode.View}
           showArrow={formMode !== FormMode.View}
-          disabled={formMode === FormMode.View}
           onChange={setValue}
         >
           <Option value={EditType.Input}>Input</Option>

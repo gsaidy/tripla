@@ -52,7 +52,7 @@ const ColorPicker: FC<{ label: string; name: NamePath; defaultValue: string }> =
         trigger="click"
         placement="bottomLeft"
       >
-        <div className="flex justify-center w-12 p-1.5 sm:mt-0.5 bg-white border border-gray-300 rounded-sm shadow cursor-pointer">
+        <div className="flex justify-center w-12 p-1.5 sm:mt-0.5 ml-3 bg-white border border-gray-300 rounded-sm shadow cursor-pointer">
           <div className="h-3.5 w-8 rounded-sm" style={{ backgroundColor: color }}></div>
         </div>
       </Popover>
