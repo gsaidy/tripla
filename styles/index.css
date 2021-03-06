@@ -30,9 +30,8 @@
   margin-bottom: 1rem;
 }
 
-.ant-input-disabled, .ant-select-disabled .ant-select-selection-item {
-  color: #111827 !important;
-  cursor: auto !important;
+.ant-input-borderless, .ant-select-borderless {
+  pointer-events: none;
 }
 
 .ant-pagination-item-link {

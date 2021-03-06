@@ -19,7 +19,6 @@ const TemplateName: FC = () => {
       <TextArea
         rows={3}
         bordered={formMode !== FormMode.View}
-        disabled={formMode === FormMode.View}
         autoSize={formMode === FormMode.View}
       />
     </Form.Item>
