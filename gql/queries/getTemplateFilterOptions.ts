@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 const GET_TEMPLATE_FILTER_OPTIONS = gql`
-  query GetTemplates($where: templates_bool_exp) {
+  query GetTemplateFilterOptions($where: templates_bool_exp) {
     templates(where: $where, order_by: { name: asc }) {
       name
     }

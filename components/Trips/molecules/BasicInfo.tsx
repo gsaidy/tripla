@@ -2,6 +2,7 @@ import { FC } from 'react';
 
 import FormSection from '../../Utilities/FormSection';
 import TripName from '../atoms/TripName';
+import TripTemplate from '../atoms/TripTemplate';
 
 const BasicInfo: FC = () => (
   <FormSection header="Basic Info">
@@ -9,6 +10,7 @@ const BasicInfo: FC = () => (
       <div className="grid grid-cols-4 gap-6">
         <div className="col-span-4 sm:col-span-3 lg:col-span-2">
           <TripName />
+          <TripTemplate />
         </div>
       </div>
     </div>
