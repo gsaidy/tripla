@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import FormSection from '../atoms/FormSection';
+import FormSection from '../../Utilities/FormSection';
 import SectionHeader from '../atoms/SectionHeader';
 import SectionName from '../atoms/SectionName';
 import SectionOrder from '../atoms/SectionOrder';

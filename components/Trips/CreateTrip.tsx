@@ -3,6 +3,7 @@ import { useSession } from 'next-auth/client';
 
 import SignInBanner from '../SignIn/molecules/SignInBanner';
 import EntityType from 'enums/entityType';
+import TripForm from './organisms/TripForm';
 
 const CreateTrip: FC = () => {
   const [session, loading] = useSession();
@@ -10,6 +11,7 @@ const CreateTrip: FC = () => {
   return (
     <div className="min-h-tripla bg-gray-50">
       {!session && !loading && <SignInBanner entity={EntityType.Trip} />}
+      <TripForm />
     </div>
   );
 };
