@@ -11,9 +11,10 @@ const TripTemplate: FC = () => {
 
   return (
     <Form.Item
+      className="-mt-3 xs:mt-0"
       label="Template"
       name="template"
-      rules={[{ required: true, message: `Please select a template.` }]}
+      rules={[{ required: true, message: 'Please select a template.' }]}
     >
       <Select showSearch loading={loading}>
         {data?.templates.map(({ id, name, user }: { id: number; name: string; user?: User }) => {
