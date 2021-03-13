@@ -30,11 +30,7 @@ const TemplateForm: FC<{
   const [form] = Form.useForm();
   const [errors, setErrors] = useState<string[]>([]);
 
-  const layout = {
-    labelCol: { span: 6 },
-  };
-
-  const onFinish = async (template: Template) => {
+  const onFinish = (template: Template) => {
     const validationErrors = validateAtLeastOneAttributeAndOption(template);
     setErrors(validateAtLeastOneAttributeAndOption(template));
     if (validationErrors.length === 0) {
@@ -47,9 +43,9 @@ const TemplateForm: FC<{
       value={{ formMode, getFieldValue: form.getFieldValue, resetFields: form.resetFields }}
     >
       <Form
-        {...layout}
         form={form}
         initialValues={templateInitialData}
+        labelCol={{ span: 6 }}
         requiredMark={formMode !== FormMode.View}
         onFinish={onFinish}
       >

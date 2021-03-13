@@ -1,6 +1,6 @@
 import { FC, useContext } from 'react';
 
-import FormSection from '../atoms/FormSection';
+import FormSection from '../../Utilities/FormSection';
 import TemplateName from '../atoms/TemplateName';
 import TemplateDescription from '../atoms/TemplateDescription';
 import { TemplateFormContext } from '../organisms/TemplateForm';
@@ -12,7 +12,7 @@ const BasicInfo: FC<{ user?: User }> = ({ user }) => {
   const { formMode } = useContext(TemplateFormContext);
 
   return (
-    <FormSection header={<h3>Basic Info</h3>}>
+    <FormSection header="Basic Info">
       <div className="relative">
         <div className="grid grid-cols-4 gap-6">
           <div

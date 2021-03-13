@@ -3,8 +3,9 @@ import { FC, useState } from 'react';
 import SignInBannerButton from '../atoms/SignInBannerButton';
 import SignInBannerText from '../atoms/SignInBannerText';
 import SignInBannerClose from '../atoms/SignInBannerClose';
+import EntityType from 'enums/entityType';
 
-const SignInBanner: FC = () => {
+const SignInBanner: FC<{ entity: EntityType }> = ({ entity }) => {
   const [hideBanner, setHideBanner] = useState(false);
 
   if (hideBanner) return null;
@@ -13,7 +14,7 @@ const SignInBanner: FC = () => {
       <div className="flex items-center justify-between flex-wrap">
         <div className="w-0 flex-1 flex items-center">
           <SignInBannerButton />
-          <SignInBannerText />
+          <SignInBannerText entity={entity} />
         </div>
         <SignInBannerClose onClick={() => setHideBanner(true)} />
       </div>
