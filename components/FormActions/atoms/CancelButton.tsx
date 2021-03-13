@@ -1,9 +1,9 @@
 import { FC, useContext } from 'react';
 import { Button } from 'antd';
 
-import { TemplateFormContext } from '../organisms/TemplateForm';
+import { TemplateFormContext } from '../../Templates/organisms/TemplateForm';
 
-const CancelChangesButton: FC<{ onClick: () => void }> = ({ onClick: setFormModeToView }) => {
+const CancelButton: FC<{ onClick: () => void }> = ({ onClick: setFormModeToView }) => {
   const { resetFields } = useContext(TemplateFormContext);
 
   const onClick = () => {
@@ -18,4 +18,4 @@ const CancelChangesButton: FC<{ onClick: () => void }> = ({ onClick: setFormMode
   );
 };
 
-export default CancelChangesButton;
+export default CancelButton;

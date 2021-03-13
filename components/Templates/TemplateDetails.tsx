@@ -10,16 +10,17 @@ import NotFound from '../NotFound/NotFound';
 import TemplateForm from './organisms/TemplateForm';
 import Template from 'interfaces/template';
 import FormMode from 'enums/formMode';
-import TemplateActions from './molecules/TemplateActions';
+import FormActions from '../FormActions/FormActions';
 import DELETE_TEMPLATE from 'gql/mutations/deleteTemplate';
 import { showLoadingMessage, showErrorMessage, showSuccessMessage } from 'utils/feedback';
 import User from 'interfaces/user';
-import EditTemplateButton from './atoms/EditTemplateButton';
-import DeleteTemplateButton from './atoms/DeleteTemplateButton';
-import SaveChangesButton from './atoms/SaveChangesButton';
-import CancelChangesButton from './atoms/CancelChangesButton';
+import EditButton from '../FormActions/atoms/EditButton';
+import DeleteButton from '../FormActions/atoms/DeleteButton';
+import SubmitButton from '../FormActions/atoms/SubmitButton';
+import CancelChangesButton from '../FormActions/atoms/CancelButton';
 import UPDATE_TEMPLATE from 'gql/mutations/updateTemplate';
 import { mapTemplate, mapUser } from 'utils/mappers';
+import EntityType from 'enums/entityType';
 
 const TemplateDetails: FC<{ id: string | string[] }> = ({ id }) => {
   const [session] = useSession();
@@ -113,22 +114,22 @@ const TemplateDetails: FC<{ id: string | string[] }> = ({ id }) => {
     >
       <TemplateForm formMode={formMode} templateInitialData={template} onSubmit={updateTemplate}>
         {userHasPermissionToEditOrDelete() && (
-          <TemplateActions className={formMode === FormMode.View ? '-mt-3' : ''}>
+          <FormActions className={formMode === FormMode.View ? '-mt-3' : ''}>
             {formMode === FormMode.View ? (
               <>
-                <EditTemplateButton onClick={() => setFormMode(FormMode.Edit)} />
-                <DeleteTemplateButton onConfirm={deleteTemplate} />
+                <EditButton
+                  entity={EntityType.Template}
+                  onClick={() => setFormMode(FormMode.Edit)}
+                />
+                <DeleteButton entity={EntityType.Template} onConfirm={deleteTemplate} />
               </>
             ) : (
               <>
-                <SaveChangesButton
-                  label={updateLoading ? 'Saving' : 'Save'}
-                  loading={updateLoading}
-                />
+                <SubmitButton label={updateLoading ? 'Saving' : 'Save'} loading={updateLoading} />
                 <CancelChangesButton onClick={() => setFormMode(FormMode.View)} />
               </>
             )}
-          </TemplateActions>
+          </FormActions>
         )}
       </TemplateForm>
     </div>
