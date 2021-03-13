@@ -13,14 +13,14 @@ const TripTemplate: FC = () => {
     <Form.Item
       className="-mt-3 xs:mt-0"
       label="Template"
-      name="template"
+      name="template_id"
       rules={[{ required: true, message: 'Please select a template.' }]}
     >
-      <Select showSearch loading={loading}>
+      <Select showSearch optionFilterProp="label" loading={loading}>
         {data?.templates.map(({ id, name, user }: { id: number; name: string; user?: User }) => {
           const userName = user ? user.name : 'Anonymous';
           return (
-            <Option key={id} value={`${name} (${userName})`}>
+            <Option key={id} value={id} label={`${name} (${userName})`}>
               {`${name} (${userName})`}
             </Option>
           );

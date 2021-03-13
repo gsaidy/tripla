@@ -13,7 +13,10 @@ const TripDestination: FC = () => {
       className="-mt-3 xs:mt-0"
       label="Destination"
       name="destination"
-      rules={[{ required: true, message: 'Please select a destination.' }]}
+      rules={[
+        { required: true, message: 'Please select a destination.' },
+        { max: 250, message: 'Destination can not exceed 250 characters.' },
+      ]}
     >
       <AutoComplete
         options={options.map(({ description: value }) => ({ value }))}

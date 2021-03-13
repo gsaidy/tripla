@@ -30,7 +30,7 @@ const TemplateForm: FC<{
   const [form] = Form.useForm();
   const [errors, setErrors] = useState<string[]>([]);
 
-  const onFinish = async (template: Template) => {
+  const onFinish = (template: Template) => {
     const validationErrors = validateAtLeastOneAttributeAndOption(template);
     setErrors(validateAtLeastOneAttributeAndOption(template));
     if (validationErrors.length === 0) {
