@@ -23,6 +23,7 @@ import { mapTemplate, mapUser } from 'utils/mappers';
 import EntityType from 'enums/entityType';
 import { sameUser } from 'utils/user';
 import GET_TRIPS_USING_TEMPLATE from 'gql/queries/getTripsUsingTemplate';
+import TemplateBeingUsedWarning from './molecules/TemplateBeingUsedWarning';
 
 const TemplateDetails: FC<{ id: string | string[] }> = ({ id }) => {
   const [session] = useSession();
@@ -130,7 +131,7 @@ const TemplateDetails: FC<{ id: string | string[] }> = ({ id }) => {
                         <div>
                           <span className="font-bold">Note: </span>
                           {tripsUsingTemplate.trips.length} trip(s) are using this template and will
-                          be affected.
+                          be affected by deleting it.
                         </div>
                       )
                     }
@@ -147,6 +148,9 @@ const TemplateDetails: FC<{ id: string | string[] }> = ({ id }) => {
                 </>
               )}
             </FormActions>
+            {formMode === FormMode.Edit && tripsUsingTemplate?.trips.length > 0 && (
+              <TemplateBeingUsedWarning trips={tripsUsingTemplate.trips} />
+            )}
           </>
         )}
       </TemplateForm>
