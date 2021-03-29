@@ -21,6 +21,7 @@ import { showLoadingMessage, showErrorMessage, showSuccessMessage } from 'utils/
 import SubmitButton from '../FormActions/atoms/SubmitButton';
 import UPDATE_TRIP from 'gql/mutations/updateTrip';
 import { mapUser } from 'utils/mappers';
+import CancelChangesButton from '../FormActions/atoms/CancelButton';
 
 const TripDetails: FC<{ id: string | string[] }> = ({ id }) => {
   const [session] = useSession();
@@ -121,6 +122,10 @@ const TripDetails: FC<{ id: string | string[] }> = ({ id }) => {
             ) : (
               <>
                 <SubmitButton label={updateLoading ? 'Saving' : 'Save'} loading={updateLoading} />
+                <CancelChangesButton
+                  entity={EntityType.Trip}
+                  onClick={() => setFormMode(FormMode.View)}
+                />
               </>
             )}
           </FormActions>

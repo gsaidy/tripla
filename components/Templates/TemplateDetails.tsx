@@ -125,7 +125,10 @@ const TemplateDetails: FC<{ id: string | string[] }> = ({ id }) => {
             ) : (
               <>
                 <SubmitButton label={updateLoading ? 'Saving' : 'Save'} loading={updateLoading} />
-                <CancelChangesButton onClick={() => setFormMode(FormMode.View)} />
+                <CancelChangesButton
+                  entity={EntityType.Template}
+                  onClick={() => setFormMode(FormMode.View)}
+                />
               </>
             )}
           </FormActions>
