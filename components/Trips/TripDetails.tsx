@@ -18,6 +18,9 @@ import EntityType from 'enums/entityType';
 import DeleteButton from '../FormActions/atoms/DeleteButton';
 import DELETE_TRIP from 'gql/mutations/deleteTrip';
 import { showLoadingMessage, showErrorMessage, showSuccessMessage } from 'utils/feedback';
+import SubmitButton from '../FormActions/atoms/SubmitButton';
+import UPDATE_TRIP from 'gql/mutations/updateTrip';
+import { mapUser } from 'utils/mappers';
 
 const TripDetails: FC<{ id: string | string[] }> = ({ id }) => {
   const [session] = useSession();
@@ -27,6 +30,10 @@ const TripDetails: FC<{ id: string | string[] }> = ({ id }) => {
     deleteTripMutation,
     { loading: deleteLoading, error: deleteError, data: deleteData },
   ] = useMutation(DELETE_TRIP);
+  const [
+    updateTripMutation,
+    { loading: updateLoading, error: updateError, data: updateData },
+  ] = useMutation(UPDATE_TRIP);
   const router = useRouter();
 
   useEffect(() => {
@@ -39,6 +46,17 @@ const TripDetails: FC<{ id: string | string[] }> = ({ id }) => {
       router.push('/trips');
     }
   }, [deleteLoading, deleteError, deleteData, router]);
+
+  useEffect(() => {
+    if (updateLoading) {
+      showLoadingMessage('Updating trip...');
+    } else if (updateError) {
+      showErrorMessage('An error occurred. Please try again.');
+    } else if (updateData) {
+      showSuccessMessage('Trip successfully updated.');
+      setFormMode(FormMode.View);
+    }
+  }, [updateLoading, updateError, updateData]);
 
   if (loading) {
     return <PageLoader />;
@@ -72,8 +90,18 @@ const TripDetails: FC<{ id: string | string[] }> = ({ id }) => {
     });
   };
 
-  const updateTrip = (trip: Trip) => {
-    console.log(trip);
+  const updateTrip = (updatedTrip: Trip) => {
+    updateTripMutation({
+      variables: {
+        id,
+        input: {
+          id,
+          createdAt: trip.createdAt,
+          ...updatedTrip,
+          ...mapUser(trip.user),
+        },
+      },
+    });
   };
 
   return (
@@ -85,10 +113,14 @@ const TripDetails: FC<{ id: string | string[] }> = ({ id }) => {
       >
         {userHasPermissionToEditOrDelete() && (
           <FormActions className={formMode === FormMode.View ? '-mt-3' : ''}>
-            {formMode === FormMode.View && (
+            {formMode === FormMode.View ? (
               <>
                 <EditButton entity={EntityType.Trip} onClick={() => setFormMode(FormMode.Edit)} />
                 <DeleteButton entity={EntityType.Trip} onConfirm={deleteTrip} />
+              </>
+            ) : (
+              <>
+                <SubmitButton label={updateLoading ? 'Saving' : 'Save'} loading={updateLoading} />
               </>
             )}
           </FormActions>
