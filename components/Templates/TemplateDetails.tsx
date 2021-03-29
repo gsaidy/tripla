@@ -21,6 +21,7 @@ import CancelChangesButton from '../FormActions/atoms/CancelButton';
 import UPDATE_TEMPLATE from 'gql/mutations/updateTemplate';
 import { mapTemplate, mapUser } from 'utils/mappers';
 import EntityType from 'enums/entityType';
+import { sameUser } from 'utils/user';
 
 const TemplateDetails: FC<{ id: string | string[] }> = ({ id }) => {
   const [session] = useSession();
@@ -79,9 +80,7 @@ const TemplateDetails: FC<{ id: string | string[] }> = ({ id }) => {
   const userHasPermissionToEditOrDelete = () => {
     const loggedInUser = session?.user as User;
     const { user: templateCreatedByUser } = template;
-    return (
-      loggedInUser && templateCreatedByUser && `${loggedInUser.id}` === templateCreatedByUser.id
-    );
+    return sameUser(loggedInUser, templateCreatedByUser);
   };
 
   const deleteTemplate = () => {
@@ -126,7 +125,10 @@ const TemplateDetails: FC<{ id: string | string[] }> = ({ id }) => {
             ) : (
               <>
                 <SubmitButton label={updateLoading ? 'Saving' : 'Save'} loading={updateLoading} />
-                <CancelChangesButton onClick={() => setFormMode(FormMode.View)} />
+                <CancelChangesButton
+                  entity={EntityType.Template}
+                  onClick={() => setFormMode(FormMode.View)}
+                />
               </>
             )}
           </FormActions>
