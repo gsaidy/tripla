@@ -40,6 +40,14 @@
   align-items: center !important;
 }
 
+.borderless-auto-complete {
+  pointer-events: none !important;
+}
+
+.borderless-auto-complete .ant-select-selector {
+  border: 0 !important;
+}
+
 @tailwind utilities;
 
 /* Write your own custom utilities styles here */

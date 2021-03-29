@@ -13,6 +13,7 @@ import Trip from 'interfaces/trip';
 import { mapUser } from 'utils/mappers';
 import User from 'interfaces/user';
 import { showLoadingMessage, showErrorMessage, showSuccessMessage } from 'utils/feedback';
+import FormMode from 'enums/formMode';
 
 const CreateTrip: FC = () => {
   const [session, loading] = useSession();
@@ -49,7 +50,7 @@ const CreateTrip: FC = () => {
       className={`min-h-tripla bg-gray-50 ${createLoading ? 'opacity-50 pointer-events-none' : ''}`}
     >
       {!session && !loading && <SignInBanner entity={EntityType.Trip} />}
-      <TripForm onSubmit={createTrip}>
+      <TripForm formMode={FormMode.Create} onSubmit={createTrip}>
         <FormActions>
           <SubmitButton
             label={createLoading ? 'Creating Trip' : 'Create Trip'}

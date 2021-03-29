@@ -37,7 +37,11 @@ const TripDetails: FC<{ id: string | string[] }> = ({ id }) => {
 
   return (
     <div className="min-h-tripla bg-gray-50">
-      <TripForm formMode={formMode} tripInitialData={trip} onSubmit={updateTrip} />
+      <TripForm
+        formMode={formMode}
+        tripInitialData={{ ...trip, templateId: trip.template.id }}
+        onSubmit={updateTrip}
+      />
     </div>
   );
 };
