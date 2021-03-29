@@ -1,6 +1,7 @@
-import { FC, useState } from 'react';
-import { useQuery } from '@apollo/client';
+import { FC, useState, useEffect } from 'react';
+import { useQuery, useMutation } from '@apollo/client';
 import { useSession } from 'next-auth/client';
+import { useRouter } from 'next/router';
 
 import GET_TRIP_DETAILS from 'gql/queries/getTripDetails';
 import PageLoader from '../PageLoader/PageLoader';
@@ -15,11 +16,29 @@ import FormActions from '../FormActions/FormActions';
 import EditButton from '../FormActions/atoms/EditButton';
 import EntityType from 'enums/entityType';
 import DeleteButton from '../FormActions/atoms/DeleteButton';
+import DELETE_TRIP from 'gql/mutations/deleteTrip';
+import { showLoadingMessage, showErrorMessage, showSuccessMessage } from 'utils/feedback';
 
 const TripDetails: FC<{ id: string | string[] }> = ({ id }) => {
   const [session] = useSession();
   const [formMode, setFormMode] = useState(FormMode.View);
   const { loading, error, data } = useQuery(GET_TRIP_DETAILS, { variables: { id } });
+  const [
+    deleteTripMutation,
+    { loading: deleteLoading, error: deleteError, data: deleteData },
+  ] = useMutation(DELETE_TRIP);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (deleteLoading) {
+      showLoadingMessage('Deleting trip...');
+    } else if (deleteError) {
+      showErrorMessage('An error occurred. Please try again.');
+    } else if (deleteData) {
+      showSuccessMessage('Trip successfully deleted.');
+      router.push('/trips');
+    }
+  }, [deleteLoading, deleteError, deleteData, router]);
 
   if (loading) {
     return <PageLoader />;
@@ -45,6 +64,14 @@ const TripDetails: FC<{ id: string | string[] }> = ({ id }) => {
     return sameUser(loggedInUser, tripCreatedByUser);
   };
 
+  const deleteTrip = () => {
+    deleteTripMutation({
+      variables: {
+        id,
+      },
+    });
+  };
+
   const updateTrip = (trip: Trip) => {
     console.log(trip);
   };
@@ -61,7 +88,7 @@ const TripDetails: FC<{ id: string | string[] }> = ({ id }) => {
             {formMode === FormMode.View && (
               <>
                 <EditButton entity={EntityType.Trip} onClick={() => setFormMode(FormMode.Edit)} />
-                <DeleteButton entity={EntityType.Trip} onConfirm={() => ({})} />
+                <DeleteButton entity={EntityType.Trip} onConfirm={deleteTrip} />
               </>
             )}
           </FormActions>
