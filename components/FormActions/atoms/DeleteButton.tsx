@@ -1,12 +1,21 @@
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 import { Button, Popconfirm } from 'antd';
 
 import EntityType from 'enums/entityType';
 import { capitalize } from 'utils/helpers';
 
-const DeleteButton: FC<{ entity: EntityType; onConfirm: () => void }> = ({ entity, onConfirm }) => (
+const DeleteButton: FC<{
+  entity: EntityType;
+  additionalWarning?: ReactNode;
+  onConfirm: () => void;
+}> = ({ entity, additionalWarning, onConfirm }) => (
   <Popconfirm
-    title={`Are you sure you want to delete this ${entity}?`}
+    title={
+      <>
+        <div>Are you sure you want to delete this {entity}?</div>
+        {additionalWarning}
+      </>
+    }
     okText="Yes"
     cancelText="No"
     onConfirm={onConfirm}

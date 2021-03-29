@@ -22,11 +22,13 @@ import UPDATE_TEMPLATE from 'gql/mutations/updateTemplate';
 import { mapTemplate, mapUser } from 'utils/mappers';
 import EntityType from 'enums/entityType';
 import { sameUser } from 'utils/user';
+import GET_TRIPS_USING_TEMPLATE from 'gql/queries/getTripsUsingTemplate';
 
 const TemplateDetails: FC<{ id: string | string[] }> = ({ id }) => {
   const [session] = useSession();
   const [formMode, setFormMode] = useState(FormMode.View);
   const { loading, error, data } = useQuery(GET_TEMPLATE_DETAILS, { variables: { id } });
+  const { data: tripsUsingTemplate } = useQuery(GET_TRIPS_USING_TEMPLATE, { variables: { id } });
   const [
     deleteTemplateMutation,
     { loading: deleteLoading, error: deleteError, data: deleteData },
@@ -113,25 +115,39 @@ const TemplateDetails: FC<{ id: string | string[] }> = ({ id }) => {
     >
       <TemplateForm formMode={formMode} templateInitialData={template} onSubmit={updateTemplate}>
         {userHasPermissionToEditOrDelete() && (
-          <FormActions className={formMode === FormMode.View ? '-mt-3' : ''}>
-            {formMode === FormMode.View ? (
-              <>
-                <EditButton
-                  entity={EntityType.Template}
-                  onClick={() => setFormMode(FormMode.Edit)}
-                />
-                <DeleteButton entity={EntityType.Template} onConfirm={deleteTemplate} />
-              </>
-            ) : (
-              <>
-                <SubmitButton label={updateLoading ? 'Saving' : 'Save'} loading={updateLoading} />
-                <CancelChangesButton
-                  entity={EntityType.Template}
-                  onClick={() => setFormMode(FormMode.View)}
-                />
-              </>
-            )}
-          </FormActions>
+          <>
+            <FormActions className={formMode === FormMode.View ? '-mt-3' : ''}>
+              {formMode === FormMode.View ? (
+                <>
+                  <EditButton
+                    entity={EntityType.Template}
+                    onClick={() => setFormMode(FormMode.Edit)}
+                  />
+                  <DeleteButton
+                    entity={EntityType.Template}
+                    additionalWarning={
+                      tripsUsingTemplate?.trips.length > 0 && (
+                        <div>
+                          <span className="font-bold">Note: </span>
+                          {tripsUsingTemplate.trips.length} trip(s) are using this template and will
+                          be affected.
+                        </div>
+                      )
+                    }
+                    onConfirm={deleteTemplate}
+                  />
+                </>
+              ) : (
+                <>
+                  <SubmitButton label={updateLoading ? 'Saving' : 'Save'} loading={updateLoading} />
+                  <CancelChangesButton
+                    entity={EntityType.Template}
+                    onClick={() => setFormMode(FormMode.View)}
+                  />
+                </>
+              )}
+            </FormActions>
+          </>
         )}
       </TemplateForm>
     </div>
