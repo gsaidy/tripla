@@ -1,13 +1,23 @@
 import { FC } from 'react';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 
-const TripDetailsPage: FC = () => (
-  <>
-    <Head>
-      <title>Trip Details - Tripla</title>
-    </Head>
-    <h1>Under construction</h1>
-  </>
-);
+import TripDetails from 'components/Trips/TripDetails';
+import PageLoader from 'components/PageLoader/PageLoader';
+
+const TripDetailsPage: FC = () => {
+  const {
+    query: { slug },
+  } = useRouter();
+
+  return (
+    <>
+      <Head>
+        <title>Trip Details - Tripla</title>
+      </Head>
+      {slug ? <TripDetails id={slug} /> : <PageLoader />}
+    </>
+  );
+};
 
 export default TripDetailsPage;

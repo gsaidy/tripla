@@ -3,7 +3,7 @@ import User from './user';
 interface Trip {
   name: string;
   destination: string;
-  template_id: number;
+  templateId: number;
   user?: User;
 }
 

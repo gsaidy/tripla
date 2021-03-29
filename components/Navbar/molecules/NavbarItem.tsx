@@ -1,7 +1,7 @@
 import { FC, useState, ReactNode } from 'react';
 import { CaretUpFilled, CaretDownFilled } from '@ant-design/icons';
 
-const TOGGLE_SUB_ITEMS_AFTER = 150;
+const TOGGLE_SUB_ITEMS_AFTER = 250;
 
 const NavbarItem: FC<{ text: string; children: ReactNode }> = ({ text, children }) => {
   const [showMenuFor, setShowMenuFor] = useState<string | null>(null);

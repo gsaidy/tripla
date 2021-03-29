@@ -12,6 +12,7 @@ const TemplateName: FC = () => {
       name="name"
       entity="template"
       labelCol={{ span: formMode === FormMode.View ? 4 : 6 }}
+      bordered={formMode !== FormMode.View}
     />
   );
 };
