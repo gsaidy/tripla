@@ -8,7 +8,7 @@ import EntityType from 'enums/entityType';
 import TripForm from './organisms/TripForm';
 import FormActions from '../FormActions/FormActions';
 import SubmitButton from '../FormActions/atoms/SubmitButton';
-import CREATE_TRIP from 'gql/mutations/createTrips';
+import CREATE_TRIP from 'gql/mutations/createTrip';
 import Trip from 'interfaces/trip';
 import { mapUser } from 'utils/mappers';
 import User from 'interfaces/user';

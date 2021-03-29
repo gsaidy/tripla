@@ -13,7 +13,7 @@ const TripTemplate: FC = () => {
     <Form.Item
       className="-mt-3 xs:mt-0"
       label="Template"
-      name="template_id"
+      name="templateId"
       rules={[{ required: true, message: 'Please select a template.' }]}
     >
       <Select showSearch optionFilterProp="label" loading={loading}>
