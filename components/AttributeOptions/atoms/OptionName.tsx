@@ -12,7 +12,7 @@ const OptionName: FC<{ parentName: number }> = ({ parentName }) => {
       <NameInput
         name={[parentName, 'name']}
         entity="option"
-        borderless={formMode !== FormMode.View}
+        bordered={formMode !== FormMode.View}
       />
     </div>
   );

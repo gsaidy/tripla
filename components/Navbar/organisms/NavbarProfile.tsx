@@ -3,7 +3,7 @@ import { FC, useState } from 'react';
 import NavbarProfileIcon from '../molecules/NavbarProfileIcon';
 import NavbarProfileDropdown from '../molecules/NavbarProfileDropdown';
 
-const TOGGLE_DROPDOWN_AFTER = 150;
+const TOGGLE_DROPDOWN_AFTER = 250;
 
 const NavbarProfile: FC = () => {
   const [showDropdown, setShowDropdown] = useState(false);
