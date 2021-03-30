@@ -24,6 +24,7 @@ import EntityType from 'enums/entityType';
 import { sameUser } from 'utils/user';
 import GET_TRIPS_USING_TEMPLATE from 'gql/queries/getTripsUsingTemplate';
 import TemplateBeingUsedWarning from './molecules/TemplateBeingUsedWarning';
+import RESET_TRIPS_TEMPLATE_ID from 'gql/mutations/resetTripsTemplateId';
 
 const TemplateDetails: FC<{ id: string | string[] }> = ({ id }) => {
   const [session] = useSession();
@@ -38,6 +39,7 @@ const TemplateDetails: FC<{ id: string | string[] }> = ({ id }) => {
     updateTemplateMutation,
     { loading: updateLoading, error: updateError, data: updateData },
   ] = useMutation(UPDATE_TEMPLATE);
+  const [resetTripsTemplateId] = useMutation(RESET_TRIPS_TEMPLATE_ID);
   const router = useRouter();
 
   useEffect(() => {
@@ -94,8 +96,8 @@ const TemplateDetails: FC<{ id: string | string[] }> = ({ id }) => {
     });
   };
 
-  const updateTemplate = (updatedTemplate: Template) => {
-    updateTemplateMutation({
+  const updateTemplate = async (updatedTemplate: Template) => {
+    await updateTemplateMutation({
       variables: {
         id,
         input: {
@@ -106,6 +108,14 @@ const TemplateDetails: FC<{ id: string | string[] }> = ({ id }) => {
         },
       },
     });
+    if (tripsUsingTemplate?.trips.length > 0) {
+      resetTripsTemplateId({
+        variables: {
+          tripIds: tripsUsingTemplate.trips.map(({ id }: { id: number }) => id),
+          templateId: id,
+        },
+      });
+    }
   };
 
   return (
