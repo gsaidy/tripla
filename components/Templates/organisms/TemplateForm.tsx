@@ -9,7 +9,8 @@ import ErrorList from '../molecules/ErrorList';
 import Template from 'interfaces/template';
 import { validateAtLeastOneAttributeAndOption } from 'utils/validators';
 import FormMode from 'enums/formMode';
-import BackToTemplateList from '../molecules/BackToTemplateList';
+import BackToList from '../../Utilities/BackToList';
+import EntityType from 'enums/entityType';
 
 export const TemplateFormContext = createContext<{
   formMode: FormMode;
@@ -49,7 +50,9 @@ const TemplateForm: FC<{
         requiredMark={formMode !== FormMode.View}
         onFinish={onFinish}
       >
-        {formMode === FormMode.View && <BackToTemplateList />}
+        {formMode === FormMode.View && (
+          <BackToList href="/templates" entity={EntityType.Template} />
+        )}
         <BasicInfo user={templateInitialData ? templateInitialData.user : undefined} />
         <Form.List name="sections">
           {(fields, { add, remove }) => (
