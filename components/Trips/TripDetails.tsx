@@ -109,7 +109,7 @@ const TripDetails: FC<{ id: string | string[] }> = ({ id }) => {
     <div className="min-h-tripla bg-gray-50">
       <TripForm
         formMode={formMode}
-        tripInitialData={{ ...trip, templateId: trip.template.id }}
+        tripInitialData={{ ...trip, templateId: trip.template?.id }}
         onSubmit={updateTrip}
       >
         {userHasPermissionToEditOrDelete() && (
