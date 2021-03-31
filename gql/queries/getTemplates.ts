@@ -12,6 +12,7 @@ const GET_TEMPLATES = gql`
       name
       description
       user {
+        id
         name
       }
       createdAt
