@@ -4,7 +4,7 @@ import { useSession } from 'next-auth/client';
 import { TablePaginationConfig } from 'antd/lib/table';
 import { FilterValue } from 'antd/lib/table/interface';
 
-import TemplateTable from '../molecules/TemplateTable';
+import EntityTable from '../../EntityTable/EntityTable';
 import GET_TEMPLATES from 'gql/queries/getTemplates';
 import PageLoader from '../../PageLoader/PageLoader';
 import ErrorResult from '../../ErrorResult/ErrorResult';
@@ -13,6 +13,8 @@ import User from 'interfaces/user';
 import { showErrorMessage } from 'utils/feedback';
 import SortOrder from 'enums/sortOrder';
 import { getTemplateFilters } from 'utils/filters';
+import EntityType from 'enums/entityType';
+import templateTableColumns from 'constants/templateTableColumns';
 
 const PAGE_SIZE = 5;
 const DEFAULT_SORT = { updatedAt: SortOrder.DESC };
@@ -128,9 +130,12 @@ const TemplateList: FC<{ createdBy: CreatorFilter; title: string; className?: st
   return (
     <TemplateListContext.Provider value={{ createdBy }}>
       <div className={`${className} ${templates.length === 0 ? 'pb-7' : ''}`}>
-        <TemplateTable
+        <EntityTable
+          entity={EntityType.Template}
           createdBy={createdBy}
           title={title}
+          createHref="/templates/create"
+          columns={templateTableColumns}
           data={templates}
           pagination={pagination}
           loading={loading}
