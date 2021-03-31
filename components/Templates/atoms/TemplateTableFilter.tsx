@@ -8,7 +8,7 @@ import { useSession } from 'next-auth/client';
 
 import GET_TEMPLATE_FILTER_OPTIONS from 'gql/queries/getTemplateFilterOptions';
 import { TemplateListContext } from '../organisms/TemplateList';
-import { getTemplateFilters } from 'utils/filters';
+import { getFilters } from 'utils/filters';
 import User from 'interfaces/user';
 
 const TemplateTableFilter: FC<{
@@ -23,7 +23,7 @@ const TemplateTableFilter: FC<{
 
   const { loading, data } = useQuery(GET_TEMPLATE_FILTER_OPTIONS, {
     variables: {
-      where: getTemplateFilters(createdBy, user),
+      where: getFilters(createdBy, user),
     },
     fetchPolicy: 'cache-and-network',
   });

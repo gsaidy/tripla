@@ -1,11 +1,7 @@
 import CreatorFilter from 'enums/creatorFilter';
 import User from 'interfaces/user';
 
-export const getTemplateFilters = (
-  createdBy: CreatorFilter,
-  user: User,
-  name?: string
-): unknown => {
+export const getFilters = (createdBy: CreatorFilter, user: User, name?: string): unknown => {
   if (name) {
     return withNameFilter(createdBy, user, name);
   }
