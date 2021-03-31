@@ -1,8 +1,10 @@
+import React, { ReactNode } from 'react';
 import moment from 'moment';
 import { ColumnsType } from 'antd/lib/table';
 
 import User from 'interfaces/user';
 import TripOverview from 'interfaces/tripOverview';
+import EntityTableViewButton from 'components/EntityTable/atoms/EntityTableViewButton';
 
 const tripTableColumns: ColumnsType<TripOverview> = [
   {
@@ -43,6 +45,15 @@ const tripTableColumns: ColumnsType<TripOverview> = [
     align: 'center',
     sorter: true,
     render: (updatedAt: string) => moment(updatedAt).fromNow(),
+  },
+  {
+    title: 'Action',
+    key: 'action',
+    width: '9%',
+    fixed: 'right',
+    render(_: unknown, { id }: { id: number }): ReactNode {
+      return React.createElement(EntityTableViewButton, { href: `/trips/${id}` }, null);
+    },
   },
 ];
 

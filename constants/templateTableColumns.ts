@@ -5,9 +5,9 @@ import { FilterDropdownProps } from 'antd/lib/table/interface';
 
 import User from 'interfaces/user';
 import TemplateOverview from 'interfaces/templateOverview';
-import TemplateTableViewButton from 'components/Templates/atoms/TemplateTableViewButton';
 import TemplateTableFilter from 'components/Templates/atoms/TemplateTableFilter';
 import TemplateTableFilterIcon from 'components/Templates/atoms/TemplateTableFilterIcon';
+import EntityTableViewButton from 'components/EntityTable/atoms/EntityTableViewButton';
 
 const templateTableColumns: ColumnsType<TemplateOverview> = [
   {
@@ -63,8 +63,8 @@ const templateTableColumns: ColumnsType<TemplateOverview> = [
     key: 'action',
     width: '9%',
     fixed: 'right',
-    render(_: unknown, { id }: TemplateOverview): ReactNode {
-      return React.createElement(TemplateTableViewButton, { id }, null);
+    render(_: unknown, { id }: { id: number }): ReactNode {
+      return React.createElement(EntityTableViewButton, { href: `/templates/${id}` }, null);
     },
   },
 ];
