@@ -25,6 +25,8 @@ export const TripListContext = createContext<{
   createdBy: CreatorFilter.All,
 });
 
+type SortType = { [field: string]: SortOrder } | { template: { name: SortOrder } };
+
 const TripList: FC<{ createdBy: CreatorFilter; title: string; className?: string }> = ({
   createdBy,
   title,
@@ -37,13 +39,13 @@ const TripList: FC<{ createdBy: CreatorFilter; title: string; className?: string
   const [pagination, setPagination] = useState({});
   const [loading, setLoading] = useState(false);
 
-  const orderBy: { [field: string]: SortOrder } = DEFAULT_SORT;
+  const orderBy = DEFAULT_SORT;
   const { loading: getTripsLoading, error, data, fetchMore, refetch } = useQuery(GET_TRIPS, {
     variables: {
       offset: 0,
       limit: PAGE_SIZE,
       where: getFilters(createdBy, user),
-      orderBy,
+      orderBy: orderBy as SortType,
     },
     fetchPolicy: 'cache-and-network',
     nextFetchPolicy: 'cache-first',
@@ -110,11 +112,10 @@ const TripList: FC<{ createdBy: CreatorFilter; title: string; className?: string
 
   const onSortChange = async (field: string, order?: SortOrder) => {
     setLoading(true);
-    const orderBy = order ? { [field]: order } : DEFAULT_SORT;
     const { data, error } = await refetch({
       offset: 0,
       limit: PAGE_SIZE,
-      orderBy,
+      orderBy: getSortOrder(field, order),
     });
     setLoading(false);
     if (data) {
@@ -122,6 +123,16 @@ const TripList: FC<{ createdBy: CreatorFilter; title: string; className?: string
     } else if (error) {
       showErrorMessage('An error occurred. Please try again.');
     }
+  };
+
+  const getSortOrder = (field: string, order?: SortOrder): SortType => {
+    if (!order) {
+      return DEFAULT_SORT;
+    }
+    if (field === 'template') {
+      return { template: { name: order } };
+    }
+    return { [field]: order };
   };
 
   return (

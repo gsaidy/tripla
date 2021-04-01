@@ -19,11 +19,13 @@ const tripTableColumns: ColumnsType<TripOverview> = [
     dataIndex: 'destination',
     ellipsis: true,
     align: 'center',
+    sorter: true,
   },
   {
     title: 'Template',
     dataIndex: 'template',
     align: 'center',
+    sorter: true,
     render: (template: { id: string; name: string }) => template?.name ?? '',
   },
   {
