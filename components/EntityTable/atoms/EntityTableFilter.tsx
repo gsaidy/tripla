@@ -1,32 +1,36 @@
-import { FC, Key, useContext } from 'react';
-import { useQuery } from '@apollo/client';
+import { FC, Key, useContext, Context } from 'react';
+import { useQuery, DocumentNode } from '@apollo/client';
 import { SearchOutlined } from '@ant-design/icons';
 import { Select, Button } from 'antd';
 const { Option } = Select;
 import { FilterConfirmProps } from 'antd/lib/table/interface';
 import { useSession } from 'next-auth/client';
 
-import GET_TEMPLATE_FILTER_OPTIONS from 'gql/queries/getTemplateFilterOptions';
-import { TemplateListContext } from '../organisms/TemplateList';
 import { getFilters } from 'utils/filters';
 import User from 'interfaces/user';
+import CreatorFilter from 'enums/creatorFilter';
 
-const TemplateTableFilter: FC<{
+const EntityTableFilter: FC<{
+  context: Context<{
+    createdBy: CreatorFilter;
+  }>;
+  query: DocumentNode;
   selectedKeys: Key[];
   setSelectedKeys: (selectedKeys: Key[]) => void;
   confirm: (param?: FilterConfirmProps) => void;
   clearFilters?: () => void;
-}> = ({ selectedKeys, setSelectedKeys, confirm, clearFilters }) => {
+}> = ({ context, query, selectedKeys, setSelectedKeys, confirm, clearFilters }) => {
   const [session] = useSession();
   const user = session?.user as User;
-  const { createdBy } = useContext(TemplateListContext);
+  const { createdBy } = useContext(context);
 
-  const { loading, data } = useQuery(GET_TEMPLATE_FILTER_OPTIONS, {
+  const { loading, data } = useQuery(query, {
     variables: {
       where: getFilters(createdBy, user),
     },
     fetchPolicy: 'cache-and-network',
   });
+
   const getOptions = (data: { [key: string]: { name: string }[] }) => {
     const options = Object.values(data)[0].map(({ name }) => name);
     const optionsWithoutDuplicates = Array.from(new Set(options));
@@ -69,4 +73,4 @@ const TemplateTableFilter: FC<{
   );
 };
 
-export default TemplateTableFilter;
+export default EntityTableFilter;

@@ -5,9 +5,11 @@ import { FilterDropdownProps } from 'antd/lib/table/interface';
 
 import User from 'interfaces/user';
 import TemplateOverview from 'interfaces/templateOverview';
-import TemplateTableFilter from 'components/Templates/atoms/TemplateTableFilter';
-import TemplateTableFilterIcon from 'components/Templates/atoms/TemplateTableFilterIcon';
+import EntityTableFilter from 'components/EntityTable/atoms/EntityTableFilter';
+import EntityTableFilterIcon from 'components/EntityTable/atoms/EntityTableFilterIcon';
 import EntityTableViewButton from 'components/EntityTable/atoms/EntityTableViewButton';
+import { TemplateListContext } from 'components/Templates/organisms/TemplateList';
+import GET_TEMPLATE_FILTER_OPTIONS from 'gql/queries/getTemplateFilterOptions';
 
 const templateTableColumns: ColumnsType<TemplateOverview> = [
   {
@@ -23,13 +25,20 @@ const templateTableColumns: ColumnsType<TemplateOverview> = [
       clearFilters,
     }: FilterDropdownProps): ReactNode {
       return React.createElement(
-        TemplateTableFilter,
-        { selectedKeys, setSelectedKeys, confirm, clearFilters },
+        EntityTableFilter,
+        {
+          context: TemplateListContext,
+          query: GET_TEMPLATE_FILTER_OPTIONS,
+          selectedKeys,
+          setSelectedKeys,
+          confirm,
+          clearFilters,
+        },
         null
       );
     },
     filterIcon(filtered: boolean): ReactNode {
-      return React.createElement(TemplateTableFilterIcon, { filtered }, null);
+      return React.createElement(EntityTableFilterIcon, { filtered }, null);
     },
   },
   {

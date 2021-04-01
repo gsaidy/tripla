@@ -1,10 +1,15 @@
 import React, { ReactNode } from 'react';
 import moment from 'moment';
 import { ColumnsType } from 'antd/lib/table';
+import { FilterDropdownProps } from 'antd/lib/table/interface';
 
 import User from 'interfaces/user';
 import TripOverview from 'interfaces/tripOverview';
 import EntityTableViewButton from 'components/EntityTable/atoms/EntityTableViewButton';
+import EntityTableFilter from 'components/EntityTable/atoms/EntityTableFilter';
+import EntityTableFilterIcon from 'components/EntityTable/atoms/EntityTableFilterIcon';
+import { TripListContext } from 'components/Trips/organisms/TripList';
+import GET_TRIP_FILTER_OPTIONS from 'gql/queries/getTripFilterOptions';
 
 const tripTableColumns: ColumnsType<TripOverview> = [
   {
@@ -13,6 +18,28 @@ const tripTableColumns: ColumnsType<TripOverview> = [
     ellipsis: true,
     align: 'center',
     sorter: true,
+    filterDropdown({
+      selectedKeys,
+      setSelectedKeys,
+      confirm,
+      clearFilters,
+    }: FilterDropdownProps): ReactNode {
+      return React.createElement(
+        EntityTableFilter,
+        {
+          context: TripListContext,
+          query: GET_TRIP_FILTER_OPTIONS,
+          selectedKeys,
+          setSelectedKeys,
+          confirm,
+          clearFilters,
+        },
+        null
+      );
+    },
+    filterIcon(filtered: boolean): ReactNode {
+      return React.createElement(EntityTableFilterIcon, { filtered }, null);
+    },
   },
   {
     title: 'Destination',
