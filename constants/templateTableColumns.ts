@@ -29,6 +29,7 @@ const templateTableColumns: ColumnsType<TemplateOverview> = [
         {
           context: TemplateListContext,
           query: GET_TEMPLATE_FILTER_OPTIONS,
+          field: 'name',
           selectedKeys,
           setSelectedKeys,
           confirm,

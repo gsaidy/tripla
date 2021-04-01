@@ -12,7 +12,7 @@ import CreatorFilter from 'enums/creatorFilter';
 import User from 'interfaces/user';
 import { showErrorMessage } from 'utils/feedback';
 import SortOrder from 'enums/sortOrder';
-import { getFilters } from 'utils/filters';
+import { getWhereClause } from 'utils/filters';
 import EntityType from 'enums/entityType';
 import tripTableColumns from 'constants/tripTableColumns';
 
@@ -44,7 +44,7 @@ const TripList: FC<{ createdBy: CreatorFilter; title: string; className?: string
     variables: {
       offset: 0,
       limit: PAGE_SIZE,
-      where: getFilters(createdBy, user),
+      where: getWhereClause(createdBy, user),
       orderBy: orderBy as SortType,
     },
     fetchPolicy: 'cache-and-network',
@@ -96,11 +96,10 @@ const TripList: FC<{ createdBy: CreatorFilter; title: string; className?: string
 
   const onFiltersChange = async (filters: Record<string, FilterValue | null>) => {
     setLoading(true);
-    const where = getFilters(createdBy, user, filters.name?.[0] as string | undefined);
     const { data, error } = await refetch({
       offset: 0,
       limit: PAGE_SIZE,
-      where,
+      where: getWhereClause(createdBy, user, filters),
     });
     setLoading(false);
     if (data) {

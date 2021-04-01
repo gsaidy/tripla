@@ -6,7 +6,7 @@ const { Option } = Select;
 import { FilterConfirmProps } from 'antd/lib/table/interface';
 import { useSession } from 'next-auth/client';
 
-import { getFilters } from 'utils/filters';
+import { getWhereClause } from 'utils/filters';
 import User from 'interfaces/user';
 import CreatorFilter from 'enums/creatorFilter';
 
@@ -15,24 +15,25 @@ const EntityTableFilter: FC<{
     createdBy: CreatorFilter;
   }>;
   query: DocumentNode;
+  field: string;
   selectedKeys: Key[];
   setSelectedKeys: (selectedKeys: Key[]) => void;
   confirm: (param?: FilterConfirmProps) => void;
   clearFilters?: () => void;
-}> = ({ context, query, selectedKeys, setSelectedKeys, confirm, clearFilters }) => {
+}> = ({ context, query, field, selectedKeys, setSelectedKeys, confirm, clearFilters }) => {
   const [session] = useSession();
   const user = session?.user as User;
   const { createdBy } = useContext(context);
 
   const { loading, data } = useQuery(query, {
     variables: {
-      where: getFilters(createdBy, user),
+      where: getWhereClause(createdBy, user),
     },
     fetchPolicy: 'cache-and-network',
   });
 
-  const getOptions = (data: { [key: string]: { name: string }[] }) => {
-    const options = Object.values(data)[0].map(({ name }) => name);
+  const getOptions = (data: { [key: string]: { [field: string]: string }[] }) => {
+    const options = Object.values(data)[0].map((element) => element[field]);
     const optionsWithoutDuplicates = Array.from(new Set(options));
     return optionsWithoutDuplicates;
   };
@@ -48,9 +49,9 @@ const EntityTableFilter: FC<{
         loading={loading}
         onChange={(value: string) => setSelectedKeys(value ? [value] : [])}
       >
-        {options.map((name) => (
-          <Option key={name} value={name}>
-            {name}
+        {options.map((value) => (
+          <Option key={value} value={value}>
+            {value}
           </Option>
         ))}
       </Select>
