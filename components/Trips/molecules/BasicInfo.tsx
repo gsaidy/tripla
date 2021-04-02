@@ -9,7 +9,10 @@ import FormMode from 'enums/formMode';
 import EntityCreatedBy from '../../Utilities/EntityCreatedBy';
 import User from 'interfaces/user';
 
-const BasicInfo: FC<{ user?: User }> = ({ user }) => {
+const BasicInfo: FC<{ user?: User; onTemplateSelect: (id: number) => void }> = ({
+  user,
+  onTemplateSelect,
+}) => {
   const { formMode } = useContext(TripFormContext);
 
   return (
@@ -19,7 +22,7 @@ const BasicInfo: FC<{ user?: User }> = ({ user }) => {
           <div className="col-span-4 sm:col-span-3 lg:col-span-2">
             <TripName />
             <TripDestination />
-            <TripTemplate />
+            <TripTemplate onSelect={onTemplateSelect} />
           </div>
           {formMode === FormMode.View && <EntityCreatedBy user={user} />}
         </div>
