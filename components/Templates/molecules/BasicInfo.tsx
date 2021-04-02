@@ -5,7 +5,7 @@ import TemplateName from '../atoms/TemplateName';
 import TemplateDescription from '../atoms/TemplateDescription';
 import { TemplateFormContext } from '../organisms/TemplateForm';
 import FormMode from 'enums/formMode';
-import TemplateCreatedBy from '../atoms/TemplateCreatedBy';
+import EntityCreatedBy from '../../Utilities/EntityCreatedBy';
 import User from 'interfaces/user';
 
 const BasicInfo: FC<{ user?: User }> = ({ user }) => {
@@ -23,7 +23,7 @@ const BasicInfo: FC<{ user?: User }> = ({ user }) => {
             <TemplateName />
             <TemplateDescription />
           </div>
-          {formMode === FormMode.View && <TemplateCreatedBy user={user} />}
+          {formMode === FormMode.View && <EntityCreatedBy user={user} />}
         </div>
       </div>
     </FormSection>
