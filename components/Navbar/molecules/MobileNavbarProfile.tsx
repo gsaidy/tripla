@@ -18,6 +18,7 @@ const MobileNavbarProfile: FC = () => {
         </div>
       </div>
       <div className="ml-6 pt-1.5 pb-3 space-y-5">
+        <MobileNavbarSubItem text="My Trips" href="/my-trips" />
         <MobileNavbarSubItem text="My Templates" href="/my-templates" />
       </div>
       <MobileNavbarSignOutButton />
