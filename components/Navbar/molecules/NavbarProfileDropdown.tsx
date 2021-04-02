@@ -14,6 +14,7 @@ const NavbarProfileDropdown: FC = () => {
       aria-orientation="vertical"
       aria-labelledby="user-menu"
     >
+      <NavbarProfileDropdownItem text="My Trips" onClick={() => router.push('/my-trips')} />
       <NavbarProfileDropdownItem text="My Templates" onClick={() => router.push('/my-templates')} />
       <NavbarProfileDropdownItem
         text="Sign Out"
