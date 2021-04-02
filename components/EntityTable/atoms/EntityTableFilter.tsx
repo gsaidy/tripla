@@ -1,34 +1,39 @@
-import { FC, Key, useContext } from 'react';
-import { useQuery } from '@apollo/client';
+import { FC, Key, useContext, Context } from 'react';
+import { useQuery, DocumentNode } from '@apollo/client';
 import { SearchOutlined } from '@ant-design/icons';
 import { Select, Button } from 'antd';
 const { Option } = Select;
 import { FilterConfirmProps } from 'antd/lib/table/interface';
 import { useSession } from 'next-auth/client';
 
-import GET_TEMPLATE_FILTER_OPTIONS from 'gql/queries/getTemplateFilterOptions';
-import { TemplateListContext } from '../organisms/TemplateList';
-import { getTemplateFilters } from 'utils/filters';
+import { getWhereClause } from 'utils/filters';
 import User from 'interfaces/user';
+import CreatorFilter from 'enums/creatorFilter';
 
-const TemplateTableFilter: FC<{
+const EntityTableFilter: FC<{
+  context: Context<{
+    createdBy: CreatorFilter;
+  }>;
+  query: DocumentNode;
+  field: string;
   selectedKeys: Key[];
   setSelectedKeys: (selectedKeys: Key[]) => void;
   confirm: (param?: FilterConfirmProps) => void;
   clearFilters?: () => void;
-}> = ({ selectedKeys, setSelectedKeys, confirm, clearFilters }) => {
+}> = ({ context, query, field, selectedKeys, setSelectedKeys, confirm, clearFilters }) => {
   const [session] = useSession();
   const user = session?.user as User;
-  const { createdBy } = useContext(TemplateListContext);
+  const { createdBy } = useContext(context);
 
-  const { loading, data } = useQuery(GET_TEMPLATE_FILTER_OPTIONS, {
+  const { loading, data } = useQuery(query, {
     variables: {
-      where: getTemplateFilters(createdBy, user),
+      where: getWhereClause(createdBy, user),
     },
     fetchPolicy: 'cache-and-network',
   });
-  const getOptions = (data: { [key: string]: { name: string }[] }) => {
-    const options = Object.values(data)[0].map(({ name }) => name);
+
+  const getOptions = (data: { [key: string]: { [field: string]: string }[] }) => {
+    const options = Object.values(data)[0].map((element) => element[field]);
     const optionsWithoutDuplicates = Array.from(new Set(options));
     return optionsWithoutDuplicates;
   };
@@ -44,9 +49,9 @@ const TemplateTableFilter: FC<{
         loading={loading}
         onChange={(value: string) => setSelectedKeys(value ? [value] : [])}
       >
-        {options.map((name) => (
-          <Option key={name} value={name}>
-            {name}
+        {options.map((value) => (
+          <Option key={value} value={value}>
+            {value}
           </Option>
         ))}
       </Select>
@@ -69,4 +74,4 @@ const TemplateTableFilter: FC<{
   );
 };
 
-export default TemplateTableFilter;
+export default EntityTableFilter;

@@ -4,14 +4,15 @@ import { ColumnsType } from 'antd/lib/table';
 import { FilterDropdownProps } from 'antd/lib/table/interface';
 
 import User from 'interfaces/user';
-import TemplateOverview from 'interfaces/templateOverview';
+import TripOverview from 'interfaces/tripOverview';
+import EntityTableViewButton from 'components/EntityTable/atoms/EntityTableViewButton';
 import EntityTableFilter from 'components/EntityTable/atoms/EntityTableFilter';
 import EntityTableFilterIcon from 'components/EntityTable/atoms/EntityTableFilterIcon';
-import EntityTableViewButton from 'components/EntityTable/atoms/EntityTableViewButton';
-import { TemplateListContext } from 'components/Templates/organisms/TemplateList';
-import GET_TEMPLATE_FILTER_OPTIONS from 'gql/queries/getTemplateFilterOptions';
+import { TripListContext } from 'components/Trips/organisms/TripList';
+import GET_TRIP_FILTER_OPTIONS from 'gql/queries/getTripFilterOptions';
+import GET_TRIP_DESTINATION_FILTER_OPTIONS from 'gql/queries/getTripDestinationFilterOptions';
 
-const templateTableColumns: ColumnsType<TemplateOverview> = [
+const tripTableColumns: ColumnsType<TripOverview> = [
   {
     title: 'Name',
     dataIndex: 'name',
@@ -27,8 +28,8 @@ const templateTableColumns: ColumnsType<TemplateOverview> = [
       return React.createElement(
         EntityTableFilter,
         {
-          context: TemplateListContext,
-          query: GET_TEMPLATE_FILTER_OPTIONS,
+          context: TripListContext,
+          query: GET_TRIP_FILTER_OPTIONS,
           field: 'name',
           selectedKeys,
           setSelectedKeys,
@@ -43,10 +44,41 @@ const templateTableColumns: ColumnsType<TemplateOverview> = [
     },
   },
   {
-    title: 'Description',
-    dataIndex: 'description',
+    title: 'Destination',
+    dataIndex: 'destination',
     ellipsis: true,
     align: 'center',
+    sorter: true,
+    filterDropdown({
+      selectedKeys,
+      setSelectedKeys,
+      confirm,
+      clearFilters,
+    }: FilterDropdownProps): ReactNode {
+      return React.createElement(
+        EntityTableFilter,
+        {
+          context: TripListContext,
+          query: GET_TRIP_DESTINATION_FILTER_OPTIONS,
+          field: 'destination',
+          selectedKeys,
+          setSelectedKeys,
+          confirm,
+          clearFilters,
+        },
+        null
+      );
+    },
+    filterIcon(filtered: boolean): ReactNode {
+      return React.createElement(EntityTableFilterIcon, { filtered }, null);
+    },
+  },
+  {
+    title: 'Template',
+    dataIndex: 'template',
+    align: 'center',
+    sorter: true,
+    render: (template: { id: string; name: string }) => template?.name ?? '',
   },
   {
     title: 'Created By',
@@ -74,9 +106,9 @@ const templateTableColumns: ColumnsType<TemplateOverview> = [
     width: '9%',
     fixed: 'right',
     render(_: unknown, { id }: { id: number }): ReactNode {
-      return React.createElement(EntityTableViewButton, { href: `/templates/${id}` }, null);
+      return React.createElement(EntityTableViewButton, { href: `/trips/${id}` }, null);
     },
   },
 ];
 
-export default templateTableColumns;
+export default tripTableColumns;

@@ -2,8 +2,9 @@ import { FC } from 'react';
 import { Button, Divider } from 'antd';
 import { useRouter } from 'next/router';
 
-const TemplateTableHeader: FC<{ title: string; showCreateButton: boolean }> = ({
+const EntityTableHeader: FC<{ title: string; createHref: string; showCreateButton: boolean }> = ({
   title,
+  createHref,
   showCreateButton,
 }) => {
   const router = useRouter();
@@ -11,7 +12,7 @@ const TemplateTableHeader: FC<{ title: string; showCreateButton: boolean }> = ({
   return (
     <div className="relative">
       {showCreateButton && (
-        <Button className="float-right" onClick={() => router.push('/templates/create')}>
+        <Button className="float-right" onClick={() => router.push(createHref)}>
           Create
         </Button>
       )}
@@ -20,4 +21,4 @@ const TemplateTableHeader: FC<{ title: string; showCreateButton: boolean }> = ({
   );
 };
 
-export default TemplateTableHeader;
+export default EntityTableHeader;

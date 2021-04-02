@@ -5,7 +5,7 @@ import { TablePaginationConfig } from 'antd/lib/table';
 import { FilterValue } from 'antd/lib/table/interface';
 
 import EntityTable from '../../EntityTable/EntityTable';
-import GET_TEMPLATES from 'gql/queries/getTemplates';
+import GET_TRIPS from 'gql/queries/getTrips';
 import PageLoader from '../../PageLoader/PageLoader';
 import ErrorResult from '../../ErrorResult/ErrorResult';
 import CreatorFilter from 'enums/creatorFilter';
@@ -14,18 +14,20 @@ import { showErrorMessage } from 'utils/feedback';
 import SortOrder from 'enums/sortOrder';
 import { getWhereClause } from 'utils/filters';
 import EntityType from 'enums/entityType';
-import templateTableColumns from 'constants/templateTableColumns';
+import tripTableColumns from 'constants/tripTableColumns';
 
 const PAGE_SIZE = 5;
 const DEFAULT_SORT = { updatedAt: SortOrder.DESC };
 
-export const TemplateListContext = createContext<{
+export const TripListContext = createContext<{
   createdBy: CreatorFilter;
 }>({
   createdBy: CreatorFilter.All,
 });
 
-const TemplateList: FC<{ createdBy: CreatorFilter; title: string; className?: string }> = ({
+type SortType = { [field: string]: SortOrder } | { template: { name: SortOrder } };
+
+const TripList: FC<{ createdBy: CreatorFilter; title: string; className?: string }> = ({
   createdBy,
   title,
   className,
@@ -33,31 +35,28 @@ const TemplateList: FC<{ createdBy: CreatorFilter; title: string; className?: st
   const [session] = useSession();
   const user = session?.user as User;
 
-  const [templates, setTemplates] = useState([]);
+  const [trips, setTrips] = useState([]);
   const [pagination, setPagination] = useState({});
   const [loading, setLoading] = useState(false);
 
-  const orderBy: { [field: string]: SortOrder } = DEFAULT_SORT;
-  const { loading: getTemplatesLoading, error, data, fetchMore, refetch } = useQuery(
-    GET_TEMPLATES,
-    {
-      variables: {
-        offset: 0,
-        limit: PAGE_SIZE,
-        where: getWhereClause(createdBy, user),
-        orderBy,
-      },
-      fetchPolicy: 'cache-and-network',
-      nextFetchPolicy: 'cache-first',
-    }
-  );
+  const orderBy = DEFAULT_SORT;
+  const { loading: getTripsLoading, error, data, fetchMore, refetch } = useQuery(GET_TRIPS, {
+    variables: {
+      offset: 0,
+      limit: PAGE_SIZE,
+      where: getWhereClause(createdBy, user),
+      orderBy: orderBy as SortType,
+    },
+    fetchPolicy: 'cache-and-network',
+    nextFetchPolicy: 'cache-first',
+  });
 
   useEffect(() => {
     if (data) {
-      const { templates } = data;
-      setTemplates(templates);
+      const { trips } = data;
+      setTrips(trips);
       const {
-        templates_aggregate: {
+        trips_aggregate: {
           aggregate: { count: total },
         },
       } = data;
@@ -69,7 +68,7 @@ const TemplateList: FC<{ createdBy: CreatorFilter; title: string; className?: st
     }
   }, [data]);
 
-  if (getTemplatesLoading && !data) {
+  if (getTripsLoading && !data) {
     return <PageLoader />;
   }
   if (error) {
@@ -88,7 +87,7 @@ const TemplateList: FC<{ createdBy: CreatorFilter; title: string; className?: st
     });
     setLoading(false);
     if (data) {
-      setTemplates(data.templates);
+      setTrips(data.trips);
       setPagination(pagination);
     } else if (error) {
       showErrorMessage('An error occurred. Please try again.');
@@ -104,7 +103,7 @@ const TemplateList: FC<{ createdBy: CreatorFilter; title: string; className?: st
     });
     setLoading(false);
     if (data) {
-      setTemplates(data.templates);
+      setTrips(data.trips);
     } else if (error) {
       showErrorMessage('An error occurred. Please try again.');
     }
@@ -112,30 +111,39 @@ const TemplateList: FC<{ createdBy: CreatorFilter; title: string; className?: st
 
   const onSortChange = async (field: string, order?: SortOrder) => {
     setLoading(true);
-    const orderBy = order ? { [field]: order } : DEFAULT_SORT;
     const { data, error } = await refetch({
       offset: 0,
       limit: PAGE_SIZE,
-      orderBy,
+      orderBy: getSortOrder(field, order),
     });
     setLoading(false);
     if (data) {
-      setTemplates(data.templates);
+      setTrips(data.trips);
     } else if (error) {
       showErrorMessage('An error occurred. Please try again.');
     }
   };
 
+  const getSortOrder = (field: string, order?: SortOrder): SortType => {
+    if (!order) {
+      return DEFAULT_SORT;
+    }
+    if (field === 'template') {
+      return { template: { name: order } };
+    }
+    return { [field]: order };
+  };
+
   return (
-    <TemplateListContext.Provider value={{ createdBy }}>
-      <div className={`${className} ${templates.length === 0 ? 'pb-7' : ''}`}>
+    <TripListContext.Provider value={{ createdBy }}>
+      <div className={`${className} ${trips.length === 0 ? 'pb-7' : ''}`}>
         <EntityTable
-          entity={EntityType.Template}
+          entity={EntityType.Trip}
           createdBy={createdBy}
           title={title}
-          createHref="/templates/create"
-          columns={templateTableColumns}
-          data={templates}
+          createHref="/trips/create"
+          columns={tripTableColumns}
+          data={trips}
           pagination={pagination}
           loading={loading}
           onPaginationChange={onPaginationChange}
@@ -143,8 +151,8 @@ const TemplateList: FC<{ createdBy: CreatorFilter; title: string; className?: st
           onSortChange={onSortChange}
         />
       </div>
-    </TemplateListContext.Provider>
+    </TripListContext.Provider>
   );
 };
 
-export default TemplateList;
+export default TripList;

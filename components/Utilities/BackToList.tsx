@@ -3,7 +3,10 @@ import { Button } from 'antd';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/router';
 
-const BackToTemplateList: FC = () => {
+import EntityType from 'enums/entityType';
+import { capitalize } from 'utils/helpers';
+
+const BackToList: FC<{ href: string; entity: EntityType }> = ({ href, entity }) => {
   const router = useRouter();
 
   return (
@@ -12,13 +15,13 @@ const BackToTemplateList: FC = () => {
         <Button
           className="rounded flex items-center"
           icon={<ArrowLeftOutlined />}
-          onClick={() => router.push('/templates')}
+          onClick={() => router.push(href)}
         >
-          Back to Template List
+          Back to {capitalize(entity)} List
         </Button>
       </div>
     </div>
   );
 };
 
-export default BackToTemplateList;
+export default BackToList;

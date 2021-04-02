@@ -5,6 +5,8 @@ import { NamePath } from 'antd/lib/form/interface';
 import BasicInfo from '../molecules/BasicInfo';
 import Trip from 'interfaces/trip';
 import FormMode from 'enums/formMode';
+import BackToList from '../../Utilities/BackToList';
+import EntityType from 'enums/entityType';
 
 export const TripFormContext = createContext<{
   formMode: FormMode;
@@ -36,6 +38,7 @@ const TripForm: FC<{
         requiredMark={formMode !== FormMode.View}
         onFinish={onSubmit}
       >
+        {formMode === FormMode.View && <BackToList href="/trips" entity={EntityType.Trip} />}
         <BasicInfo />
         {children}
       </Form>
