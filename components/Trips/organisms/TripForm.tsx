@@ -39,7 +39,7 @@ const TripForm: FC<{
         onFinish={onSubmit}
       >
         {formMode === FormMode.View && <BackToList href="/trips" entity={EntityType.Trip} />}
-        <BasicInfo />
+        <BasicInfo user={tripInitialData ? tripInitialData.user : undefined} />
         {children}
       </Form>
     </TripFormContext.Provider>
