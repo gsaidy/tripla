@@ -10,6 +10,8 @@ import BackToList from '../../Utilities/BackToList';
 import EntityType from 'enums/entityType';
 import GET_TEMPLATE_SECTIONS from 'gql/queries/getTemplateSections';
 import TripSections from '../../TripSections/TripSections';
+import { showLoadingMessage, showErrorMessage, hideLoadingMessage } from 'utils/feedback';
+import Section from 'interfaces/section';
 
 export const TripFormContext = createContext<{
   formMode: FormMode;
@@ -28,14 +30,23 @@ const TripForm: FC<{
   onSubmit: (trip: Trip) => void;
 }> = ({ formMode, tripInitialData, children, onSubmit }) => {
   const [form] = Form.useForm();
-  const [getTemplateSections, { data: templateSectionsData }] = useLazyQuery(GET_TEMPLATE_SECTIONS);
+  const [
+    getTemplateSections,
+    { loading: templateSectionsLoading, error: templateSectionsError, data: templateSectionsData },
+  ] = useLazyQuery(GET_TEMPLATE_SECTIONS);
   const [sections, setSections] = useState<Section[] | null>(null);
 
+
   useEffect(() => {
-    if (templateSectionsData) {
+    if (templateSectionsLoading) {
+      showLoadingMessage('Loading template sections...');
+    } else if (templateSectionsError) {
+      showErrorMessage('Error fetching template sections.');
+    } else if (templateSectionsData) {
+      hideLoadingMessage();
       setSections(templateSectionsData.templates_by_pk.sections);
     }
-  }, [templateSectionsData]);
+  }, [templateSectionsLoading, templateSectionsData]);
 
   const onTemplateSelect = (id: number) => {
     getTemplateSections({
