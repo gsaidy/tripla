@@ -106,7 +106,11 @@ const TripDetails: FC<{ id: string | string[] }> = ({ id }) => {
   };
 
   return (
-    <div className="min-h-tripla bg-gray-50">
+    <div
+      className={`min-h-tripla bg-gray-50 ${
+        deleteLoading || updateLoading ? 'opacity-50 pointer-events-none' : ''
+      }`}
+    >
       <TripForm
         formMode={formMode}
         tripInitialData={{ ...trip, templateId: trip.template?.id }}

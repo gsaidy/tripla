@@ -36,7 +36,6 @@ const TripForm: FC<{
   ] = useLazyQuery(GET_TEMPLATE_SECTIONS);
   const [sections, setSections] = useState<Section[] | null>(null);
 
-
   useEffect(() => {
     if (templateSectionsLoading) {
       showLoadingMessage('Loading template sections...');
@@ -58,6 +57,7 @@ const TripForm: FC<{
     <TripFormContext.Provider
       value={{ formMode, getFieldValue: form.getFieldValue, resetFields: form.resetFields }}
     >
+      {formMode === FormMode.View && <BackToList href="/trips" entity={EntityType.Trip} />}
       <Form
         className="space-y-4"
         form={form}
@@ -66,7 +66,6 @@ const TripForm: FC<{
         requiredMark={formMode !== FormMode.View}
         onFinish={onSubmit}
       >
-        {formMode === FormMode.View && <BackToList href="/trips" entity={EntityType.Trip} />}
         <BasicInfo
           user={tripInitialData ? tripInitialData.user : undefined}
           onTemplateSelect={onTemplateSelect}
