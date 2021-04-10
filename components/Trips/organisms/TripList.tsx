@@ -27,11 +27,7 @@ export const TripListContext = createContext<{
 
 type SortType = { [field: string]: SortOrder } | { template: { name: SortOrder } };
 
-const TripList: FC<{ createdBy: CreatorFilter; title: string; className?: string }> = ({
-  createdBy,
-  title,
-  className,
-}) => {
+const TripList: FC<{ createdBy: CreatorFilter; title: string }> = ({ createdBy, title }) => {
   const [session] = useSession();
   const user = session?.user as User;
 
@@ -136,7 +132,7 @@ const TripList: FC<{ createdBy: CreatorFilter; title: string; className?: string
 
   return (
     <TripListContext.Provider value={{ createdBy }}>
-      <div className={`${className} ${trips.length === 0 ? 'pb-7' : ''}`}>
+      <div className={trips.length === 0 ? 'pb-7' : ''}>
         <EntityTable
           entity={EntityType.Trip}
           createdBy={createdBy}

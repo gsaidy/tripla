@@ -54,7 +54,7 @@ function EntityTable<T>({
   }
 
   return (
-    <div className="max-w-7xl mx-auto py-6 px-4 lg:px-6">
+    <>
       <EntityTableHeader
         title={title}
         createHref={createHref}
@@ -74,7 +74,7 @@ function EntityTable<T>({
         loading={loading}
         onChange={onChange}
       />
-    </div>
+    </>
   );
 }
 
