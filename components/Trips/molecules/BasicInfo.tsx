@@ -16,7 +16,7 @@ const BasicInfo: FC<{ user?: User; onTemplateSelect: (id: number) => void }> = (
   const { formMode } = useContext(TripFormContext);
 
   return (
-    <FormSection header="Basic Info">
+    <FormSection header="Basic Info" fullWidth={true}>
       <div className="relative">
         <div className="grid grid-cols-4 gap-6">
           <div className="col-span-4 sm:col-span-3 lg:col-span-2">

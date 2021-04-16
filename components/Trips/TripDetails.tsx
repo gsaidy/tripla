@@ -117,7 +117,7 @@ const TripDetails: FC<{ id: string | string[] }> = ({ id }) => {
         onSubmit={updateTrip}
       >
         {userHasPermissionToEditOrDelete() && (
-          <FormActions className={formMode === FormMode.View ? '-mt-3' : ''}>
+          <FormActions className={formMode === FormMode.View ? '-mt-3' : ''} fullWidth={true}>
             {formMode === FormMode.View ? (
               <>
                 <EditButton entity={EntityType.Trip} onClick={() => setFormMode(FormMode.Edit)} />
