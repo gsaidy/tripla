@@ -14,7 +14,10 @@ const TripSectionModal: FC<{ visible: boolean; fields: Attribute[]; onCancel: ()
     <Modal
       visible={visible}
       title="Add Item"
-      onCancel={onCancel}
+      onCancel={() => {
+        form.resetFields();
+        onCancel();
+      }}
       onOk={() => {
         form.validateFields().then(() => {
           form.resetFields();
@@ -22,8 +25,13 @@ const TripSectionModal: FC<{ visible: boolean; fields: Attribute[]; onCancel: ()
       }}
     >
       <Form form={form} className="section-modal-form space-y-5" layout="vertical">
-        {fields.map(({ id, name }) => (
-          <Form.Item key={id} name={name} label={name}>
+        {fields.map(({ id, name, required }) => (
+          <Form.Item
+            key={id}
+            name={name}
+            label={name}
+            rules={[{ required, message: `Please select a ${name}.` }]}
+          >
             <Input />
           </Form.Item>
         ))}

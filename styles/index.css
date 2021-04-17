@@ -53,7 +53,7 @@
   overflow: auto;
 }
 
-.section-modal-form .ant-form-item {
+.section-modal-form .ant-form-item, .section-modal-form .ant-form-item-explain {
   margin-bottom: 0;
 }
 
