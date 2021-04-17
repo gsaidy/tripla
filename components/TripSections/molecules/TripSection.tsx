@@ -22,7 +22,7 @@ const TripSection: FC<{ section: Section }> = ({ section }) => {
       <TripSectionModal
         visible={showSectionModal}
         fields={section.attributes}
-        onCancel={() => setShowSectionModal(false)}
+        hide={() => setShowSectionModal(false)}
       />
     </div>
   );
