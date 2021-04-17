@@ -14,15 +14,11 @@ const Trips: FC = () => {
     return <PageLoader />;
   }
   return (
-    <div className="min-h-tripla">
+    <div className="min-h-tripla max-w-7xl mx-auto py-6 px-4 lg:px-6">
       {session ? (
         <>
           <MyTripList createdBy={CreatorFilter.Me} title="My Trips" />
-          <OtherUsersTripList
-            createdBy={CreatorFilter.Other}
-            title="Other Users Trips"
-            className="-mt-10"
-          />
+          <OtherUsersTripList createdBy={CreatorFilter.Other} title="Other Users Trips" />
         </>
       ) : (
         <AllTripList createdBy={CreatorFilter.All} title="Trips" />

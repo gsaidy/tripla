@@ -9,7 +9,7 @@ const TemplateBeingUsedWarning: FC<{ trips: { id: number; name: string }[] }> = 
   const [showDetails, setShowDetails] = useState(false);
 
   return (
-    <div className="max-w-7xl mx-auto pb-4 sm:px-4 lg:px-6 mb-1">
+    <div className="max-w-7xl mx-auto pb-4 sm:px-4 lg:px-6">
       <div className="md:grid md:grid-cols-6">
         <div className="md:col-start-2 md:col-span-5">
           <Alert

@@ -1,30 +1,20 @@
 import { gql } from '@apollo/client';
 
+import TEMPLATE_SECTIONS from './templateSections';
+
 const TEMPLATE_DETAILS = gql`
   fragment TemplateDetails on templates {
     id
     name
     description
-    sections(order_by: { order: asc }) {
-      name
-      order
-      attributes {
-        name
-        required
-        edit
-        view
-        options {
-          name
-          color
-        }
-      }
-    }
+    ...TemplateSections
     user {
       id
       name
     }
     createdAt
   }
+  ${TEMPLATE_SECTIONS}
 `;
 
 export default TEMPLATE_DETAILS;

@@ -8,7 +8,7 @@ import User from 'interfaces/user';
 import { TripFormContext } from '../organisms/TripForm';
 import FormMode from 'enums/formMode';
 
-const TripTemplate: FC = () => {
+const TripTemplate: FC<{ onSelect: (id: number) => void }> = ({ onSelect }) => {
   const { loading, data } = useQuery(GET_TRIP_TEMPLATE_OPTIONS);
   const { formMode } = useContext(TripFormContext);
 
@@ -25,6 +25,7 @@ const TripTemplate: FC = () => {
         loading={loading}
         bordered={formMode !== FormMode.View}
         showArrow={formMode !== FormMode.View}
+        onSelect={onSelect}
       >
         {data?.templates.map(({ id, name, user }: { id: number; name: string; user?: User }) => {
           const userName = user ? user.name : 'Anonymous';

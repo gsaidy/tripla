@@ -5,11 +5,15 @@ export const showLoadingMessage = (msgText: string): void => {
 };
 
 export const showErrorMessage = (msgText: string): void => {
-  message.destroy('loading');
+  hideLoadingMessage();
   message.error({ content: msgText, key: 'error', duration: 3 });
 };
 
 export const showSuccessMessage = (msgText: string): void => {
-  message.destroy('loading');
+  hideLoadingMessage();
   message.success({ content: msgText, key: 'success', duration: 3 });
+};
+
+export const hideLoadingMessage = () => {
+  message.destroy('loading');
 };

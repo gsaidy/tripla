@@ -25,11 +25,7 @@ export const TemplateListContext = createContext<{
   createdBy: CreatorFilter.All,
 });
 
-const TemplateList: FC<{ createdBy: CreatorFilter; title: string; className?: string }> = ({
-  createdBy,
-  title,
-  className,
-}) => {
+const TemplateList: FC<{ createdBy: CreatorFilter; title: string }> = ({ createdBy, title }) => {
   const [session] = useSession();
   const user = session?.user as User;
 
@@ -128,7 +124,7 @@ const TemplateList: FC<{ createdBy: CreatorFilter; title: string; className?: st
 
   return (
     <TemplateListContext.Provider value={{ createdBy }}>
-      <div className={`${className} ${templates.length === 0 ? 'pb-7' : ''}`}>
+      <div className={templates.length === 0 ? 'pb-7' : ''}>
         <EntityTable
           entity={EntityType.Template}
           createdBy={createdBy}

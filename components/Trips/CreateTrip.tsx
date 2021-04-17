@@ -51,7 +51,7 @@ const CreateTrip: FC = () => {
     >
       {!session && !loading && <SignInBanner entity={EntityType.Trip} />}
       <TripForm formMode={FormMode.Create} onSubmit={createTrip}>
-        <FormActions>
+        <FormActions fullWidth={true}>
           <SubmitButton
             label={createLoading ? 'Creating Trip' : 'Create Trip'}
             loading={createLoading}

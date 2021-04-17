@@ -43,6 +43,7 @@ const TemplateForm: FC<{
     <TemplateFormContext.Provider
       value={{ formMode, getFieldValue: form.getFieldValue, resetFields: form.resetFields }}
     >
+      {formMode === FormMode.View && <BackToList href="/templates" entity={EntityType.Template} />}
       <Form
         form={form}
         initialValues={templateInitialData}
@@ -50,9 +51,6 @@ const TemplateForm: FC<{
         requiredMark={formMode !== FormMode.View}
         onFinish={onFinish}
       >
-        {formMode === FormMode.View && (
-          <BackToList href="/templates" entity={EntityType.Template} />
-        )}
         <BasicInfo user={templateInitialData ? templateInitialData.user : undefined} />
         <Form.List name="sections">
           {(fields, { add, remove }) => (

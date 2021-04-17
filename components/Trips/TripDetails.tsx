@@ -106,14 +106,18 @@ const TripDetails: FC<{ id: string | string[] }> = ({ id }) => {
   };
 
   return (
-    <div className="min-h-tripla bg-gray-50">
+    <div
+      className={`min-h-tripla bg-gray-50 ${
+        deleteLoading || updateLoading ? 'opacity-50 pointer-events-none' : ''
+      }`}
+    >
       <TripForm
         formMode={formMode}
         tripInitialData={{ ...trip, templateId: trip.template?.id }}
         onSubmit={updateTrip}
       >
         {userHasPermissionToEditOrDelete() && (
-          <FormActions className={formMode === FormMode.View ? '-mt-3' : ''}>
+          <FormActions className={formMode === FormMode.View ? '-mt-3' : ''} fullWidth={true}>
             {formMode === FormMode.View ? (
               <>
                 <EditButton entity={EntityType.Trip} onClick={() => setFormMode(FormMode.Edit)} />
