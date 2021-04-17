@@ -48,6 +48,15 @@
   border: 0 !important;
 }
 
+.ant-modal-body {
+  max-height: 60vh;
+  overflow: auto;
+}
+
+.section-modal-form .ant-form-item {
+  margin-bottom: 0;
+}
+
 @tailwind utilities;
 
 /* Write your own custom utilities styles here */
