@@ -42,8 +42,14 @@ const TripSectionModal: FC<{ visible: boolean; fields: Attribute[]; hide: () => 
       ]}
     >
       <Form form={form} className="section-modal-form space-y-5" layout="vertical">
-        {fields.map(({ id, name, required }) => (
-          <TripSectionModalField key={id} name={name} required={required} />
+        {fields.map(({ id, name, required, edit, options }) => (
+          <TripSectionModalField
+            key={id}
+            name={name}
+            required={required}
+            type={edit}
+            options={options}
+          />
         ))}
       </Form>
     </Modal>
