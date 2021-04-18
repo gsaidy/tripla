@@ -4,7 +4,7 @@ import { Table } from 'antd';
 import Section from 'interfaces/section';
 import TripSectionHeader from '../atoms/TripSectionHeader';
 import Attribute from 'interfaces/attribute';
-import TripSectionModal from '../atoms/TripSectionModal';
+import TripSectionModal from '../../TripSectionModal/TripSectionModal';
 
 const TripSection: FC<{ section: Section }> = ({ section }) => {
   const [showSectionModal, setShowSectionModal] = useState(false);

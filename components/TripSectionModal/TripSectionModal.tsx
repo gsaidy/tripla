@@ -1,7 +1,10 @@
 import { FC } from 'react';
-import { Form, Input, Modal, Button } from 'antd';
+import { Form, Modal } from 'antd';
 
 import Attribute from 'interfaces/attribute';
+import CancelButton from './molecules/CancelButton';
+import SubmitButton from './molecules/SubmitButton';
+import TripSectionModalField from './molecules/TripSectionModalField';
 
 const TripSectionModal: FC<{ visible: boolean; fields: Attribute[]; hide: () => void }> = ({
   visible,
@@ -16,9 +19,14 @@ const TripSectionModal: FC<{ visible: boolean; fields: Attribute[]; hide: () => 
   };
 
   const onSubmit = () => {
-    form.validateFields().then(() => {
-      form.resetFields();
-    });
+    form
+      .validateFields()
+      .then(() => {
+        form.resetFields();
+      })
+      .catch((info) => {
+        console.log('Validate Failed:', info);
+      });
   };
 
   return (
@@ -28,27 +36,14 @@ const TripSectionModal: FC<{ visible: boolean; fields: Attribute[]; hide: () => 
       onCancel={onCancel}
       onOk={onSubmit}
       footer={[
-        <Button key="cancel" onClick={onCancel}>
-          Cancel
-        </Button>,
-        <Button key="addFirst" type="primary" onClick={onSubmit}>
-          Add First
-        </Button>,
-        <Button key="addLast" type="primary" onClick={onSubmit}>
-          Add Last
-        </Button>,
+        <CancelButton key="cancel" onCancel={onCancel} />,
+        <SubmitButton key="addFirst" label="Add First" onSubmit={onSubmit} />,
+        <SubmitButton key="addLast" label="Add Last" onSubmit={onSubmit} />,
       ]}
     >
       <Form form={form} className="section-modal-form space-y-5" layout="vertical">
         {fields.map(({ id, name, required }) => (
-          <Form.Item
-            key={id}
-            name={name}
-            label={name}
-            rules={[{ required, message: `Please select a ${name}.` }]}
-          >
-            <Input />
-          </Form.Item>
+          <TripSectionModalField key={id} name={name} required={required} />
         ))}
       </Form>
     </Modal>
