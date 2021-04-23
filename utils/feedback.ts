@@ -14,6 +14,6 @@ export const showSuccessMessage = (msgText: string): void => {
   message.success({ content: msgText, key: 'success', duration: 3 });
 };
 
-export const hideLoadingMessage = () => {
+export const hideLoadingMessage = (): void => {
   message.destroy('loading');
 };
