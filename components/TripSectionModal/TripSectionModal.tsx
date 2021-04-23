@@ -5,12 +5,14 @@ import Attribute from 'interfaces/attribute';
 import CancelButton from './molecules/CancelButton';
 import SubmitButton from './molecules/SubmitButton';
 import TripSectionModalField from './molecules/TripSectionModalField';
+import RowPlacement from 'enums/rowPlacement';
 
-const TripSectionModal: FC<{ visible: boolean; fields: Attribute[]; hide: () => void }> = ({
-  visible,
-  fields,
-  hide,
-}) => {
+const TripSectionModal: FC<{
+  visible: boolean;
+  fields: Attribute[];
+  hide: () => void;
+  onAdd: (placement: RowPlacement, row: Record<string, unknown>) => void;
+}> = ({ visible, fields, hide, onAdd }) => {
   const [form] = Form.useForm();
 
   const onCancel = () => {
@@ -18,11 +20,13 @@ const TripSectionModal: FC<{ visible: boolean; fields: Attribute[]; hide: () => 
     hide();
   };
 
-  const onSubmit = () => {
+  const onSubmit = (placement: RowPlacement) => {
     form
       .validateFields()
-      .then(() => {
+      .then((values) => {
         form.resetFields();
+        onAdd(placement, values);
+        hide();
       })
       .catch((info) => {
         console.log('Validate Failed:', info);
@@ -34,11 +38,19 @@ const TripSectionModal: FC<{ visible: boolean; fields: Attribute[]; hide: () => 
       visible={visible}
       title="Add Item"
       onCancel={onCancel}
-      onOk={onSubmit}
+      onOk={() => onSubmit(RowPlacement.Last)}
       footer={[
         <CancelButton key="cancel" onCancel={onCancel} />,
-        <SubmitButton key="addFirst" label="Add First" onSubmit={onSubmit} />,
-        <SubmitButton key="addLast" label="Add Last" onSubmit={onSubmit} />,
+        <SubmitButton
+          key="addFirst"
+          label="Add First"
+          onSubmit={() => onSubmit(RowPlacement.First)}
+        />,
+        <SubmitButton
+          key="addLast"
+          label="Add Last"
+          onSubmit={() => onSubmit(RowPlacement.Last)}
+        />,
       ]}
     >
       <Form form={form} className="section-modal-form space-y-5" layout="vertical">
