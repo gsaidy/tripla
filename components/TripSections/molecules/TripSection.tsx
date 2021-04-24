@@ -1,6 +1,8 @@
 import { FC, useState, ReactNode } from 'react';
-import { Table, Tag } from 'antd';
+import { Table, Tag, Button } from 'antd';
 import moment, { Moment } from 'moment';
+import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { ColumnsType } from 'antd/lib/table';
 
 import Section from 'interfaces/section';
 import TripSectionHeader from '../atoms/TripSectionHeader';
@@ -60,13 +62,30 @@ const TripSection: FC<{ section: Section }> = ({ section }) => {
     return tableCell;
   };
 
-  const columns = section.attributes.map(({ name, edit, view, options }: Attribute) => ({
-    title: name,
-    dataIndex: name,
-    ellipsis: true,
-    align: 'center' as 'center' | 'left' | 'right',
-    render: (value: unknown) => renderTableCell(value, edit, view, options),
-  }));
+  const columns: ColumnsType<Record<string, unknown>> = section.attributes.map(
+    ({ name, edit, view, options }: Attribute) => ({
+      title: name,
+      dataIndex: name,
+      ellipsis: true,
+      align: 'center' as 'center' | 'left' | 'right',
+      render: (value: unknown) => renderTableCell(value, edit, view, options),
+    })
+  );
+
+  columns.push({
+    title: 'Actions',
+    key: 'actions',
+    width: '105px',
+    fixed: 'right',
+    render() {
+      return (
+        <div className="space-x-2">
+          <Button type="primary" ghost icon={<EditOutlined />} />
+          <Button danger icon={<DeleteOutlined />} />
+        </div>
+      );
+    },
+  });
 
   const onAdd = (placement: RowPlacement, row: Record<string, unknown>) => {
     if (placement === RowPlacement.First) {
@@ -84,6 +103,7 @@ const TripSection: FC<{ section: Section }> = ({ section }) => {
         columns={columns}
         dataSource={data}
         locale={{ emptyText: `No ${section.name} added yet.` }}
+        scroll={{ x: section.attributes.length * 200 }}
       />
       <TripSectionModal
         visible={showSectionModal}
