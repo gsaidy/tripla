@@ -7,6 +7,7 @@ const TEMPLATE_SECTIONS = gql`
       name
       order
       attributes {
+        id
         name
         required
         edit

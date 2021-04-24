@@ -4,7 +4,7 @@ interface Section {
   id?: number;
   name: string;
   order?: number;
-  attributes?: Attribute[];
+  attributes: Attribute[];
 }
 
 export default Section;

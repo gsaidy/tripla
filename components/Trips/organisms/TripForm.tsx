@@ -45,7 +45,7 @@ const TripForm: FC<{
       hideLoadingMessage();
       setSections(templateSectionsData.templates_by_pk.sections);
     }
-  }, [templateSectionsLoading, templateSectionsData]);
+  }, [templateSectionsLoading, templateSectionsError, templateSectionsData]);
 
   const onTemplateSelect = (id: number) => {
     getTemplateSections({

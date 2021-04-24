@@ -26,7 +26,7 @@ const mapSections = (sections?: Section[]) => {
   return;
 };
 
-const mapAttributes = (attributes?: Attribute[]) => {
+const mapAttributes = (attributes: Attribute[]) => {
   if (attributes) {
     return {
       data: attributes.map(({ name, required, edit, view, options }: Attribute) => ({
