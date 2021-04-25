@@ -1,7 +1,7 @@
 import { FC, useState, ReactNode } from 'react';
 import { Table, Tag, Button } from 'antd';
 import moment, { Moment } from 'moment';
-import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { EditOutlined } from '@ant-design/icons';
 import { ColumnsType } from 'antd/lib/table';
 
 import Section from 'interfaces/section';
@@ -13,6 +13,7 @@ import EditType from 'enums/editType';
 import { TIME_FORMAT, DATE_FORMAT } from 'constants/dateTimeFormats';
 import ViewType from 'enums/viewType';
 import Option from 'interfaces/option';
+import TripSectionRowDeleteButton from '../atoms/TripSectionRowDeleteButton';
 
 const TripSection: FC<{ section: Section }> = ({ section }) => {
   const [showSectionModal, setShowSectionModal] = useState(false);
@@ -74,20 +75,20 @@ const TripSection: FC<{ section: Section }> = ({ section }) => {
 
   columns.push({
     title: 'Actions',
-    key: 'actions',
+    dataIndex: 'addedAt',
     width: '105px',
     fixed: 'right',
-    render() {
+    render(addedAt: Date) {
       return (
         <div className="space-x-2">
           <Button type="primary" ghost icon={<EditOutlined />} />
-          <Button danger icon={<DeleteOutlined />} />
+          <TripSectionRowDeleteButton onConfirm={() => deleteRow(addedAt)} />
         </div>
       );
     },
   });
 
-  const onAdd = (placement: RowPlacement, row: Record<string, unknown>) => {
+  const addRow = (placement: RowPlacement, row: Record<string, unknown>) => {
     if (placement === RowPlacement.First) {
       setData([{ addedAt: +new Date(), ...row }, ...data]);
     } else {
@@ -95,8 +96,12 @@ const TripSection: FC<{ section: Section }> = ({ section }) => {
     }
   };
 
+  const deleteRow = (rowToDeleteAddedAt: Date) => {
+    setData(data.filter(({ addedAt }) => addedAt !== rowToDeleteAddedAt));
+  };
+
   return (
-    <div>
+    <div className={data.length === 0 ? 'mb-11' : 'mb-7'}>
       <TripSectionHeader name={section.name} onAddClick={() => setShowSectionModal(true)} />
       <Table
         rowKey="addedAt"
@@ -109,7 +114,7 @@ const TripSection: FC<{ section: Section }> = ({ section }) => {
         visible={showSectionModal}
         fields={section.attributes}
         hide={() => setShowSectionModal(false)}
-        onAdd={onAdd}
+        onAdd={addRow}
       />
     </div>
   );
