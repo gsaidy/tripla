@@ -1,7 +1,6 @@
 import { FC, useState, ReactNode } from 'react';
-import { Table, Tag, Button } from 'antd';
+import { Table, Tag } from 'antd';
 import moment, { Moment } from 'moment';
-import { EditOutlined } from '@ant-design/icons';
 import { ColumnsType } from 'antd/lib/table';
 
 import Section from 'interfaces/section';
@@ -14,9 +13,13 @@ import { TIME_FORMAT, DATE_FORMAT } from 'constants/dateTimeFormats';
 import ViewType from 'enums/viewType';
 import Option from 'interfaces/option';
 import TripSectionRowDeleteButton from '../atoms/TripSectionRowDeleteButton';
+import TripSectionRowEditButton from '../atoms/TripSectionRowEditButton';
+import FormMode from 'enums/formMode';
 
 const TripSection: FC<{ section: Section }> = ({ section }) => {
   const [showSectionModal, setShowSectionModal] = useState(false);
+  const [mode, setMode] = useState(FormMode.Create);
+  const [modalValues, setModalValues] = useState<Record<string, unknown> | undefined>(undefined);
   const [data, setData] = useState<Record<string, unknown>[]>([]);
 
   const renderTableCell = (
@@ -81,12 +84,17 @@ const TripSection: FC<{ section: Section }> = ({ section }) => {
     render(addedAt: Date) {
       return (
         <div className="space-x-2">
-          <Button type="primary" ghost icon={<EditOutlined />} />
+          <TripSectionRowEditButton onClick={() => onEdit(addedAt)} />
           <TripSectionRowDeleteButton onConfirm={() => deleteRow(addedAt)} />
         </div>
       );
     },
   });
+
+  const onAdd = () => {
+    setMode(FormMode.Create);
+    setShowSectionModal(true);
+  };
 
   const addRow = (placement: RowPlacement, row: Record<string, unknown>) => {
     if (placement === RowPlacement.First) {
@@ -100,9 +108,16 @@ const TripSection: FC<{ section: Section }> = ({ section }) => {
     setData(data.filter(({ addedAt }) => addedAt !== rowToDeleteAddedAt));
   };
 
+  const onEdit = (rowToEditAddedAt: Date) => {
+    setMode(FormMode.Edit);
+    const rowToEdit = data.find(({ addedAt }) => addedAt === rowToEditAddedAt);
+    setModalValues(rowToEdit);
+    setShowSectionModal(true);
+  };
+
   return (
     <div className={data.length === 0 ? 'mb-11' : 'mb-7'}>
-      <TripSectionHeader name={section.name} onAddClick={() => setShowSectionModal(true)} />
+      <TripSectionHeader name={section.name} onAddClick={onAdd} />
       <Table
         rowKey="addedAt"
         columns={columns}
@@ -112,7 +127,9 @@ const TripSection: FC<{ section: Section }> = ({ section }) => {
       />
       <TripSectionModal
         visible={showSectionModal}
+        mode={mode}
         fields={section.attributes}
+        initialValues={modalValues}
         hide={() => setShowSectionModal(false)}
         onAdd={addRow}
       />

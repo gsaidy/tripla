@@ -6,25 +6,28 @@ import CancelButton from './molecules/CancelButton';
 import SubmitButton from './molecules/SubmitButton';
 import TripSectionModalField from './molecules/TripSectionModalField';
 import RowPlacement from 'enums/rowPlacement';
+import FormMode from 'enums/formMode';
 
 const TripSectionModal: FC<{
   visible: boolean;
+  mode: FormMode;
   fields: Attribute[];
+  initialValues: Record<string, unknown> | undefined;
   hide: () => void;
   onAdd: (placement: RowPlacement, row: Record<string, unknown>) => void;
-}> = ({ visible, fields, hide, onAdd }) => {
+}> = ({ visible, mode, fields, initialValues, hide, onAdd }) => {
   const [form] = Form.useForm();
 
-  const onCancel = () => {
+  if (mode === FormMode.Edit) {
+    form.setFieldsValue(initialValues);
+  } else {
     form.resetFields();
-    hide();
-  };
+  }
 
   const onSubmit = (placement: RowPlacement) => {
     form
       .validateFields()
       .then((values) => {
-        form.resetFields();
         onAdd(placement, values);
         hide();
       })
@@ -37,10 +40,10 @@ const TripSectionModal: FC<{
     <Modal
       visible={visible}
       title="Add Item"
-      onCancel={onCancel}
+      onCancel={hide}
       onOk={() => onSubmit(RowPlacement.Last)}
       footer={[
-        <CancelButton key="cancel" onCancel={onCancel} />,
+        <CancelButton key="cancel" onCancel={hide} />,
         <SubmitButton
           key="addFirst"
           label="Add First"
