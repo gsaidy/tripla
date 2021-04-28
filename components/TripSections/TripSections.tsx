@@ -9,7 +9,7 @@ const TripSections: FC<{ sections: Section[] }> = ({ sections }) => {
     return <NoSectionsAlert />;
   }
   return (
-    <div className="space-y-11 bg-white max-w-7xl mx-auto py-6 px-4 lg:px-6">
+    <div className="bg-white max-w-7xl mx-auto py-6 px-4 lg:px-6">
       {sections.map((section) => (
         <TripSection key={section.id} section={section} />
       ))}
