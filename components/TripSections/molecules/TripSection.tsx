@@ -115,6 +115,15 @@ const TripSection: FC<{ section: Section }> = ({ section }) => {
     setShowSectionModal(true);
   };
 
+  const editRow = (row: Record<string, unknown>) => {
+    const index = data.findIndex(({ addedAt }) => addedAt === modalValues?.addedAt);
+    setData([
+      ...data.slice(0, index),
+      { ...row, addedAt: modalValues?.addedAt },
+      ...data.slice(index + 1),
+    ]);
+  };
+
   return (
     <div className={data.length === 0 ? 'mb-11' : 'mb-7'}>
       <TripSectionHeader name={section.name} onAddClick={onAdd} />
@@ -132,6 +141,7 @@ const TripSection: FC<{ section: Section }> = ({ section }) => {
         initialValues={modalValues}
         hide={() => setShowSectionModal(false)}
         onAdd={addRow}
+        onEdit={editRow}
       />
     </div>
   );

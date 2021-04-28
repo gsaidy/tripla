@@ -15,7 +15,8 @@ const TripSectionModal: FC<{
   initialValues: Record<string, unknown> | undefined;
   hide: () => void;
   onAdd: (placement: RowPlacement, row: Record<string, unknown>) => void;
-}> = ({ visible, mode, fields, initialValues, hide, onAdd }) => {
+  onEdit: (row: Record<string, unknown>) => void;
+}> = ({ visible, mode, fields, initialValues, hide, onAdd, onEdit }) => {
   const [form] = Form.useForm();
 
   useEffect(() => {
@@ -28,11 +29,15 @@ const TripSectionModal: FC<{
     }
   }, [visible, form, initialValues, mode]);
 
-  const onSubmit = (placement: RowPlacement) => {
+  const onSubmit = (placement?: RowPlacement) => {
     form
       .validateFields()
       .then((values) => {
-        onAdd(placement, values);
+        if (mode === FormMode.Create) {
+          onAdd(placement as RowPlacement, values);
+        } else {
+          onEdit(values);
+        }
         hide();
       })
       .catch((info) => {
@@ -40,25 +45,30 @@ const TripSectionModal: FC<{
       });
   };
 
+  const footer = [<CancelButton key="cancel" onCancel={hide} />];
+
+  if (mode === FormMode.Create) {
+    footer.push(
+      <SubmitButton
+        key="addFirst"
+        label="Add First"
+        onSubmit={() => onSubmit(RowPlacement.First)}
+      />
+    );
+    footer.push(
+      <SubmitButton key="addLast" label="Add Last" onSubmit={() => onSubmit(RowPlacement.Last)} />
+    );
+  } else {
+    footer.push(<SubmitButton key="save" label="Save" onSubmit={onSubmit} />);
+  }
+
   return (
     <Modal
       visible={visible}
       title="Add Item"
       onCancel={hide}
       onOk={() => onSubmit(RowPlacement.Last)}
-      footer={[
-        <CancelButton key="cancel" onCancel={hide} />,
-        <SubmitButton
-          key="addFirst"
-          label="Add First"
-          onSubmit={() => onSubmit(RowPlacement.First)}
-        />,
-        <SubmitButton
-          key="addLast"
-          label="Add Last"
-          onSubmit={() => onSubmit(RowPlacement.Last)}
-        />,
-      ]}
+      footer={footer}
     >
       <Form form={form} className="section-modal-form space-y-5" layout="vertical">
         {fields.map(({ id, name, required, edit, options }) => (
