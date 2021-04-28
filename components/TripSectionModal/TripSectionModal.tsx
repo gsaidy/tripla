@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { Form, Modal } from 'antd';
 
 import Attribute from 'interfaces/attribute';
@@ -18,11 +18,15 @@ const TripSectionModal: FC<{
 }> = ({ visible, mode, fields, initialValues, hide, onAdd }) => {
   const [form] = Form.useForm();
 
-  if (mode === FormMode.Edit) {
-    form.setFieldsValue(initialValues);
-  } else {
-    form.resetFields();
-  }
+  useEffect(() => {
+    if (form && visible) {
+      if (mode === FormMode.Edit) {
+        form.setFieldsValue(initialValues);
+      } else {
+        form.resetFields();
+      }
+    }
+  }, [visible, form, initialValues, mode]);
 
   const onSubmit = (placement: RowPlacement) => {
     form
