@@ -15,10 +15,12 @@ import EntityType from 'enums/entityType';
 export const TemplateFormContext = createContext<{
   formMode: FormMode;
   getFieldValue: (name: NamePath) => unknown;
+  setFieldsValue: (values: unknown) => void;
   resetFields: (fields?: NamePath[]) => void;
 }>({
   formMode: FormMode.Create,
   getFieldValue: (name: NamePath) => name,
+  setFieldsValue: (values: unknown) => values,
   resetFields: (fields?: NamePath[]) => fields,
 });
 
@@ -41,7 +43,12 @@ const TemplateForm: FC<{
 
   return (
     <TemplateFormContext.Provider
-      value={{ formMode, getFieldValue: form.getFieldValue, resetFields: form.resetFields }}
+      value={{
+        formMode,
+        getFieldValue: form.getFieldValue,
+        setFieldsValue: form.setFieldsValue,
+        resetFields: form.resetFields,
+      }}
     >
       {formMode === FormMode.View && <BackToList href="/templates" entity={EntityType.Template} />}
       <Form
