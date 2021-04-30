@@ -21,8 +21,16 @@ const TripSection: FC<{ section: Section }> = ({ section }) => {
   const [showSectionModal, setShowSectionModal] = useState(false);
   const [modalMode, setModalMode] = useState(FormMode.Create);
   const [modalValues, setModalValues] = useState<Record<string, unknown> | undefined>(undefined);
-  const [data, setData] = useState<Record<string, unknown>[]>([]);
+  const { formMode } = useContext(TripFormContext);
   const { getFieldValue, setFieldsValue } = useContext(TripFormContext);
+
+  const getInitialData = () => {
+    if (formMode === FormMode.Create) return [];
+    const allSectionsData = getFieldValue('data') as Record<string, unknown> | undefined;
+    return (allSectionsData?.[section.name] ?? []) as Record<string, unknown>[];
+  };
+
+  const [data, setData] = useState<Record<string, unknown>[]>(getInitialData());
 
   useEffect(() => {
     setFieldsValue({
