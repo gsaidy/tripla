@@ -1,5 +1,7 @@
 import { gql } from '@apollo/client';
 
+import TEMPLATE_SECTIONS from './templateSections';
+
 const TRIP_DETAILS = gql`
   fragment TripDetails on trips {
     id
@@ -8,6 +10,7 @@ const TRIP_DETAILS = gql`
     template {
       id
       name
+      ...TemplateSections
       user {
         id
         name
@@ -17,8 +20,10 @@ const TRIP_DETAILS = gql`
       id
       name
     }
+    data
     createdAt
   }
+  ${TEMPLATE_SECTIONS}
 `;
 
 export default TRIP_DETAILS;
