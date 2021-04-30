@@ -19,7 +19,7 @@ import { TripFormContext } from '../../Trips/organisms/TripForm';
 
 const TripSection: FC<{ section: Section }> = ({ section }) => {
   const [showSectionModal, setShowSectionModal] = useState(false);
-  const [mode, setMode] = useState(FormMode.Create);
+  const [modalMode, setModalMode] = useState(FormMode.Create);
   const [modalValues, setModalValues] = useState<Record<string, unknown> | undefined>(undefined);
   const [data, setData] = useState<Record<string, unknown>[]>([]);
   const { getFieldValue, setFieldsValue } = useContext(TripFormContext);
@@ -100,7 +100,7 @@ const TripSection: FC<{ section: Section }> = ({ section }) => {
   });
 
   const onAdd = () => {
-    setMode(FormMode.Create);
+    setModalMode(FormMode.Create);
     setShowSectionModal(true);
   };
 
@@ -117,7 +117,7 @@ const TripSection: FC<{ section: Section }> = ({ section }) => {
   };
 
   const onEdit = (rowToEditAddedAt: Date) => {
-    setMode(FormMode.Edit);
+    setModalMode(FormMode.Edit);
     const rowToEdit = data.find(({ addedAt }) => addedAt === rowToEditAddedAt);
     setModalValues(rowToEdit);
     setShowSectionModal(true);
@@ -144,7 +144,7 @@ const TripSection: FC<{ section: Section }> = ({ section }) => {
       />
       <TripSectionModal
         visible={showSectionModal}
-        mode={mode}
+        mode={modalMode}
         fields={section.attributes}
         initialValues={modalValues}
         hide={() => setShowSectionModal(false)}
