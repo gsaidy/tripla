@@ -92,20 +92,22 @@ const TripSection: FC<{ section: Section }> = ({ section }) => {
     })
   );
 
-  columns.push({
-    title: 'Actions',
-    dataIndex: 'addedAt',
-    width: '105px',
-    fixed: 'right',
-    render(addedAt: Date) {
-      return (
-        <div className="space-x-2">
-          <TripSectionRowEditButton onClick={() => onEdit(addedAt)} />
-          <TripSectionRowDeleteButton onConfirm={() => deleteRow(addedAt)} />
-        </div>
-      );
-    },
-  });
+  if (formMode !== FormMode.View) {
+    columns.push({
+      title: 'Actions',
+      dataIndex: 'addedAt',
+      width: '105px',
+      fixed: 'right',
+      render(addedAt: Date) {
+        return (
+          <div className="space-x-2">
+            <TripSectionRowEditButton onClick={() => onEdit(addedAt)} />
+            <TripSectionRowDeleteButton onConfirm={() => deleteRow(addedAt)} />
+          </div>
+        );
+      },
+    });
+  }
 
   const onAdd = () => {
     setModalMode(FormMode.Create);
