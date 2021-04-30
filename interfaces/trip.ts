@@ -5,6 +5,7 @@ interface Trip {
   destination: string;
   templateId: number;
   user?: User;
+  data?: unknown;
 }
 
 export default Trip;

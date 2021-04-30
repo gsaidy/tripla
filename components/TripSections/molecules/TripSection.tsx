@@ -1,4 +1,4 @@
-import { FC, useState, ReactNode } from 'react';
+import { FC, useState, ReactNode, useContext, useEffect } from 'react';
 import { Table, Tag } from 'antd';
 import moment, { Moment } from 'moment';
 import { ColumnsType } from 'antd/lib/table';
@@ -15,12 +15,20 @@ import Option from 'interfaces/option';
 import TripSectionRowDeleteButton from '../atoms/TripSectionRowDeleteButton';
 import TripSectionRowEditButton from '../atoms/TripSectionRowEditButton';
 import FormMode from 'enums/formMode';
+import { TripFormContext } from '../../Trips/organisms/TripForm';
 
 const TripSection: FC<{ section: Section }> = ({ section }) => {
   const [showSectionModal, setShowSectionModal] = useState(false);
   const [mode, setMode] = useState(FormMode.Create);
   const [modalValues, setModalValues] = useState<Record<string, unknown> | undefined>(undefined);
   const [data, setData] = useState<Record<string, unknown>[]>([]);
+  const { getFieldValue, setFieldsValue } = useContext(TripFormContext);
+
+  useEffect(() => {
+    setFieldsValue({
+      data: { ...(getFieldValue('data') as Record<string, unknown>), [section.name]: data },
+    });
+  }, [data, getFieldValue, setFieldsValue, section.name]);
 
   const renderTableCell = (
     value: unknown,

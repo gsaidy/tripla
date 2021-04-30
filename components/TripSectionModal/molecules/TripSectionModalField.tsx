@@ -7,7 +7,7 @@ const { TextArea } = Input;
 
 import EditType from 'enums/editType';
 import Option from 'interfaces/option';
-import { TIME_FORMAT } from 'constants/dateTimeFormats';
+import { TIME_FORMAT, MINUTE_STEP } from 'constants/dateTimeFormats';
 
 const TripSectionModalField: FC<{
   name: string;
@@ -34,9 +34,9 @@ const TripSectionModalField: FC<{
   } else if (type === EditType.DateRangePicker) {
     field = <DateRangePicker />;
   } else if (type === EditType.TimePicker) {
-    field = <TimePicker use12Hours format={TIME_FORMAT} />;
+    field = <TimePicker use12Hours format={TIME_FORMAT} minuteStep={MINUTE_STEP} />;
   } else if (type === EditType.TimeRangePicker) {
-    field = <TimeRangePicker use12Hours format={TIME_FORMAT} />;
+    field = <TimeRangePicker use12Hours format={TIME_FORMAT} minuteStep={MINUTE_STEP} />;
   } else {
     field = <TextArea rows={3} />;
   }
