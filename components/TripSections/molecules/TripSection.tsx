@@ -133,7 +133,7 @@ const TripSection: FC<{ section: Section }> = ({ section }) => {
   };
 
   return (
-    <div className={data.length === 0 ? 'mb-11' : 'mb-7'}>
+    <div className={data.length === 0 ? 'mb-11 last:mb-6' : 'mb-7 last:mb-2'}>
       <TripSectionHeader name={section.name} onAddClick={onAdd} />
       <Table
         rowKey="addedAt"
