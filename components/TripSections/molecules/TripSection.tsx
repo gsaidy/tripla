@@ -19,10 +19,18 @@ import { TripFormContext } from '../../Trips/organisms/TripForm';
 
 const TripSection: FC<{ section: Section }> = ({ section }) => {
   const [showSectionModal, setShowSectionModal] = useState(false);
-  const [mode, setMode] = useState(FormMode.Create);
+  const [modalMode, setModalMode] = useState(FormMode.Create);
   const [modalValues, setModalValues] = useState<Record<string, unknown> | undefined>(undefined);
-  const [data, setData] = useState<Record<string, unknown>[]>([]);
+  const { formMode } = useContext(TripFormContext);
   const { getFieldValue, setFieldsValue } = useContext(TripFormContext);
+
+  const getInitialData = () => {
+    if (formMode === FormMode.Create) return [];
+    const allSectionsData = getFieldValue('data') as Record<string, unknown> | undefined;
+    return (allSectionsData?.[section.name] ?? []) as Record<string, unknown>[];
+  };
+
+  const [data, setData] = useState<Record<string, unknown>[]>(getInitialData());
 
   useEffect(() => {
     setFieldsValue({
@@ -84,23 +92,25 @@ const TripSection: FC<{ section: Section }> = ({ section }) => {
     })
   );
 
-  columns.push({
-    title: 'Actions',
-    dataIndex: 'addedAt',
-    width: '105px',
-    fixed: 'right',
-    render(addedAt: Date) {
-      return (
-        <div className="space-x-2">
-          <TripSectionRowEditButton onClick={() => onEdit(addedAt)} />
-          <TripSectionRowDeleteButton onConfirm={() => deleteRow(addedAt)} />
-        </div>
-      );
-    },
-  });
+  if (formMode !== FormMode.View) {
+    columns.push({
+      title: 'Actions',
+      dataIndex: 'addedAt',
+      width: '105px',
+      fixed: 'right',
+      render(addedAt: Date) {
+        return (
+          <div className="space-x-2">
+            <TripSectionRowEditButton onClick={() => onEdit(addedAt)} />
+            <TripSectionRowDeleteButton onConfirm={() => deleteRow(addedAt)} />
+          </div>
+        );
+      },
+    });
+  }
 
   const onAdd = () => {
-    setMode(FormMode.Create);
+    setModalMode(FormMode.Create);
     setShowSectionModal(true);
   };
 
@@ -117,10 +127,33 @@ const TripSection: FC<{ section: Section }> = ({ section }) => {
   };
 
   const onEdit = (rowToEditAddedAt: Date) => {
-    setMode(FormMode.Edit);
+    setModalMode(FormMode.Edit);
     const rowToEdit = data.find(({ addedAt }) => addedAt === rowToEditAddedAt);
-    setModalValues(rowToEdit);
+    setModalValues(transformRow(rowToEdit as Record<string, unknown>));
     setShowSectionModal(true);
+  };
+
+  const transformRow = (row: Record<string, unknown>) => {
+    const transformedRow: Record<string, unknown> = {};
+    Object.keys(row).forEach((key: string) => {
+      const editType = section.attributes.find(({ name }) => name === key)?.edit;
+      const { [key]: value } = row;
+      if (
+        (editType === EditType.DatePicker || editType === EditType.TimePicker) &&
+        typeof value === 'string'
+      ) {
+        transformedRow[key] = moment(value as string);
+      } else if (
+        (editType === EditType.TimeRangePicker || editType === EditType.DateRangePicker) &&
+        value &&
+        typeof (value as string[])[0] === 'string'
+      ) {
+        transformedRow[key] = [moment((value as string[])[0]), moment((value as string[])[1])];
+      } else {
+        transformedRow[key] = value;
+      }
+    });
+    return transformedRow;
   };
 
   const editRow = (row: Record<string, unknown>) => {
@@ -133,7 +166,7 @@ const TripSection: FC<{ section: Section }> = ({ section }) => {
   };
 
   return (
-    <div className={data.length === 0 ? 'mb-11' : 'mb-7'}>
+    <div className={data.length === 0 ? 'mb-11 last:mb-6' : 'mb-7 last:mb-2'}>
       <TripSectionHeader name={section.name} onAddClick={onAdd} />
       <Table
         rowKey="addedAt"
@@ -144,7 +177,7 @@ const TripSection: FC<{ section: Section }> = ({ section }) => {
       />
       <TripSectionModal
         visible={showSectionModal}
-        mode={mode}
+        mode={modalMode}
         fields={section.attributes}
         initialValues={modalValues}
         hide={() => setShowSectionModal(false)}

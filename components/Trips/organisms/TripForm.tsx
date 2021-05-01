@@ -36,7 +36,9 @@ const TripForm: FC<{
     getTemplateSections,
     { loading: templateSectionsLoading, error: templateSectionsError, data: templateSectionsData },
   ] = useLazyQuery(GET_TEMPLATE_SECTIONS);
-  const [sections, setSections] = useState<Section[] | null>(null);
+  const [sections, setSections] = useState<Section[] | null>(
+    formMode === FormMode.Create ? null : tripInitialData?.template?.sections ?? null
+  );
 
   useEffect(() => {
     if (templateSectionsLoading) {
@@ -45,6 +47,7 @@ const TripForm: FC<{
       showErrorMessage('Error fetching template sections.');
     } else if (templateSectionsData) {
       hideLoadingMessage();
+      form.setFieldsValue({ data: [] });
       setSections(templateSectionsData.templates_by_pk.sections);
     }
   }, [templateSectionsLoading, templateSectionsError, templateSectionsData]);
