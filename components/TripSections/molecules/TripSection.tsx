@@ -129,8 +129,31 @@ const TripSection: FC<{ section: Section }> = ({ section }) => {
   const onEdit = (rowToEditAddedAt: Date) => {
     setModalMode(FormMode.Edit);
     const rowToEdit = data.find(({ addedAt }) => addedAt === rowToEditAddedAt);
-    setModalValues(rowToEdit);
+    setModalValues(transformRow(rowToEdit as Record<string, unknown>));
     setShowSectionModal(true);
+  };
+
+  const transformRow = (row: Record<string, unknown>) => {
+    const transformedRow: Record<string, unknown> = {};
+    Object.keys(row).forEach((key: string) => {
+      const editType = section.attributes.find(({ name }) => name === key)?.edit;
+      const { [key]: value } = row;
+      if (
+        (editType === EditType.DatePicker || editType === EditType.TimePicker) &&
+        typeof value === 'string'
+      ) {
+        transformedRow[key] = moment(value as string);
+      } else if (
+        (editType === EditType.TimeRangePicker || editType === EditType.DateRangePicker) &&
+        value &&
+        typeof (value as string[])[0] === 'string'
+      ) {
+        transformedRow[key] = [moment((value as string[])[0]), moment((value as string[])[1])];
+      } else {
+        transformedRow[key] = value;
+      }
+    });
+    return transformedRow;
   };
 
   const editRow = (row: Record<string, unknown>) => {
