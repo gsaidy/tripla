@@ -32,7 +32,8 @@ const TripSectionModal: FC<{
   const onSubmit = (placement?: RowPlacement) => {
     form
       .validateFields()
-      .then((values) => {
+      .then((formValues) => {
+        const values = replaceUndefinedWithNull(formValues);
         if (mode === FormMode.Create) {
           onAdd(placement as RowPlacement, values);
         } else {
@@ -43,6 +44,19 @@ const TripSectionModal: FC<{
       .catch((info) => {
         console.log('Validate Failed:', info);
       });
+  };
+
+  const replaceUndefinedWithNull = (formValues: Record<string, unknown>) => {
+    const transformedValues: Record<string, unknown> = {};
+    Object.keys(formValues).forEach((key: string) => {
+      const { [key]: value } = formValues;
+      if (value === undefined) {
+        transformedValues[key] = null;
+      } else {
+        transformedValues[key] = value;
+      }
+    });
+    return transformedValues;
   };
 
   const footer = [<CancelButton key="cancel" onCancel={hide} />];
