@@ -47,6 +47,7 @@ const TripForm: FC<{
       showErrorMessage('Error fetching template sections.');
     } else if (templateSectionsData) {
       hideLoadingMessage();
+      form.setFieldsValue({ data: [] });
       setSections(templateSectionsData.templates_by_pk.sections);
     }
   }, [templateSectionsLoading, templateSectionsError, templateSectionsData]);
