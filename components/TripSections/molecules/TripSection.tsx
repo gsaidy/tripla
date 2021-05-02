@@ -174,6 +174,12 @@ const TripSection: FC<{ section: Section }> = ({ section }) => {
         dataSource={data}
         locale={{ emptyText: `No ${section.name} added yet.` }}
         scroll={{ x: section.attributes.length * 200 }}
+        pagination={{
+          showSizeChanger: true,
+          pageSizeOptions: ['5', '10', '25', '50'],
+          showTotal: (total: number, range: number[]) =>
+            `${range[0]}-${range[1]} of ${total} items`,
+        }}
       />
       <TripSectionModal
         visible={showSectionModal}
