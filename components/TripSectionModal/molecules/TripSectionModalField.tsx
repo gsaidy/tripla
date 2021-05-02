@@ -36,7 +36,9 @@ const TripSectionModalField: FC<{
   } else if (type === EditType.TimePicker) {
     field = <TimePicker use12Hours format={TIME_FORMAT} minuteStep={MINUTE_STEP} />;
   } else if (type === EditType.TimeRangePicker) {
-    field = <TimeRangePicker use12Hours format={TIME_FORMAT} minuteStep={MINUTE_STEP} />;
+    field = (
+      <TimeRangePicker use12Hours format={TIME_FORMAT} minuteStep={MINUTE_STEP} order={false} />
+    );
   } else {
     field = <TextArea rows={3} />;
   }
