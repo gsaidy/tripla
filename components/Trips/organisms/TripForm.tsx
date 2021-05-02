@@ -4,6 +4,7 @@ import { NamePath } from 'antd/lib/form/interface';
 import { useLazyQuery } from '@apollo/client';
 
 import BasicInfo from '../molecules/BasicInfo';
+import TemplateDeletedAlert from '../molecules/TemplateDeletedAlert';
 import Trip from 'interfaces/trip';
 import FormMode from 'enums/formMode';
 import BackToList from '../../Utilities/BackToList';
@@ -52,6 +53,10 @@ const TripForm: FC<{
     }
   }, [templateSectionsLoading, templateSectionsError, templateSectionsData]);
 
+  if (formMode !== FormMode.Create && !tripInitialData?.templateId) {
+    form.setFieldsValue({ data: undefined });
+  }
+
   const onTemplateSelect = (id: number) => {
     getTemplateSections({
       variables: { id },
@@ -80,6 +85,9 @@ const TripForm: FC<{
           user={tripInitialData ? tripInitialData.user : undefined}
           onTemplateSelect={onTemplateSelect}
         />
+        {formMode !== FormMode.Create &&
+          !tripInitialData?.templateId &&
+          !form.getFieldValue('templateId') && <TemplateDeletedAlert />}
         {sections && <TripSections sections={sections} />}
         {children}
       </Form>
