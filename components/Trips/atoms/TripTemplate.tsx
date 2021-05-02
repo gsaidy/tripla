@@ -9,7 +9,9 @@ import { TripFormContext } from '../organisms/TripForm';
 import FormMode from 'enums/formMode';
 
 const TripTemplate: FC<{ onSelect: (id: number) => void }> = ({ onSelect }) => {
-  const { loading, data } = useQuery(GET_TRIP_TEMPLATE_OPTIONS);
+  const { loading, data } = useQuery(GET_TRIP_TEMPLATE_OPTIONS, {
+    fetchPolicy: 'cache-and-network',
+  });
   const { formMode, getFieldValue } = useContext(TripFormContext);
 
   const onDropdownVisibleChange = (opened: boolean) => {
