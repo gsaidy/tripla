@@ -1,6 +1,6 @@
 import { FC, useContext } from 'react';
 import { useQuery } from '@apollo/client';
-import { Select, Form } from 'antd';
+import { Select, Form, notification } from 'antd';
 const { Option } = Select;
 
 import GET_TRIP_TEMPLATE_OPTIONS from 'gql/queries/getTripTemplateOptions';
@@ -10,7 +10,18 @@ import FormMode from 'enums/formMode';
 
 const TripTemplate: FC<{ onSelect: (id: number) => void }> = ({ onSelect }) => {
   const { loading, data } = useQuery(GET_TRIP_TEMPLATE_OPTIONS);
-  const { formMode } = useContext(TripFormContext);
+  const { formMode, getFieldValue } = useContext(TripFormContext);
+
+  const onDropdownVisibleChange = (opened: boolean) => {
+    if (opened && getFieldValue('data')) {
+      notification.warning({
+        message: 'Are you sure?',
+        description:
+          'Choosing a different template will change the trip sections thus the existing sections data will be lost.',
+        placement: 'topLeft',
+      });
+    }
+  };
 
   return (
     <Form.Item
@@ -26,6 +37,7 @@ const TripTemplate: FC<{ onSelect: (id: number) => void }> = ({ onSelect }) => {
         bordered={formMode !== FormMode.View}
         showArrow={formMode !== FormMode.View}
         onSelect={onSelect}
+        onDropdownVisibleChange={onDropdownVisibleChange}
       >
         {data?.templates.map(({ id, name, user }: { id: number; name: string; user?: User }) => {
           const userName = user ? user.name : 'Anonymous';
