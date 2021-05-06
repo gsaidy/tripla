@@ -88,6 +88,10 @@ const TripSection: FC<{ section: Section }> = ({ section }) => {
       dataIndex: name,
       ellipsis: true,
       align: 'center' as 'center' | 'left' | 'right',
+      sorter: (a: { [name: string]: unknown }, b: Record<string, unknown>) =>
+        (a[name] as { [name: string]: unknown }) >= (b[name] as { [name: string]: unknown })
+          ? 1
+          : -1,
       render: (value: unknown) => renderTableCell(value, edit, view, options),
     })
   );
@@ -175,6 +179,8 @@ const TripSection: FC<{ section: Section }> = ({ section }) => {
         locale={{ emptyText: `No ${section.name} added yet.` }}
         scroll={{ x: section.attributes.length * 200 }}
         pagination={{
+          simple: window.screen.width < 350,
+          size: window.screen.width < 500 ? 'small' : 'default',
           showSizeChanger: true,
           pageSizeOptions: ['5', '10', '25', '50'],
           showTotal: (total: number, range: number[]) =>
