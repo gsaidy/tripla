@@ -1,0 +1,62 @@
+@tailwind base;
+
+/* Write your own custom base styles here */
+
+/* for screen with a width below 640px, the navbar height is 74px and the footer height is 77px*/
+.min-h-tripla {
+  min-height: calc(100vh - 74px - 77px);
+}
+
+/* for screen with a width of 640px and above, the navbar height is 82px and the footer height is 60px*/
+@media (min-width: 640px) {
+  .min-h-tripla {
+    min-height: calc(100vh - 82px - 60px);
+  }
+}
+
+@tailwind components;
+
+/* Write your own custom component styles here */
+
+.ant-input, .ant-select-selector, .ant-picker, .ant-input-number {
+  border-radius: .25rem !important;
+}
+
+.ant-picker {
+  width: 100%;
+}
+
+.ant-form-item-explain {
+  margin-bottom: 1rem;
+}
+
+.ant-input-borderless, .ant-select-borderless {
+  pointer-events: none;
+}
+
+.ant-pagination-item-link {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.borderless-auto-complete {
+  pointer-events: none !important;
+}
+
+.borderless-auto-complete .ant-select-selector {
+  border: 0 !important;
+}
+
+.ant-modal-body {
+  max-height: 60vh;
+  overflow: auto;
+}
+
+.section-modal-form .ant-form-item, .section-modal-form .ant-form-item-explain {
+  margin-bottom: 0;
+}
+
+@tailwind utilities;
+
+/* Write your own custom utilities styles here */
