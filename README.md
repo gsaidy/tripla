@@ -73,6 +73,37 @@ The video below illustrates the steps on the platform.
 
 <img src="https://github.com/gsaidy/tripla/blob/main/public/db_diagram.png" alt="DB Diagram">
 
+## Running locally
+
+1) First, clone the repo in a desired folder:
+
+```bash
+git clone git@github.com:gsaidy/tripla.git
+```
+
+2) Cd into the project directory:
+```bash
+cd tripla
+```
+
+3) Install the application dependencies:
+```bash
+yarn install
+# or
+npm install
+```
+
+4) Create a copy of `.env.template` file named `.env` under the root folder then please send an email to georges.saidy49@gmail.com to get the values of the environment variables.
+
+5) Run the development server:
+```bash
+yarn dev
+# or
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) in the browser.
+
 ## Found a bug? Missing a specific feature?
 Feel free to file a new issue with a respective title and description.
 
