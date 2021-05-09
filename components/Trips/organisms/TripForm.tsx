@@ -51,7 +51,7 @@ const TripForm: FC<{
       form.setFieldsValue({ data: [] });
       setSections(templateSectionsData.templates_by_pk.sections);
     }
-  }, [templateSectionsLoading, templateSectionsError, templateSectionsData]);
+  }, [templateSectionsLoading, templateSectionsError, templateSectionsData, form]);
 
   if (formMode !== FormMode.Create && !tripInitialData?.templateId) {
     form.setFieldsValue({ data: undefined });

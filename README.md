@@ -72,3 +72,9 @@ The video below illustrates the steps on the platform.
 ## Database Diagram
 
 <img src="https://github.com/gsaidy/tripla/blob/main/public/db_diagram.png" alt="DB Diagram">
+
+## Found a bug? Missing a specific feature?
+Feel free to file a new issue with a respective title and description.
+
+## License
+Tripla is released under the terms of the [MIT License](https://github.com/gsaidy/tripla/blob/main/LICENSE).
