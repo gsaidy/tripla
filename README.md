@@ -68,3 +68,7 @@ The video below illustrates the steps on the platform.
 * [Prettier](https://github.com/prettier/prettier) - An opinionated code formatter.
 * [husky](https://github.com/typicode/husky) - Modern native Git hooks made easy.
 * [lint-staged](https://github.com/okonet/lint-staged) - Run linters on git staged files.
+
+## Database Diagram
+
+<img src="https://github.com/gsaidy/tripla/blob/main/public/db_diagram.png" alt="DB Diagram">
