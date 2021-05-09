@@ -30,3 +30,24 @@
   </a>
 </p>
 <br/>
+
+## Basic Overview
+<a href="https://tripla.vercel.app/" target="_blank">Tripla</a> is a platform to manage your trip in a simple and customizable way.
+
+Make a list of places to visit during your trip based on different categories that you determine such as attractions, restaurants and nightlife.
+
+It is recommended to sign in using of the 3 available providers (Google, Facebook and Github) before creating a trip or a template to be able to edit it or delete it later since only the creator could do those actions.
+
+## Basic Example
+Let's say you are visting Prague next month. You want to make a list beforehand of the attractions to visit and the restaurants you want to try.
+
+Let's say for attractions, you care about the name of the attraction, the suggested duration to spend and how important it is to visit that attraction (priority).
+
+Let's say for restaurants, you care about the name of the restaurant, the opening hours, the type of cuisine and you would like to add a link to the restaurant menu.
+
+In that case, you need to create a template with the two sections and their attributes then use that template to create the trip with the actual data.
+You could also check if an existing template created by you or any user is similar and could be used instead of creating one.
+
+The video below illustrates the steps on the platform.
+
+<img src="https://github.com/gsaidy/tripla-gif/blob/main/tripla.gif">
