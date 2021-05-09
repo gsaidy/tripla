@@ -51,3 +51,20 @@ You could also check if an existing template created by you or any user is simil
 The video below illustrates the steps on the platform.
 
 <img src="https://github.com/gsaidy/tripla-gif/blob/main/tripla.gif">
+
+## What does Tripla use?
+
+* [Next.js](https://github.com/vercel/next.js/) - A React front-end development web framework.
+* [TypeScript](https://github.com/microsoft/TypeScript) - A strict syntactical superset of JavaScript.
+* [Ant Design](https://github.com/ant-design/ant-design) - An enterprise-class UI design language and React UI library.
+* [Tailwind CSS](https://github.com/tailwindlabs/tailwindcss) - A utility-first CSS framework for rapidly building custom user interfaces.
+* [Apollo Client](https://github.com/apollographql/apollo-client) - A fully-featured caching GraphQL client.
+* [GraphQL](https://github.com/graphql/graphql-js) - A query language for APIs.
+* [Hasura](https://github.com/hasura/graphql-engine) - A blazing-fast GraphQL server that gives an instant, realtime GraphQL APIs over Postgres.
+* [NextAuth.js](https://github.com/nextauthjs/next-auth) - A complete open source authentication solution for Next.js applications.
+* [Moment.js](https://github.com/moment/moment) - A JavaScript date library for parsing, validating, manipulating, and formatting dates.
+* [use-places-autocomplete](https://github.com/wellyshen/use-places-autocomplete) - A React hook for Google Maps Places Autocomplete.
+* [ESLint](https://github.com/eslint/eslint) - A tool for identifying and reporting on patterns found in ECMAScript/JavaScript code.
+* [Prettier](https://github.com/prettier/prettier) - An opinionated code formatter.
+* [husky](https://github.com/typicode/husky) - Modern native Git hooks made easy.
+* [lint-staged](https://github.com/okonet/lint-staged) - Run linters on git staged files.
